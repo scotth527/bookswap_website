@@ -11,9 +11,22 @@ export class Item extends React.Component {
 	render() {
 		if (this.state.newItem) {
 			return (
-				<div className="col-12 bg-secondary border border-dark rounded">
-					<div className="row">sss</div>
-				</div>
+				<React.Fragment>
+					<button
+						className="btn btn-outline-dark btn-lg btn-block mb-3 border border-dark rounded"
+						style={{ whiteSpace: "normal" }}>
+						<div className="row">
+							<div className="col-2 my-auto">
+								<img src="https://via.placeholder.com/75x75" />
+							</div>
+							<div className="col-10 mx-auto my-auto">
+								<h4>Add a Book</h4>
+							</div>
+						</div>
+					</button>
+
+					<hr className="featurette-divider my-3" />
+				</React.Fragment>
 			);
 		} else {
 			return (
