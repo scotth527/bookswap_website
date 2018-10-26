@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import YourShop from "../component/shopbutton.jsx";
+import Profilebanner from "../component/profilejumbotron.jsx";
 
 export class Account extends React.Component {
 	render() {
@@ -23,17 +24,18 @@ export class Account extends React.Component {
 			},
 			{
 				name: "Your Orders",
-				description: "Keep track if incoming and outgoing orders"
+				description: "Keep track of incoming and outgoing orders."
 			},
 			{
 				name: "Your Information",
 				description:
-					"Looking to update your information such as your address and contact information."
+					"Update your information such as your address and contact information."
 			}
 		];
 
 		return (
 			<div className="container">
+				<Profilebanner />
 				{options.map((item, index) => {
 					return (
 						<YourShop
