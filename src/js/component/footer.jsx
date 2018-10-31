@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 
+import "../../styles/footer.css";
+
 export class Footer extends Component {
 	render() {
 		return (
-			<div>
-				<footer>
-					<div className="container-fluid border-top p-5">
-						<div className="row">
-							<h2 className="text-center">Footer</h2>
-						</div>
+			<div className="">
+				<footer className="container-fluid mt-2 text-center border-top border-dark">
+					<div className="row">
+						<h2 className="col-12">Footer</h2>
 					</div>
 				</footer>
 			</div>

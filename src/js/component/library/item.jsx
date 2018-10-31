@@ -48,11 +48,6 @@ export class Item extends React.Component {
 								<i className="far fa-star" />
 							</div>
 						</div>
-						<div className="row">
-							<div className="col-12" alt="Description">
-								<p>{this.shorten(this.props.description)}</p>
-							</div>
-						</div>
 						<div className="row justify-content-end pr-2">
 							<button
 								className="btn"
