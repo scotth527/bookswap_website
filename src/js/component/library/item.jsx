@@ -30,7 +30,7 @@ export class Item extends React.Component {
 			);
 		} else {
 			return (
-				<div className="col-12 bg-light border border-dark rounded">
+				<div className="col-12 bg-light mb-3 border border-dark rounded">
 					<div className="row">
 						<div className="col-2 my-auto">
 							<img src="https://via.placeholder.com/75x75" />

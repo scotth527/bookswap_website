@@ -5,7 +5,7 @@ import ScrollToTop from "./component/functional/scrollToTop.jsx";
 import { Home } from "./views/home.jsx";
 import { Account } from "./views/account.jsx";
 import { Wishlist } from "./views/wishlist.jsx";
-
+import { Single } from "./views/search.jsx";
 //import { Demo } from "./views/demo.jsx";
 //import { Single } from "./views/single.jsx";
 import { Library } from "./views/library.jsx";
@@ -25,6 +25,7 @@ export class Layout extends React.Component {
 						<Route exact path="/account" component={Account} />
 						<Route exact path="/library" component={Library} />
 						<Route exact path="/wishlist" component={Wishlist} />
+						<Route exact path="/search" component={Single} />
 						<Route render={() => <h1>Not found!</h1>} />
 					</Switch>
 					<Footer />
