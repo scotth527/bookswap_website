@@ -55,9 +55,10 @@ export class Item extends React.Component {
 						</div>
 						<div className="row justify-content-end pr-2">
 							<button
+								onClick={() => this.props.addStuff()}
 								className="btn"
 								style={{ whiteSpace: "normal" }}>
-								View Book Page
+								{this.props.buttonName}
 							</button>
 						</div>
 					</div>
@@ -68,11 +69,14 @@ export class Item extends React.Component {
 }
 Item.propTypes = {
 	title: PropTypes.string,
-	description: PropTypes.string
+	description: PropTypes.string,
+	buttonName: PropTypes.string,
+	addStuff: PropTypes.func
 };
 Item.defaultProps = {
 	title: "Placeholder",
-	description: "PLACEHOLDER"
+	description: "PLACEHOLDER",
+	buttonName: "Name of view"
 };
 
 export default Item;

@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom";
 import SearchModal from "../component/searchmodal.jsx";
 import Item from "../component/library/item.jsx";
 import PropTypes from "prop-types";
+import "../../styles/wishlist.css";
 
 export class Wishlist extends React.Component {
 	constructor(props) {
@@ -22,16 +23,14 @@ export class Wishlist extends React.Component {
 						<Item />
 						<Item />
 						<div className="col-2 mx-auto text-center">
-							<button
-								className="btn"
+							<i
+								id="addButton"
 								onClick={() =>
 									this.setState({ showModal: true })
-								}>
-								<i
-									style={{ fontSize: "3em" }}
-									className="far fa-plus-square"
-								/>
-							</button>
+								}
+								style={{ fontSize: "3em" }}
+								className="btn far fa-plus-square"
+							/>
 						</div>
 					</div>
 				</div>

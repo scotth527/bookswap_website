@@ -14,8 +14,8 @@ export class SearchModal extends React.Component {
 				<div className="modal-dialog" role="document">
 					<div className="modal-content">
 						<div className="modal-header">
-							<h5 className="modal-title">
-								What books are you looking for?
+							<h5 className="modal-title col-8 mx-auto text-center">
+								What books are you looking to read?
 							</h5>
 							{this.props.onClose ? (
 								<button
@@ -30,14 +30,14 @@ export class SearchModal extends React.Component {
 								""
 							)}
 						</div>
-						<div className="modal-body">
-							<form className="form-inline mx-auto">
+						<div className="modal-body mx-auto col-12">
+							<form className="form-inline ">
 								<i
-									className="fa fa-search"
+									className="col-1 fa fa-search"
 									aria-hidden="true"
 								/>
 								<input
-									className="form-control form-control-sm ml-3 w-75"
+									className="form-control form-control-sm ml-3 col-10"
 									type="text"
 									placeholder="Search"
 									aria-label="Search"
@@ -46,9 +46,6 @@ export class SearchModal extends React.Component {
 						</div>
 
 						<div className="modal-footer">
-							<button type="button" className="btn btn-primary">
-								Oh no!
-							</button>
 							<button
 								type="button"
 								onClick={() => this.props.onClose()}
