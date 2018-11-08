@@ -1,52 +1,52 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import YourShop from "../component/shopbutton.jsx";
+import Profilebanner from "../component/profilejumbotron.jsx";
 
-import { Context } from "../store/appContext.jsx";
-
-import "../../styles/demo.css";
-
-export class Demo extends React.Component {
+export class Account extends React.Component {
 	render() {
+		Account.propTypes = {
+			pagetitle: PropTypes.string,
+			pagedescription: PropTypes.string
+		};
+
+		let options = [
+			{
+				name: "Your Shop",
+				description:
+					"Manage your books that you plan to trade away. Add books to your shop to start trading!"
+			},
+			{
+				name: "Wishlist",
+				description:
+					"Let others know what books you would like to read! Someone out there might have what you want!"
+			},
+			{
+				name: "Your Orders",
+				description: "Keep track of incoming and outgoing orders."
+			},
+			{
+				name: "Your Information",
+				description:
+					"Update your information such as your address and contact information."
+			}
+		];
+
 		return (
 			<div className="container">
-				<ul className="list-group">
-					<Context.Consumer>
-						{({ store, actions }) => {
-							return store.demo.map((item, index) => {
-								return (
-									<li
-										key={index}
-										className="list-group-item d-flex justify-content-between"
-										style={{ background: item.background }}>
-										<Link to={"/single/" + index}>
-											<span>Link to: {item.title}</span>
-										</Link>
-										<p style={{ color: item.initial }}>
-											{
-												"Check store/store.js scroll to the actions to see the code "
-											}
-										</p>
-										<button
-											className="btn btn-success"
-											onClick={() =>
-												actions.changeColor(
-													index,
-													"orange"
-												)
-											}>
-											Change Color
-										</button>
-									</li>
-								);
-							});
-						}}
-					</Context.Consumer>
-				</ul>
-				<br />
-				<Link to="/">
-					<button className="btn btn-primary">Back home</button>
-				</Link>
+				<Profilebanner />
+				{options.map((item, index) => {
+					return (
+						<YourShop
+							key={index}
+							pagetitle={item.name}
+							pagedescription={item.description}
+						/>
+					);
+				})}
 			</div>
 		);
 	}
 }
+export default Account;
