@@ -1,11 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Context } from "../store/appContext.jsx";
+import "../../styles/bookpage.css";
 
 export class BookPage extends React.Component {
 	render() {
 		return (
-			<div className="container-fluid mt-5">
+			<div
+				className="container-fluid mt-5 d-flex flex-column wrapper"
+				style={{
+					flexGrow: "1",
+					position: "relative"
+				}}>
 				<div className="row">
 					<Context.Consumer>
 						{({ store, actions }) => {
@@ -19,7 +25,7 @@ export class BookPage extends React.Component {
 										/>
 										<div className="col-9 d-flex flex-column mx-auto">
 											<h1 className="text-left mb-3">
-												This will show the demo element:{" "}
+												Title:
 												{
 													store.demo[
 														this.props.match.params
@@ -32,7 +38,6 @@ export class BookPage extends React.Component {
 												<div className="col-6 text-left">
 													<p>By: Author</p>
 													<p>Genre</p>
-													<p># of pages </p>
 													<p>Language</p>
 													<p>ISBN</p>
 													<p className="text-wrap">
@@ -42,6 +47,13 @@ export class BookPage extends React.Component {
 												<div className="col-5 d-flex flex-column align-content-end text-wrap">
 													<button
 														type="button"
+														onClick={() =>
+															actions.addToLibrary(
+																this.props.match
+																	.params
+																	.theid
+															)
+														}
 														style={{
 															whiteSpace: "normal"
 														}}
@@ -64,7 +76,13 @@ export class BookPage extends React.Component {
 													</button>
 													<h2>or</h2>
 													<button
-														onClick
+														onClick={() =>
+															actions.addToWishlist(
+																this.props.match
+																	.params
+																	.theid
+															)
+														}
 														type="button"
 														className="btn btn-dark">
 														Add to wishlist
