@@ -1,3 +1,5 @@
+let key = "qnZN4IYfVP3fduRalfrFw";
+
 const getState = scope => {
 	return {
 		store: {
@@ -47,6 +49,50 @@ const getState = scope => {
 				let mistake = scope.state.store;
 				mistake.library.splice(id, 1);
 				scope.setState(mistake);
+			},
+
+			search: (q, field = "all", page = 1) => {
+				fetch(
+					"https://www.goodreads.com/search/index.xml?key=" +
+						key +
+						"&q=" +
+						q +
+						"&page=" +
+						page +
+						"&search[field]=" +
+						field
+				)
+					.then(res => res.json())
+					.then(response => {})
+					.catch(error => console.log(error));
+			},
+
+			getBookByID: id => {
+				let book = 0;
+
+				fetch(
+					"https://www.goodreads.com/book/isbn_to_id/" +
+						id +
+						"?key=" +
+						key
+				)
+					.then(res => res.json())
+					.then(response => {})
+					.catch(error => console.log(error));
+			},
+
+			getIDByISBN: isbn => {
+				let id = 0;
+
+				fetch(
+					"https://www.goodreads.com/book/isbn_to_id/" +
+						isbn +
+						"?key=" +
+						key
+				)
+					.then(res => res.json())
+					.then(response => {})
+					.catch(error => console.log(error));
 			}
 
 			/*

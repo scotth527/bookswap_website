@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Context } from "../../store/appContext.jsx";
+
 import {
 	Dropdown,
 	DropdownToggle,
@@ -15,8 +17,8 @@ export class SearchBar extends React.Component {
 		this.state = {
 			dropdownOpen: false,
 			drop: {
-				button: "Title",
-				item: 0
+				button: "All",
+				field: "all"
 			},
 			input: ""
 		};
@@ -59,7 +61,16 @@ export class SearchBar extends React.Component {
 										onClick={e =>
 											this.onClick({
 												button: e.target.innerHTML,
-												item: 0
+												field: "all"
+											})
+										}>
+										All
+									</DropdownItem>
+									<DropdownItem
+										onClick={e =>
+											this.onClick({
+												button: e.target.innerHTML,
+												field: "title"
 											})
 										}>
 										Title
@@ -68,10 +79,19 @@ export class SearchBar extends React.Component {
 										onClick={e =>
 											this.onClick({
 												button: e.target.innerHTML,
-												item: 1
+												field: "author"
 											})
 										}>
 										Author
+									</DropdownItem>
+									<DropdownItem
+										onClick={e =>
+											this.onClick({
+												button: e.target.innerHTML,
+												field: "isbn"
+											})
+										}>
+										ISBN
 									</DropdownItem>
 								</DropdownMenu>
 							</Dropdown>
@@ -90,7 +110,24 @@ export class SearchBar extends React.Component {
 					</li>
 					<li className="nav-item col-2">
 						<div className="col-12">
-							<button className="btn btn-primary">Search</button>
+							<Context.Consumer>
+								{({ store, actions }) => {
+									return (
+										<button
+											onClick={() => {
+												actions.search(
+													encodeURIComponent(
+														this.state.input
+													),
+													this.state.drop.field
+												);
+											}}
+											className="btn btn-primary">
+											Search
+										</button>
+									);
+								}}
+							</Context.Consumer>
 						</div>
 					</li>
 				</div>
