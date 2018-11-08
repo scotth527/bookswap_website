@@ -10,7 +10,7 @@ import { Single } from "./views/search.jsx";
 //import { Single } from "./views/single.jsx";
 import { Library } from "./views/library.jsx";
 import Store from "./store/appContext.jsx";
-import { Navbar } from "./component/navbar.jsx";
+import { NavBar } from "./component/navbar.jsx";
 import { Footer } from "./component/footer.jsx";
 import { BookPage } from "./views/bookpage.jsx";
 
@@ -20,7 +20,7 @@ export class Layout extends React.Component {
 		return (
 			<BrowserRouter>
 				<ScrollToTop>
-					<Navbar />
+					<NavBar show="inline-block" />
 					<Switch>
 						<Route exact path="/home" component={Home} />
 						<Route exact path="/account" component={Account} />

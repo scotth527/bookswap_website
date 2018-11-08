@@ -23,9 +23,7 @@ export class Wishlist extends React.Component {
 					position: "relative"
 				}}>
 				<div className="row">
-					<div
-						style={{ overflowY: "hidden" }}
-						className="col-9 mx-auto">
+					<div className="col-9 mx-auto">
 						<h1 className="text-center">Wishlist</h1>
 						<Item />
 						<Item />
