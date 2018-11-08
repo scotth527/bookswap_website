@@ -18,7 +18,19 @@ const getState = scope => {
 
 			wishlist: [],
 
-			library: []
+			library: [],
+
+			books: [],
+
+			tradeRequests: [],
+
+			users: [
+				{
+					username: "scotth527",
+					lists: [1, 2, 3, 4],
+					city: "Miami, FL"
+				}
+			]
 		},
 		actions: {
 			changeColor: (element, color) => {

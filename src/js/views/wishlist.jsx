@@ -4,6 +4,7 @@ import SearchModal from "../component/searchmodal.jsx";
 import Item from "../component/library/item.jsx";
 import PropTypes from "prop-types";
 import "../../styles/wishlist.css";
+import "../../styles/bookpage.css";
 
 export class Wishlist extends React.Component {
 	constructor(props) {
@@ -15,7 +16,12 @@ export class Wishlist extends React.Component {
 
 	render() {
 		return (
-			<div className="mt-5 container-fluid">
+			<div
+				className="mt-5 container-fluid wrapper"
+				style={{
+					flexGrow: "1",
+					position: "relative"
+				}}>
 				<div className="row">
 					<div
 						style={{ overflowY: "hidden" }}
@@ -33,7 +39,6 @@ export class Wishlist extends React.Component {
 					show={this.state.showModal}
 					onClose={() => this.setState({ showModal: false })}
 				/>
-
 				<div className="row mt-5 text-right">
 					<div
 						style={{

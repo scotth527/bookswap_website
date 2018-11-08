@@ -7,8 +7,11 @@ export class Footer extends Component {
 		return (
 			<footer
 				style={{
-					position: "relative",
-					bottom: "0"
+					position: "absolute",
+					bottom: "0",
+					left: "0",
+					flexShrink: "0",
+					height: "40px"
 				}}
 				className="container-fluid mt-2 text-center border-top border-dark">
 				<h2 className="col-12">Footer</h2>
