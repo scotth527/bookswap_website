@@ -22,22 +22,35 @@ export class Wishlist extends React.Component {
 						<Item />
 						<Item />
 						<Item />
-						<div className="col-2 mx-auto text-center">
-							<i
-								id="addButton"
-								onClick={() =>
-									this.setState({ showModal: true })
-								}
-								style={{ fontSize: "3em" }}
-								className="btn far fa-plus-square"
-							/>
+						<Item />
+						<Item />
+						<Item />
+						<SearchModal
+		                    show={this.state.showModal}
+		                    onClose={() => this.setState({ showModal: false })}
+		                />
+		                <div className="row mt-5 text-right">
+			                    <div
+			                        style={{
+			                            position: "fixed",
+			                            bottom: "20px",
+			                            overflow: "hidden",
+			                            height: "100px",
+			                            marginTop: "30px"
+			                        }}
+			                        className=" col-12 mx-auto ">
+			                        <i
+			                            id="addButton"
+			                            onClick={() => this.setState({ showModal: true })}
+			                            style={{
+			                                fontSize: "3em"
+			                            }}
+			                            className="btn far fa-plus-square"
+			                        />
+			                    </div>
 						</div>
 					</div>
 				</div>
-				<SearchModal
-					show={this.state.showModal}
-					onClose={() => this.setState({ showModal: false })}
-				/>
 			</div>
 		);
 	}

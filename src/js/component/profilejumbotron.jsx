@@ -3,8 +3,8 @@ import React from "react";
 function Profilebanner(props) {
 	return (
 		<div>
-			<div className="jumbotron jumbotron-fluid">
-				<div className="container d-flex align-items-center">
+			<div className="mt-5 jumbotron jumbotron-fluid">
+				<div className="container d-flex ">
 					<img
 						src="https://picsum.photos/150/150/?random"
 						className="floatLeft mr-3"

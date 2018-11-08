@@ -5,7 +5,9 @@ import Item from "../component/library/item.jsx";
 export class Library extends React.Component {
 	render() {
 		return (
-			<div className="container" style={{ wordWrap: "break-word" }}>
+			<div
+				className="container"
+				style={{ wordWrap: "break-word", marginTop: "50px" }}>
 				<NewItem className="modal-dialog" />
 				<Item />
 				<Item

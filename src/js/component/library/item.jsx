@@ -35,7 +35,7 @@ export class Item extends React.Component {
 					<div className="col-2 my-auto">
 						<img src="https://via.placeholder.com/75x75" />
 					</div>
-					<div className="col-10 py-2">
+					<div className="col-xs-12 col-lg-10 py-2">
 						<div className="row">
 							<div className="col-8" alt="Title">
 								<h5>{this.props.title}</h5>

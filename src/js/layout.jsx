@@ -12,6 +12,7 @@ import { Library } from "./views/library.jsx";
 import Store from "./store/appContext.jsx";
 import { NavBar } from "./component/navbar.jsx";
 import { Footer } from "./component/footer.jsx";
+import { BookPage } from "./views/bookpage.jsx";
 
 //create your first component
 export class Layout extends React.Component {
@@ -26,6 +27,11 @@ export class Layout extends React.Component {
 						<Route exact path="/library" component={Library} />
 						<Route exact path="/wishlist" component={Wishlist} />
 						<Route exact path="/search" component={Single} />
+						<Route
+							exact
+							path="/bookpage/:theid"
+							component={BookPage}
+						/>
 						<Route render={() => <h1>Not found!</h1>} />
 					</Switch>
 					<Footer />
