@@ -49,33 +49,41 @@ export class LogIn extends React.Component {
 						<div className="modal-body mx-auto col-12">
 							<div className="form-inline">
 								<h2>Log In</h2>
-								<div className="form-group">
-									<div className="form-inline">
-										<h2>Email</h2>
+								<div className="container">
+									<div className="row">
+										<div className="form-group">
+											<div className="form-inline">
+												<h2>Email</h2>
+											</div>
+											<input
+												className="form-control"
+												type="text"
+												placeholder="Email"
+												onChange={event =>
+													this.State({
+														email:
+															event.target.value
+													})
+												}
+											/>
+										</div>
+										<div className="row">
+											<div className="form-inline">
+												<h2>Password</h2>
+											</div>
+											<input
+												className="form-control"
+												type="Password"
+												placeholder="Password"
+												onChange={event =>
+													this.State({
+														password:
+															event.target.value
+													})
+												}
+											/>
+										</div>
 									</div>
-									<input
-										className="form-control"
-										type="text"
-										placeholder="Email"
-										onChange={event =>
-											this.State({
-												email: event.target.value
-											})
-										}
-									/>
-									<div className="form-inline">
-										<h2>Password</h2>
-									</div>
-									<input
-										className="form-control"
-										type="Password"
-										placeholder="Password"
-										onChange={event =>
-											this.State({
-												password: event.target.value
-											})
-										}
-									/>
 									<button
 										className="btn btn-primary"
 										type="button"
