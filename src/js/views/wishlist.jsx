@@ -17,16 +17,10 @@ export class Wishlist extends React.Component {
 
 	render() {
 		return (
-			<div
-				className="mt-5 container-fluid wrapper"
-				style={{
-					flexGrow: "1",
-					position: "relative"
-				}}>
+			<div className="container-fluid">
 				<div className="row">
 					<div className="col-9 mx-auto">
 						<h1 className="text-center">Wishlist</h1>
-
 						<Context.Consumer>
 							{({ store, actions }) => {
 								return store.wishlist.map((item, index) => {

@@ -57,23 +57,30 @@ export class SignUp extends React.Component {
 								""
 							)}
 						</div>
-						<div className="modal-body mx-auto col-12">
-							<div className="form-inline">
-								<h2>Sign Up</h2>
-								<div className="form-group">
-									<div className="form-inline">
-										<h2>First Name</h2>
+						<div classNmae="row">
+							<div className="modal-body mx-auto col-12">
+								<div className="form-inline">
+									<h2>Sign Up</h2>
+								</div>
+								<div className="row">
+									<div className="form-group">
+										<div className="form-inline">
+											<h2>First Name</h2>
+										</div>
+										<input
+											className="form-control"
+											type="text"
+											placeholder="first name"
+											onChange={event =>
+												this.State({
+													firstname:
+														event.target.value
+												})
+											}
+										/>
 									</div>
-									<input
-										className="form-control"
-										type="text"
-										placeholder="first name"
-										onChange={event =>
-											this.State({
-												firstname: event.target.value
-											})
-										}
-									/>
+								</div>
+								<div className="row">
 									<div className="form-inline">
 										<h2>Last Name</h2>
 									</div>
@@ -87,6 +94,8 @@ export class SignUp extends React.Component {
 											})
 										}
 									/>
+								</div>
+								<div className="row">
 									<div className="form-inline">
 										<h2>Email</h2>
 									</div>
@@ -100,87 +109,81 @@ export class SignUp extends React.Component {
 											})
 										}
 									/>
-									<div className="form-inline">
-										<h2>Address</h2>
-									</div>
-									<input
-										className="form-control"
-										type="text"
-										placeholder="Address"
-										onChange={event =>
-											this.State({
-												address: event.target.value
-											})
-										}
-									/>
-									<div className="form-inline">
-										<h2>Phone</h2>
-									</div>
-									<input
-										className="form-control"
-										type="text"
-										placeholder="Phone"
-										onChange={event =>
-											this.State({
-												phone: event.target.value
-											})
-										}
-									/>
-									<div className="form-inline">
-										<h2>Birthday</h2>
-									</div>
-									<input
-										className="form-control"
-										type="text"
-										placeholder="Birthday"
-										onChange={event =>
-											this.State({
-												birthday: event.target.value
-											})
-										}
-									/>
-									<div className="form-inline">
-										<h2>Genre</h2>
-									</div>
-									<div className="nav-item dropdown">
-										<a
-											className="nav-link dropdown-toggle"
-											href="#"
-											id="navbarDropdown"
-											role="button"
-											data-toggle="dropdown"
-											aria-haspopup="true"
-											aria-expanded="false">
-											Genre
-										</a>
-										<div
-											className="dropdown-menu"
-											aria-labelledby="navbarDropdown">
-											<a
-												className="dropdown-item"
-												href="#">
-												Action
-											</a>
-											<a
-												className="dropdown-item"
-												href="#">
-												Another action
-											</a>
-											<div className="dropdown-divider" />
-											<a
-												className="dropdown-item"
-												href="#">
-												Something else here
-											</a>
-										</div>
-									</div>
-									<button
-										className="btn btn-primary"
-										type="button"
-										onClick={() => this.signUp}>
-										Submit
-									</button>
 								</div>
+								<div className="form-inline">
+									<h2>Address</h2>
+								</div>
+								<input
+									className="form-control"
+									type="text"
+									placeholder="Address"
+									onChange={event =>
+										this.State({
+											address: event.target.value
+										})
+									}
+								/>
+								<div className="form-inline">
+									<h2>Phone</h2>
+								</div>
+								<input
+									className="form-control"
+									type="text"
+									placeholder="Phone"
+									onChange={event =>
+										this.State({
+											phone: event.target.value
+										})
+									}
+								/>
+								<div className="form-inline">
+									<h2>Birthday</h2>
+								</div>
+								<input
+									className="form-control"
+									type="text"
+									placeholder="Birthday"
+									onChange={event =>
+										this.State({
+											birthday: event.target.value
+										})
+									}
+								/>
+								<div className="form-inline">
+									<h2>Genre</h2>
+								</div>
+								<div className="nav-item dropdown">
+									<a
+										className="nav-link dropdown-toggle"
+										href="#"
+										id="navbarDropdown"
+										role="button"
+										data-toggle="dropdown"
+										aria-haspopup="true"
+										aria-expanded="false">
+										Genre
+									</a>
+									<div
+										className="dropdown-menu"
+										aria-labelledby="navbarDropdown">
+										<a className="dropdown-item" href="#">
+											Action
+										</a>
+										<a className="dropdown-item" href="#">
+											Another action
+										</a>
+										<div className="dropdown-divider" />
+										<a className="dropdown-item" href="#">
+											Something else here
+										</a>
+									</div>
+								</div>
+								<button
+									className="btn btn-primary"
+									type="button"
+									onClick={() => this.signUp}>
+									Submit
+								</button>
 							</div>
 						</div>
 					</div>
