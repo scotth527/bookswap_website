@@ -12,10 +12,10 @@ export class Usermodal extends React.Component {
 				tabIndex="-1"
 				role="dialog"
 				style={{ display: this.props.show ? "inline-block" : "none" }}>
-				<div className="modal-dialog" role="document">
-					<div className="modal-content">
+				<div className="modal-dialog " role="document">
+					<div className="modal-content col-12">
 						<div className="modal-header">
-							<h5 className="modal-title col-8 mx-auto text-center">
+							<h5 className="modal-title  mx-auto text-center">
 								Users who own this book
 							</h5>
 							{this.props.onClose ? (
@@ -31,11 +31,18 @@ export class Usermodal extends React.Component {
 								""
 							)}
 						</div>
-						<div className="modal-body mx-auto col-12">
+						<div className="modal-body mx-auto col-12 d-flex flex-column">
 							<Context.Consumer>
 								{({ store, actions }) => {
 									return store.users.map((item, index) => {
-										return <Userdiv key={item.id} />;
+										return (
+											<Userdiv
+												key={index}
+												Picurl="https://picsum.photos/50/50/?random"
+												City={item.city}
+												Username={item.username}
+											/>
+										);
 									});
 								}}
 							</Context.Consumer>
@@ -48,20 +55,6 @@ export class Usermodal extends React.Component {
 								data-dismiss="modal">
 								Cancel
 							</button>
-							<Context.Consumer>
-								{({ store, actions }) => {
-									return store.users.map((item, index) => {
-										return (
-											<Userdiv
-												key={index}
-												Picurl="https://picsum.photos/150/150/?random"
-												City={item.city}
-												Username={item.username}
-											/>
-										);
-									});
-								}}
-							</Context.Consumer>
 						</div>
 					</div>
 				</div>
