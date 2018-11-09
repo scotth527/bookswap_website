@@ -9,6 +9,7 @@ import { Single } from "./views/search.jsx";
 //import { Demo } from "./views/demo.jsx";
 //import { Single } from "./views/single.jsx";
 import { Library } from "./views/library.jsx";
+import { Trade } from "./views/trade.jsx";
 import Store from "./store/appContext.jsx";
 import { NavBar } from "./component/navbar.jsx";
 import { Footer } from "./component/footer.jsx";
@@ -29,8 +30,13 @@ export class Layout extends React.Component {
 						<Route exact path="/search" component={Single} />
 						<Route
 							exact
-							path="/bookpage/:theid"
+							path="/bookpage/:id"
 							component={BookPage}
+						/>
+						<Route
+							exact
+							path="/trade/:id/:from/:to"
+							component={Trade}
 						/>
 						<Route render={() => <h1>Not found!</h1>} />
 					</Switch>
