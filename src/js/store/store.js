@@ -1,3 +1,6 @@
+import Convert from "xml-js";
+
+let cors = "http://cors-anywhere.herokuapp.com/";
 let key = "qnZN4IYfVP3fduRalfrFw";
 
 const getState = scope => {
@@ -53,7 +56,8 @@ const getState = scope => {
 
 			search: (q, field = "all", page = 1) => {
 				fetch(
-					"https://www.goodreads.com/search/index.xml?key=" +
+					cors +
+						"https://www.goodreads.com/search/index.xml?key=" +
 						key +
 						"&q=" +
 						q +
@@ -62,8 +66,14 @@ const getState = scope => {
 						"&search[field]=" +
 						field
 				)
-					.then(res => res.json())
-					.then(response => {})
+					.then(res => res.text())
+					.then(res =>
+						Convert.xml2json(res, {
+							compact: false,
+							spaces: 4
+						})
+					)
+					.then(response => console.log(response))
 					.catch(error => console.log(error));
 			},
 
