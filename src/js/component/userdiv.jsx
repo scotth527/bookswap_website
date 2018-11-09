@@ -5,35 +5,46 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 function Userdiv(props) {
-	Userdiv.propTypes = {
-		Username: PropTypes.string,
-		Picurl: PropTypes.string,
-		City: PropTypes.string
-	};
-
 	return (
-		<div className="container-fluid card col-xs-12 col-md-9 col-lg-6 mb-3">
-			<div className="card-header text-left">
-				<h5 className="card-title">{props.pagetitle}</h5>
+		<div
+			className="col-12 mb-3 d-flex border border-dark rounded"
+			onClick={e => {
+				if (e.currentTarget.className.search(" bg-secondary") == -1) {
+					e.currentTarget.className += " bg-secondary";
+				} else {
+					e.currentTarget.className = e.currentTarget.className.replace(
+						" bg-secondary",
+						""
+					);
+				}
+			}}>
+			<img
+				src={props.Picurl}
+				className="floatLeft mt-2 mb-2 mr-3"
+				alt="..."
+				style={{ borderRadius: "50%" }}
+			/>
+			<div className="d-flex flex-column">
+				<h1 className="lead">{props.Username}</h1>
+				<p> {props.City}</p>
 			</div>
-			<div className="card-body text-center">
-				<p className="card-text" style={{ whiteSpace: "normal" }}>
-					{props.pagedescription}
-				</p>
-				<Link to={props.link}>
-					<button
-						type="button"
-						className="btn btn-outline-dark btn-lg mb-3 text-right"
-						style={{ whiteSpace: "normal" }}>
-						<i className="far fa-arrow-alt-circle-right" />
-					</button>
-				</Link>
-			</div>
-			<div className="card-footer text-center text-muted">
-				{props.uniqueinfo}
-			</div>
+			<button type="button" className="btn btn-primary">
+				Request Book
+			</button>
 		</div>
 	);
 }
+
+Userdiv.propTypes = {
+	Username: PropTypes.string,
+	Picurl: PropTypes.string,
+	City: PropTypes.string
+};
+
+Userdiv.defaultProps = {
+	Username: "Placeholder",
+	Picurl: "https://picsum.photos/50/50/?random",
+	City: "Placeholder"
+};
 
 export default Userdiv;

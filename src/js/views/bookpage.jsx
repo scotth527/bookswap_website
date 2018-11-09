@@ -2,9 +2,40 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Context } from "../store/appContext.jsx";
 import "../../styles/bookpage.css";
+import StoreAddModal from "../component/confirmtostoremodal.jsx";
+import WishAddModal from "../component/confirmwishmodal.jsx";
+import Usermodal from "../component/usermodal.jsx";
 
 export class BookPage extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			showConfirmLibModal: false,
+			itemToAdd: 0,
+			showConfirmWishModal: false,
+			showOwnersModal: false
+		};
+	}
+
+	itemToAddChanger(bookNumber) {
+		let toAdd = this.state.itemToAdd;
+		toAdd = bookNumber;
+		this.setState(toAdd);
+	}
+
+	shorten(description) {
+		if (description.length > 150) {
+			return (
+				description.substring(
+					0,
+					description.substring(0, 200).lastIndexOf(" ")
+				) + "..."
+			);
+		} else return description;
+	}
+
 	render() {
+		console.log();
 		return (
 			<div
 				className="container-fluid mt-5 d-flex flex-column wrapper"
@@ -20,40 +51,65 @@ export class BookPage extends React.Component {
 									<div className="d-flex">
 										<img
 											className="col-3 "
-											src="https://s.gr-assets.com/assets/nophoto/book/111x148-bcc042a9c91a29c1d680899eff700a03.png"
+											src={
+												store.books[
+													this.props.match.params
+														.theid
+												].image
+											}
 											alt="..."
 										/>
 										<div className="col-9 d-flex flex-column mx-auto">
 											<h1 className="text-left mb-3">
-												Title:
-												{
-													store.demo[
+												{"Title: " +
+													store.books[
 														this.props.match.params
 															.theid
-													].title
-												}
+													].title}
 											</h1>
 											<div className="row mx-auto" />
 											<div className="col-12 d-flex mx-auto">
 												<div className="col-6 text-left">
-													<p>By: Author</p>
+													<p>
+														{"By: " +
+															store.books[
+																this.props.match
+																	.params
+																	.theid
+															].author}
+													</p>
 													<p>Genre</p>
-													<p>Language</p>
+													<p>
+														{"Language: " +
+															store.books[
+																this.props.match
+																	.params
+																	.theid
+															].editionlanguage}
+													</p>
 													<p>ISBN</p>
 													<p className="text-wrap">
-														Description
+														{"Description: " +
+															this.shorten(
+																store.books[
+																	this.props
+																		.match
+																		.params
+																		.theid
+																].description
+															)}
 													</p>
 												</div>
 												<div className="col-5 d-flex flex-column align-content-end text-wrap">
 													<button
-														type="button"
 														onClick={() =>
-															actions.addToLibrary(
-																this.props.match
-																	.params
-																	.theid
-															)
+															this.setState({
+																showConfirmLibModal: true,
+																showConfirmWishModal: false,
+																showOwnersModal: false
+															})
 														}
+														type="button"
 														style={{
 															whiteSpace: "normal"
 														}}
@@ -64,6 +120,26 @@ export class BookPage extends React.Component {
 														this book
 													</button>
 													<button
+														onClick={() =>
+															this.setState({
+																showConfirmLibModal: false,
+																showConfirmWishModal: true,
+																showOwnersModal: false
+															})
+														}
+														type="button"
+														className="btn btn-dark">
+														Add to wishlist
+													</button>
+													<h2>or</h2>
+													<button
+														onClick={() =>
+															this.setState({
+																showConfirmLibModal: false,
+																showConfirmWishModal: false,
+																showOwnersModal: true
+															})
+														}
 														type="button"
 														style={{
 															whiteSpace: "normal"
@@ -71,21 +147,17 @@ export class BookPage extends React.Component {
 														className="btn btn-dark
 														mb-2 ">
 														{" "}
-														Find users who own this
-														book
+														Users who OWN this book
 													</button>
-													<h2>or</h2>
 													<button
-														onClick={() =>
-															actions.addToWishlist(
-																this.props.match
-																	.params
-																	.theid
-															)
-														}
 														type="button"
-														className="btn btn-dark">
-														Add to wishlist
+														style={{
+															whiteSpace: "normal"
+														}}
+														className="btn btn-dark
+														mb-2 ">
+														{" "}
+														Users who WANT
 													</button>
 												</div>
 											</div>
@@ -96,11 +168,38 @@ export class BookPage extends React.Component {
 						}}
 					</Context.Consumer>
 				</div>
+				<StoreAddModal
+					show={this.state.showConfirmLibModal}
+					onClose={() =>
+						this.setState({ showConfirmLibModal: false })
+					}
+					id={parseFloat(this.props.match.params.theid)}
+				/>
+				<WishAddModal
+					show={this.state.showConfirmWishModal}
+					onClose={() =>
+						this.setState({ showConfirmWishModal: false })
+					}
+					id={parseInt(this.props.match.params.theid)}
+				/>
+				<Usermodal
+					show={this.state.showOwnersModal}
+					onClose={() => this.setState({ showOwnersModal: false })}
+					id={parseInt(this.props.match.params.theid)}
+				/>
 			</div>
 		);
 	}
 }
 
 BookPage.propTypes = {
-	match: PropTypes.object
+	match: PropTypes.object,
+	history: PropTypes.object,
+	onDelete: PropTypes.func,
+	delete: PropTypes.func
+};
+
+BookPage.defaultProps = {
+	show: false,
+	onClose: null
 };

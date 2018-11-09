@@ -13,7 +13,7 @@ function YourShop(props) {
 	};
 
 	return (
-		<div className="container-fluid card col-xs-12 col-md-9 col-lg-6 mb-3">
+		<div className="container card col-xs-12 col-md-9 col-lg-4 mb-xs-3">
 			<div className="card-header text-left">
 				<h5 className="card-title">{props.pagetitle}</h5>
 			</div>

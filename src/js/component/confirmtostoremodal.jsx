@@ -2,9 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { Context } from "../store/appContext.jsx";
-import Userdiv from "./userdiv.jsx";
 
-export class Usermodal extends React.Component {
+export class StoreAddModal extends React.Component {
 	render() {
 		return (
 			<div
@@ -12,11 +11,13 @@ export class Usermodal extends React.Component {
 				tabIndex="-1"
 				role="dialog"
 				style={{ display: this.props.show ? "inline-block" : "none" }}>
-				<div className="modal-dialog " role="document">
-					<div className="modal-content col-12">
+				<div className="modal-dialog" role="document">
+					<div className="modal-content">
 						<div className="modal-header">
-							<h5 className="modal-title  mx-auto text-center">
-								Users who own this book
+							<h5 className="modal-title col-8 mx-auto text-center">
+								By hitting confirm you are adding this book to
+								your personal library and are offering it to
+								trade to potential people.
 							</h5>
 							{this.props.onClose ? (
 								<button
@@ -31,22 +32,6 @@ export class Usermodal extends React.Component {
 								""
 							)}
 						</div>
-						<div className="modal-body mx-auto col-12 d-flex flex-column">
-							<Context.Consumer>
-								{({ store, actions }) => {
-									return store.users.map((item, index) => {
-										return (
-											<Userdiv
-												key={index}
-												Picurl="https://picsum.photos/50/50/?random"
-												City={item.city}
-												Username={item.username}
-											/>
-										);
-									});
-								}}
-							</Context.Consumer>
-						</div>
 						<div className="modal-footer">
 							<button
 								type="button"
@@ -55,6 +40,24 @@ export class Usermodal extends React.Component {
 								data-dismiss="modal">
 								Cancel
 							</button>
+							<Context.Consumer>
+								{({ store, actions }) => {
+									return (
+										<button
+											type="button"
+											onClick={() => {
+												actions.addToLibrary(
+													store.books[this.props.id]
+												);
+												this.props.onClose();
+											}}
+											className="btn btn-success"
+											data-dismiss="modal">
+											Accept
+										</button>
+									);
+								}}
+							</Context.Consumer>
 						</div>
 					</div>
 				</div>
@@ -66,7 +69,7 @@ export class Usermodal extends React.Component {
  * Define the data-types for
  * your component's properties
  **/
-Usermodal.propTypes = {
+StoreAddModal.propTypes = {
 	history: PropTypes.object,
 	onClose: PropTypes.func,
 	show: PropTypes.bool,
@@ -77,9 +80,9 @@ Usermodal.propTypes = {
  * Define the default values for
  * your component's properties
  **/
-Usermodal.defaultProps = {
+StoreAddModal.defaultProps = {
 	show: false,
 	onClose: null
 };
 
-export default withRouter(Usermodal);
+export default withRouter(StoreAddModal);
