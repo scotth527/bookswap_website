@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import YourShop from "../component/shopbutton.jsx";
 import Profilebanner from "../component/profilejumbotron.jsx";
+import "../../styles/bookpage.css";
 
 export class Account extends React.Component {
 	render() {
@@ -28,21 +29,20 @@ export class Account extends React.Component {
 			},
 			{
 				name: "Your Orders",
-				description: "Keep track of incoming and outgoing orders.",
+				description:
+					"Keep track of incoming and outgoing orders and pending requests.",
 				link: "/home",
 				uniqueinfo: "# of Pending Orders"
-			},
-			{
-				name: "Your Information",
-				description:
-					"Update your information such as your address and contact information.",
-				link: "/home",
-				uniqueinfo: "Last logged on"
 			}
 		];
 
 		return (
-			<React.Fragment>
+			<div
+				className="wrapper"
+				style={{
+					flexGrow: "1",
+					position: "relative"
+				}}>
 				<Profilebanner />
 				<div className="row">
 					{options.map((item, index) => {
@@ -57,7 +57,7 @@ export class Account extends React.Component {
 						);
 					})}
 				</div>
-			</React.Fragment>
+			</div>
 		);
 	}
 }

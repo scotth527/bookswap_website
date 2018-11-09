@@ -15,11 +15,9 @@ export class Wishlist extends React.Component {
 
 	render() {
 		return (
-			<div className="mt-5 container-fluid">
+			<div className="container-fluid">
 				<div className="row">
-					<div
-						style={{ overflowY: "hidden" }}
-						className="col-9 mx-auto">
+					<div className="col-9 mx-auto">
 						<h1 className="text-center">Wishlist</h1>
 						<Item />
 						<Item />
@@ -27,31 +25,32 @@ export class Wishlist extends React.Component {
 						<Item />
 						<Item />
 						<Item />
-					</div>
-				</div>
-				<SearchModal
-					show={this.state.showModal}
-					onClose={() => this.setState({ showModal: false })}
-				/>
-
-				<div className="row mt-5 text-right">
-					<div
-						style={{
-							position: "fixed",
-							bottom: "20px",
-							overflow: "hidden",
-							height: "100px",
-							marginTop: "30px"
-						}}
-						className=" col-12 mx-auto ">
-						<i
-							id="addButton"
-							onClick={() => this.setState({ showModal: true })}
-							style={{
-								fontSize: "3em"
-							}}
-							className="btn far fa-plus-square"
+						<SearchModal
+							show={this.state.showModal}
+							onClose={() => this.setState({ showModal: false })}
 						/>
+						<div className="row mt-5 text-right">
+							<div
+								style={{
+									position: "fixed",
+									bottom: "20px",
+									overflow: "hidden",
+									height: "100px",
+									marginTop: "30px"
+								}}
+								className=" col-12 mx-auto ">
+								<i
+									id="addButton"
+									onClick={() =>
+										this.setState({ showModal: true })
+									}
+									style={{
+										fontSize: "3em"
+									}}
+									className="btn far fa-plus-square"
+								/>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
