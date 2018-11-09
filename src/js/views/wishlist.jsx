@@ -5,6 +5,7 @@ import Item from "../component/library/item.jsx";
 import PropTypes from "prop-types";
 import "../../styles/wishlist.css";
 import "../../styles/bookpage.css";
+import { Context } from "../store/appContext.jsx";
 
 export class Wishlist extends React.Component {
 	constructor(props) {
@@ -25,12 +26,20 @@ export class Wishlist extends React.Component {
 				<div className="row">
 					<div className="col-9 mx-auto">
 						<h1 className="text-center">Wishlist</h1>
-						<Item />
-						<Item />
-						<Item />
-						<Item />
-						<Item />
-						<Item />
+
+						<Context.Consumer>
+							{({ store, actions }) => {
+								return store.wishlist.map((item, index) => {
+									return (
+										<Item
+											key={index}
+											title={item.title}
+											description={item.description}
+										/>
+									);
+								});
+							}}
+						</Context.Consumer>
 					</div>
 				</div>
 				<SearchModal

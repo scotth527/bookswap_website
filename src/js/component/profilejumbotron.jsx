@@ -11,7 +11,12 @@ function Profilebanner(props) {
 						alt="..."
 						style={{ borderRadius: "50%" }}
 					/>
-					<h1 className="lead">Welcome (User)!</h1>
+					<div className="d-flex flex-column">
+						<h1 className="lead">Welcome (User)!</h1>
+						<p> Full Name </p>
+						<p> Address </p>
+						<p> Email </p>
+					</div>
 				</div>
 			</div>
 		</div>

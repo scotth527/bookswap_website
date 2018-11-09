@@ -2,8 +2,25 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Context } from "../store/appContext.jsx";
 import "../../styles/bookpage.css";
+import StoreAddModal from "../component/confirmtostoremodal.jsx";
 
 export class BookPage extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			showConfirmLibModal: false,
+			itemToAdd: 0,
+			showConfirmWishModal: false,
+			showOwnersModal: false
+		};
+	}
+
+	itemToAddChanger(bookNumber) {
+		let toAdd = this.state.itemToAdd;
+		toAdd = bookNumber;
+		this.setState(toAdd);
+	}
+
 	render() {
 		return (
 			<div
@@ -47,13 +64,6 @@ export class BookPage extends React.Component {
 												<div className="col-5 d-flex flex-column align-content-end text-wrap">
 													<button
 														type="button"
-														onClick={() =>
-															actions.addToLibrary(
-																this.props.match
-																	.params
-																	.theid
-															)
-														}
 														style={{
 															whiteSpace: "normal"
 														}}
@@ -65,27 +75,29 @@ export class BookPage extends React.Component {
 													</button>
 													<button
 														type="button"
+														className="btn btn-dark">
+														Add to wishlist
+													</button>
+													<h2>or</h2>
+													<button
+														type="button"
 														style={{
 															whiteSpace: "normal"
 														}}
 														className="btn btn-dark
 														mb-2 ">
 														{" "}
-														Find users who own this
-														book
+														Users who OWN this book
 													</button>
-													<h2>or</h2>
 													<button
-														onClick={() =>
-															actions.addToWishlist(
-																this.props.match
-																	.params
-																	.theid
-															)
-														}
 														type="button"
-														className="btn btn-dark">
-														Add to wishlist
+														style={{
+															whiteSpace: "normal"
+														}}
+														className="btn btn-dark
+														mb-2 ">
+														{" "}
+														Users who WANT
 													</button>
 												</div>
 											</div>
