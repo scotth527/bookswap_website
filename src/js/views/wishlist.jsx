@@ -29,6 +29,7 @@ export class Wishlist extends React.Component {
 											key={index}
 											title={item.title}
 											description={item.description}
+											buttonName="Find users who own this book"
 										/>
 									);
 								});

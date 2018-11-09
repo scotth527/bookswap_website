@@ -15,7 +15,9 @@ export class StoreAddModal extends React.Component {
 					<div className="modal-content">
 						<div className="modal-header">
 							<h5 className="modal-title col-8 mx-auto text-center">
-								What books are you looking to read?
+								By hitting confirm you are adding this book to
+								your personal library and are offering it to
+								trade to potential people.
 							</h5>
 							{this.props.onClose ? (
 								<button
@@ -30,29 +32,32 @@ export class StoreAddModal extends React.Component {
 								""
 							)}
 						</div>
-						<div className="modal-body mx-auto col-12">
-							<form className="form-inline ">
-								<i
-									className="col-1 fa fa-search"
-									aria-hidden="true"
-								/>
-								<input
-									className="form-control form-control-sm ml-3 col-10"
-									type="text"
-									placeholder="Search"
-									aria-label="Search"
-								/>
-							</form>
-						</div>
-
 						<div className="modal-footer">
 							<button
 								type="button"
 								onClick={() => this.props.onClose()}
-								className="btn btn-secondary"
+								className="btn btn-secondary mr-2"
 								data-dismiss="modal">
-								Close
+								Cancel
 							</button>
+							<Context.Consumer>
+								{({ store, actions }) => {
+									return (
+										<button
+											type="button"
+											onClick={() => {
+												actions.addToLibrary(
+													store.books[this.props.id]
+												);
+												this.props.onClose();
+											}}
+											className="btn btn-success"
+											data-dismiss="modal">
+											Accept
+										</button>
+									);
+								}}
+							</Context.Consumer>
 						</div>
 					</div>
 				</div>
@@ -68,7 +73,7 @@ StoreAddModal.propTypes = {
 	history: PropTypes.object,
 	onClose: PropTypes.func,
 	show: PropTypes.bool,
-	id: PropTypes.string
+	id: PropTypes.number
 };
 
 /**

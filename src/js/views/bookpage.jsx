@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import { Context } from "../store/appContext.jsx";
 import "../../styles/bookpage.css";
 import StoreAddModal from "../component/confirmtostoremodal.jsx";
+import WishAddModal from "../component/confirmwishmodal.jsx";
+import Usermodal from "../component/usermodal.jsx";
 
 export class BookPage extends React.Component {
 	constructor(props) {
@@ -33,6 +35,7 @@ export class BookPage extends React.Component {
 	}
 
 	render() {
+		console.log();
 		return (
 			<div
 				className="container-fluid mt-5 d-flex flex-column wrapper"
@@ -101,7 +104,9 @@ export class BookPage extends React.Component {
 													<button
 														onClick={() =>
 															this.setState({
-																showConfirmLibModal: true
+																showConfirmLibModal: true,
+																showConfirmWishModal: false,
+																showOwnersModal: false
 															})
 														}
 														type="button"
@@ -115,12 +120,26 @@ export class BookPage extends React.Component {
 														this book
 													</button>
 													<button
+														onClick={() =>
+															this.setState({
+																showConfirmLibModal: false,
+																showConfirmWishModal: true,
+																showOwnersModal: false
+															})
+														}
 														type="button"
 														className="btn btn-dark">
 														Add to wishlist
 													</button>
 													<h2>or</h2>
 													<button
+														onClick={() =>
+															this.setState({
+																showConfirmLibModal: false,
+																showConfirmWishModal: false,
+																showOwnersModal: true
+															})
+														}
 														type="button"
 														style={{
 															whiteSpace: "normal"
@@ -154,6 +173,19 @@ export class BookPage extends React.Component {
 					onClose={() =>
 						this.setState({ showConfirmLibModal: false })
 					}
+					id={parseFloat(this.props.match.params.theid)}
+				/>
+				<WishAddModal
+					show={this.state.showConfirmWishModal}
+					onClose={() =>
+						this.setState({ showConfirmWishModal: false })
+					}
+					id={parseInt(this.props.match.params.theid)}
+				/>
+				<Usermodal
+					show={this.state.showOwnersModal}
+					onClose={() => this.setState({ showOwnersModal: false })}
+					id={parseInt(this.props.match.params.theid)}
 				/>
 			</div>
 		);
@@ -165,4 +197,9 @@ BookPage.propTypes = {
 	history: PropTypes.object,
 	onDelete: PropTypes.func,
 	delete: PropTypes.func
+};
+
+BookPage.defaultProps = {
+	show: false,
+	onClose: null
 };
