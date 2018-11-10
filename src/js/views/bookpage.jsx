@@ -170,7 +170,7 @@ export class BookPage extends React.Component {
 					onClose={() =>
 						this.setState({ showConfirmLibModal: false })
 					}
-					id={parseFloat(this.props.match.params.theid)}
+					id={parseInt(this.props.match.params.theid)}
 				/>
 				<WishAddModal
 					show={this.state.showConfirmWishModal}

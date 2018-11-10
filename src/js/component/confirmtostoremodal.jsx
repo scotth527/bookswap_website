@@ -47,7 +47,9 @@ export class StoreAddModal extends React.Component {
 											type="button"
 											onClick={() => {
 												actions.addToLibrary(
-													store.books[this.props.id]
+													actions.searchBookByID(
+														this.props.id
+													)
 												);
 												this.props.onClose();
 											}}
