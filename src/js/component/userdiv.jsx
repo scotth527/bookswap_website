@@ -8,6 +8,7 @@ function Userdiv(props) {
 	return (
 		<div
 			className="col-12 mb-3 d-flex border border-dark rounded"
+			id={this.props.index}
 			onClick={e => {
 				if (e.currentTarget.className.search(" bg-secondary") == -1) {
 					e.currentTarget.className += " bg-secondary";
@@ -38,7 +39,9 @@ function Userdiv(props) {
 Userdiv.propTypes = {
 	Username: PropTypes.string,
 	Picurl: PropTypes.string,
-	City: PropTypes.string
+	City: PropTypes.string,
+	index: PropTypes.number,
+	id: PropTypes.number
 };
 
 Userdiv.defaultProps = {

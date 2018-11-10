@@ -57,7 +57,7 @@ export class SignUp extends React.Component {
 								""
 							)}
 						</div>
-						<div classNmae="row">
+						<div className="row">
 							<div className="modal-body mx-auto col-12">
 								<div className="form-inline">
 									<h2>Sign Up</h2>
