@@ -154,15 +154,9 @@ const getState = scope => {
 			},
 
 			searchUsersForID: id => {
-				return scope.state.store.users.filter(item => {
-					if (
-						item.library.find(e => {
-							return e == id;
-						}) != undefined
-					) {
-						return item;
-					}
-				});
+				return scope.state.store.users.filter(
+					item => item.library.find(e => e === id) !== undefined
+				);
 			},
 
 			search: (q, field = "all", page = 1) => {

@@ -30,13 +30,8 @@ export class Layout extends React.Component {
 						<Route exact path="/search" component={Single} />
 						<Route
 							exact
-							path="/bookpage/:id"
+							path="/bookpage/:theid"
 							component={BookPage}
-						/>
-						<Route
-							exact
-							path="/trade/:id/:from/:to"
-							component={Trade}
 						/>
 						<Route render={() => <h1>Not found!</h1>} />
 					</Switch>
