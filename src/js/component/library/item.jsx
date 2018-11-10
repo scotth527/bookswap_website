@@ -56,7 +56,7 @@ export class Item extends React.Component {
 						<div className="row justify-content-end pr-2">
 							<button
 								onClick={() => this.props.addStuff()}
-								className="btn"
+								className="btn btn-sm"
 								style={{ whiteSpace: "normal" }}>
 								{this.props.buttonName}
 							</button>

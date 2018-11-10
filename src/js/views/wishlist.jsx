@@ -6,12 +6,15 @@ import PropTypes from "prop-types";
 import "../../styles/wishlist.css";
 import "../../styles/bookpage.css";
 import { Context } from "../store/appContext.jsx";
+import Usermodal from "../component/usermodal.jsx";
 
 export class Wishlist extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			showModal: false
+			showModal: false,
+			showOwnersModal: false,
+			bookid: 0
 		};
 	}
 
@@ -30,6 +33,13 @@ export class Wishlist extends React.Component {
 											title={item.title}
 											description={item.description}
 											buttonName="Find users who own this book"
+											addStuff={() =>
+												this.setState({
+													key: "library",
+													bookid: item.id,
+													showOwnersModal: true
+												})
+											}
 										/>
 									);
 								});
@@ -41,6 +51,16 @@ export class Wishlist extends React.Component {
 					show={this.state.showModal}
 					onClose={() => this.setState({ showModal: false })}
 				/>
+				{this.state.showOwnersModal && (
+					<Usermodal
+						show={this.state.showOwnersModal}
+						onClose={() =>
+							this.setState({ key: "", showOwnersModal: false })
+						}
+						userKey={this.state.key}
+						id={parseInt(this.state.bookid)}
+					/>
+				)}
 				<div className="row mt-5 text-right">
 					<div
 						style={{

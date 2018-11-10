@@ -29,7 +29,7 @@ function Userdiv(props) {
 				<h1 className="lead">{props.Username}</h1>
 				<p> {props.City}</p>
 			</div>
-			<button type="button" className="btn btn-primary">
+			<button type="button" className="btn btn-primary btn-sm">
 				Request Book
 			</button>
 		</div>
