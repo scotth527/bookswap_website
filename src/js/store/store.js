@@ -101,47 +101,8 @@ const getState = scope => {
 			users: [
 				{
 					username: "scotth527",
-					library: [
-						{
-							id: 1,
-							title: "Mass Effect: Revelation",
-							author: "Drew Karpyshyn",
-							description:
-								"Every advanced society in the galaxy relies on the technology of the Protheans, an ancient species that vanished fifty thousand years ago. After discovering a cache of Prothean technology on Mars in 2148, humanity is spreading to the stars; the newest interstellar species, struggling to carve out its place in the greater galactic community.On the edge of colonized space, ship commander and Alliance war hero David Anderson investigates the remains of a top secret military research station; smoking ruins littered with bodies and unanswered questions. Who attacked this post and for what purpose? And where is Kahlee Sanders, the young scientist who mysteriously vanished from the base hours before her colleagues were slaughtered?Sanders is now the prime suspect, but finding her creates more problems for Anderson than it solves. Partnered with a rogue alien agent he can't trust and pursued by an assassin he can't escape, Anderson battles impossible odds on uncharted worlds to uncover a sinister conspiracy . . . one he won't live to tell about. Or so the enemy thinks.",
-							paperback: "323 pages",
-							published: "May 1st 2007 by Del Rey",
-							editionlanguage: "English",
-							image:
-								"https://images.gr-assets.com/books/1389736825l/231599.jpg"
-						},
-						{
-							id: 5,
-							title: "City of Bones (The Mortal Instruments #1)",
-							author: "Cassandra Clare",
-							description:
-								"When fifteen-year-old Clary Fray heads out to the Pandemonium Club in New York City, she hardly expects to witness a murder― much less a murder committed by three teenagers covered with strange tattoos and brandishing bizarre weapons. Then the body disappears into thin air. It's hard to call the police when the murderers are invisible to everyone else and when there is nothing―not even a smear of blood―to show that a boy has died. Or was he a boy?This is Clary's first meeting with the Shadowhunters, warriors dedicated to ridding the earth of demons. It's also her first encounter with Jace, a Shadowhunter who looks a little like an angel and acts a lot like a jerk. Within twenty-four hours Clary is pulled into Jace's world with a vengeance when her mother disappears and Clary herself is attacked by a demon. But why would demons be interested in ordinary mundanes like Clary and her mother? And how did Clary suddenly get the Sight? The Shadowhunters would like to know...",
-							paperback: "485 pages",
-							published:
-								"March 27th 2007 by Margaret K. McElderry Books",
-							editionlanguage: "English",
-							image:
-								"https://images.gr-assets.com/books/1432730315l/256683.jpg"
-						}
-					],
-					wishlist: [
-						{
-							id: 4,
-							title: "Watching the Watchmen",
-							author: "Dave Gibbons, Chip Kidd",
-							description:
-								"Enjoy the ultimate companion to a comics masterpiece, as award-winning artist Dave Gibbons gives his own account of the genesis of WATCHMEN in this dust-jacketed hardback volume, opening his vast personal archives to reveal never-published pages, original character designs, page thumbnails, sketches and much more, including posters, covers and rare portfolio art. Featuring the breathtaking design of Chip Kidd and Mike Essl, WATCHING THE WATCHMEN is both a major art book in its own right, and the definitive companion to the graphic novel that changed an industry.Voted among Time magazine's 100 Best Novels from 1923 to the present, a perennial bestseller over the past twenty years and widely considered the greatest graphic novel of all time, WATCHMEN is a gripping, labyrinthine piece of comic art, which has earned an acclaimed place in modern literary history. I've had a great time, re-visiting the very beginnings of Watchmen and unearthing material I haven't set eyes on for many years. As a fan myself, this is the kind of stuff I eat up and I'm sure the many devotees of the graphic novel will do the same! says Gibbons.© DC Comics 2008. All Rights Reserved. ",
-							paperback: "256 pages",
-							published: "October 21st 2008 by Titan Books",
-							editionlanguage: "English",
-							image:
-								"https://images.gr-assets.com/books/1320522306l/3135895.jpg"
-						}
-					],
+					library: [1, 5],
+					wishlist: [4],
 					city: "Miami, FL"
 				},
 				{
