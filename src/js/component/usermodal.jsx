@@ -35,7 +35,10 @@ export class Usermodal extends React.Component {
 							<Context.Consumer>
 								{({ store, actions }) => {
 									return actions
-										.searchUsersForID(this.props.id)
+										.searchUsersForID(
+											this.props.id,
+											this.props.userKey
+										)
 										.map((item, index) => {
 											return (
 												<Userdiv
@@ -74,7 +77,8 @@ Usermodal.propTypes = {
 	history: PropTypes.object,
 	onClose: PropTypes.func,
 	show: PropTypes.bool,
-	id: PropTypes.number
+	id: PropTypes.number,
+	userKey: PropTypes.string
 };
 
 /**

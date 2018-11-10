@@ -153,9 +153,9 @@ const getState = scope => {
 				scope.setState(mistake);
 			},
 
-			searchUsersForID: id => {
+			searchUsersForID: (id, key) => {
 				return scope.state.store.users.filter(
-					item => item.library.find(e => e === id) !== undefined
+					item => item[key].find(e => e === id) !== undefined
 				);
 			},
 
