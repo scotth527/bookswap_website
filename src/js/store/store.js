@@ -165,6 +165,12 @@ const getState = scope => {
 				scope.setState(store);
 			},
 
+			searchBookByID: bookindex => {
+				return scope.state.store.books.find(e => {
+					if (e.id === bookindex) return e;
+				});
+			},
+
 			addToLibrary: bookid => {
 				let store = scope.state.store;
 				store.library.push(bookid);

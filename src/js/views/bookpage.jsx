@@ -46,125 +46,122 @@ export class BookPage extends React.Component {
 				<div className="row">
 					<Context.Consumer>
 						{({ store, actions }) => {
-							return (
-								<div className="mx-auto col-12 text-center">
-									<div className="d-flex">
-										<img
-											className="col-3 "
-											src={
-												store.books[
-													this.props.match.params
-														.theid
-												].image
-											}
-											alt="..."
-										/>
-										<div className="col-9 d-flex flex-column mx-auto">
-											<h1 className="text-left mb-3">
-												{"Title: " +
-													store.books[
-														this.props.match.params
-															.theid
-													].title}
-											</h1>
-											<div className="row mx-auto" />
-											<div className="col-12 d-flex mx-auto">
-												<div className="col-6 text-left">
-													<p>
-														{"By: " +
-															store.books[
-																this.props.match
-																	.params
-																	.theid
-															].author}
-													</p>
-													<p>Genre</p>
-													<p>
-														{"Language: " +
-															store.books[
-																this.props.match
-																	.params
-																	.theid
-															].editionlanguage}
-													</p>
-													<p>ISBN</p>
-													<p className="text-wrap">
-														{"Description: " +
-															this.shorten(
-																store.books[
-																	this.props
-																		.match
-																		.params
-																		.theid
-																].description
-															)}
-													</p>
-												</div>
-												<div className="col-5 d-flex flex-column align-content-end text-wrap">
-													<button
-														onClick={() =>
-															this.setState({
-																showConfirmLibModal: true,
-																showConfirmWishModal: false,
-																showOwnersModal: false
-															})
-														}
-														type="button"
-														style={{
-															whiteSpace: "normal"
-														}}
-														className="btn btn-dark
+							let theBook = store.books.filter(item => {
+								return (
+									item.id ===
+									parseInt(this.props.match.params.theid)
+								);
+							});
+							console.log(theBook);
+							if (theBook.length > 0) {
+								return (
+									<div className="mx-auto col-12 text-center">
+										<div className="d-flex">
+											<img
+												className="col-3 "
+												src={theBook[0].image}
+												alt="..."
+											/>
+											<div className="col-9 d-flex flex-column mx-auto">
+												<h1 className="text-left mb-3">
+													{"Title: " +
+														theBook[0].title}
+												</h1>
+												<div className="row mx-auto" />
+												<div className="col-12 d-flex mx-auto">
+													<div className="col-6 text-left">
+														<p>
+															{"By: " +
+																theBook[0]
+																	.author}
+														</p>
+														<p>Genre</p>
+														<p>
+															{"Language: " +
+																theBook[0]
+																	.editionlanguage}
+														</p>
+														<p>ISBN</p>
+														<p className="text-wrap">
+															{"Description: " +
+																this.shorten(
+																	theBook[0]
+																		.description
+																)}
+														</p>
+													</div>
+													<div className="col-5 d-flex flex-column align-content-end text-wrap">
+														<button
+															onClick={() =>
+																this.setState({
+																	showConfirmLibModal: true,
+																	showConfirmWishModal: false,
+																	showOwnersModal: false
+																})
+															}
+															type="button"
+															style={{
+																whiteSpace:
+																	"normal"
+															}}
+															className="btn btn-dark
 														mb-2 ">
-														{" "}
-														I own it & want to trade
-														this book
-													</button>
-													<button
-														onClick={() =>
-															this.setState({
-																showConfirmLibModal: false,
-																showConfirmWishModal: true,
-																showOwnersModal: false
-															})
-														}
-														type="button"
-														className="btn btn-dark">
-														Add to wishlist
-													</button>
-													<h2>or</h2>
-													<button
-														onClick={() =>
-															this.setState({
-																showConfirmLibModal: false,
-																showConfirmWishModal: false,
-																showOwnersModal: true
-															})
-														}
-														type="button"
-														style={{
-															whiteSpace: "normal"
-														}}
-														className="btn btn-dark
+															{" "}
+															I own it & want to
+															trade this book
+														</button>
+														<button
+															onClick={() =>
+																this.setState({
+																	showConfirmLibModal: false,
+																	showConfirmWishModal: true,
+																	showOwnersModal: false
+																})
+															}
+															type="button"
+															className="btn btn-dark">
+															Add to wishlist
+														</button>
+														<h2>or</h2>
+														<button
+															onClick={() =>
+																this.setState({
+																	showConfirmLibModal: false,
+																	showConfirmWishModal: false,
+																	showOwnersModal: true
+																})
+															}
+															type="button"
+															style={{
+																whiteSpace:
+																	"normal"
+															}}
+															className="btn btn-dark
 														mb-2 ">
-														{" "}
-														Users who OWN this book
-													</button>
-													<button
-														type="button"
-														style={{
-															whiteSpace: "normal"
-														}}
-														className="btn btn-dark
+															{" "}
+															Users who OWN this
+															book
+														</button>
+														<button
+															type="button"
+															style={{
+																whiteSpace:
+																	"normal"
+															}}
+															className="btn btn-dark
 														mb-2 ">
-														{" "}
-														Users who WANT
-													</button>
+															{" "}
+															Users who WANT
+														</button>
+													</div>
 												</div>
 											</div>
 										</div>
 									</div>
-								</div>
-							);
+								);
+							} else {
+								return <h1>Not a valid Book</h1>;
+							}
 						}}
 					</Context.Consumer>
 				</div>
