@@ -12,6 +12,7 @@ export class BookPage extends React.Component {
 		this.state = {
 			showConfirmLibModal: false,
 			itemToAdd: 0,
+			key: "",
 			showConfirmWishModal: false,
 			showOwnersModal: false
 		};
@@ -126,6 +127,8 @@ export class BookPage extends React.Component {
 														<button
 															onClick={() =>
 																this.setState({
+																	key:
+																		"library",
 																	showConfirmLibModal: false,
 																	showConfirmWishModal: false,
 																	showOwnersModal: true
@@ -143,6 +146,15 @@ export class BookPage extends React.Component {
 															book
 														</button>
 														<button
+															onClick={() =>
+																this.setState({
+																	key:
+																		"wishlist",
+																	showConfirmLibModal: false,
+																	showConfirmWishModal: false,
+																	showOwnersModal: true
+																})
+															}
 															type="button"
 															style={{
 																whiteSpace:
@@ -165,25 +177,34 @@ export class BookPage extends React.Component {
 						}}
 					</Context.Consumer>
 				</div>
-				<StoreAddModal
-					show={this.state.showConfirmLibModal}
-					onClose={() =>
-						this.setState({ showConfirmLibModal: false })
-					}
-					id={parseInt(this.props.match.params.theid)}
-				/>
-				<WishAddModal
-					show={this.state.showConfirmWishModal}
-					onClose={() =>
-						this.setState({ showConfirmWishModal: false })
-					}
-					id={parseInt(this.props.match.params.theid)}
-				/>
-				<Usermodal
-					show={this.state.showOwnersModal}
-					onClose={() => this.setState({ showOwnersModal: false })}
-					id={parseInt(this.props.match.params.theid)}
-				/>
+				{this.state.showConfirmLibModal && (
+					<StoreAddModal
+						show={this.state.showConfirmLibModal}
+						onClose={() =>
+							this.setState({ showConfirmLibModal: false })
+						}
+						id={parseInt(this.props.match.params.theid)}
+					/>
+				)}
+				{this.state.showConfirmWishModal && (
+					<WishAddModal
+						show={this.state.showConfirmWishModal}
+						onClose={() =>
+							this.setState({ showConfirmWishModal: false })
+						}
+						id={parseInt(this.props.match.params.theid)}
+					/>
+				)}
+				{this.state.showOwnersModal && (
+					<Usermodal
+						show={this.state.showOwnersModal}
+						onClose={() =>
+							this.setState({ key: "", showOwnersModal: false })
+						}
+						userKey={this.state.key}
+						id={parseInt(this.props.match.params.theid)}
+					/>
+				)}
 			</div>
 		);
 	}

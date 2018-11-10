@@ -34,16 +34,23 @@ export class Usermodal extends React.Component {
 						<div className="modal-body mx-auto col-12 d-flex flex-column">
 							<Context.Consumer>
 								{({ store, actions }) => {
-									return store.users.map((item, index) => {
-										return (
-											<Userdiv
-												key={index}
-												Picurl="https://picsum.photos/50/50/?random"
-												City={item.city}
-												Username={item.username}
-											/>
-										);
-									});
+									return actions
+										.searchUsersForID(
+											this.props.id,
+											this.props.userKey
+										)
+										.map((item, index) => {
+											return (
+												<Userdiv
+													key={index}
+													id={item.id}
+													index={index}
+													Picurl="https://picsum.photos/50/50/?random"
+													City={item.city}
+													Username={item.username}
+												/>
+											);
+										});
 								}}
 							</Context.Consumer>
 						</div>
@@ -70,7 +77,8 @@ Usermodal.propTypes = {
 	history: PropTypes.object,
 	onClose: PropTypes.func,
 	show: PropTypes.bool,
-	id: PropTypes.number
+	id: PropTypes.number,
+	userKey: PropTypes.string
 };
 
 /**
