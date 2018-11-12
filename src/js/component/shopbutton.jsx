@@ -35,7 +35,9 @@ function YourShop(props) {
 									return (
 										<Preview
 											key={store.books[item].id}
-											link={store.books[item].id}
+											link={store.books[
+												item
+											].id.toString()}
 											picurl={store.books[item].image}
 											title={store.books[item].title}
 										/>

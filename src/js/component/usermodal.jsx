@@ -5,6 +5,14 @@ import { Context } from "../store/appContext.jsx";
 import Userdiv from "./userdiv.jsx";
 
 export class Usermodal extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			userid: 0,
+			showTrade: false,
+			showSelf: false
+		};
+	}
 	render() {
 		return (
 			<div
@@ -48,6 +56,11 @@ export class Usermodal extends React.Component {
 													Picurl="https://picsum.photos/50/50/?random"
 													City={item.city}
 													Username={item.username}
+													getUserID={() =>
+														this.setState({
+															userid: item.id
+														})
+													}
 												/>
 											);
 										});
@@ -61,6 +74,15 @@ export class Usermodal extends React.Component {
 								className="btn btn-secondary mr-2"
 								data-dismiss="modal">
 								Cancel
+							</button>
+							<button
+								onClick={() => {
+									this.props.onClose();
+									this.setState({ showTrade: true });
+								}}
+								type="button"
+								className="btn btn-primary btn">
+								Request Trade
 							</button>
 						</div>
 					</div>
