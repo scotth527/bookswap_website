@@ -8,7 +8,7 @@ function Userdiv(props) {
 	return (
 		<div
 			className="col-12 mb-3 d-flex justify-content-around border border-dark rounded"
-			id={props.index}
+			id={props.id}
 			onClick={e => {
 				if (e.currentTarget.className.search(" bg-secondary") == -1) {
 					e.currentTarget.className += " bg-secondary";
@@ -44,7 +44,7 @@ Userdiv.propTypes = {
 	Username: PropTypes.string,
 	Picurl: PropTypes.string,
 	City: PropTypes.string,
-	index: PropTypes.number,
+	//index: PropTypes.number,
 	id: PropTypes.number
 };
 

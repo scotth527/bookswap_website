@@ -5,13 +5,21 @@ import { Context } from "../store/appContext.jsx";
 import Userdiv from "./userdiv.jsx";
 
 export class Usermodal extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			showSelf: this.props.show,
+			showTrade: false
+		};
+	}
+
 	render() {
 		return (
 			<div
 				className="modal"
 				tabIndex="-1"
 				role="dialog"
-				style={{ display: this.props.show ? "inline-block" : "none" }}>
+				style={{ display: this.state.show ? "inline-block" : "none" }}>
 				<div className="modal-dialog " role="document">
 					<div className="modal-content col-12">
 						<div className="modal-header">
@@ -44,7 +52,7 @@ export class Usermodal extends React.Component {
 												<Userdiv
 													key={index}
 													id={item.id}
-													index={index}
+													//index={index}
 													Picurl="https://picsum.photos/50/50/?random"
 													City={item.city}
 													Username={item.username}
