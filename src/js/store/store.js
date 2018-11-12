@@ -19,22 +19,9 @@ const getState = scope => {
 				}
 			],
 
-			wishlist: [
-				{
-					id: 1,
-					title: "Mass Effect: Revelation",
-					author: "Drew Karpyshyn",
-					description:
-						"Every advanced society in the galaxy relies on the technology of the Protheans, an ancient species that vanished fifty thousand years ago. After discovering a cache of Prothean technology on Mars in 2148, humanity is spreading to the stars; the newest interstellar species, struggling to carve out its place in the greater galactic community.On the edge of colonized space, ship commander and Alliance war hero David Anderson investigates the remains of a top secret military research station; smoking ruins littered with bodies and unanswered questions. Who attacked this post and for what purpose? And where is Kahlee Sanders, the young scientist who mysteriously vanished from the base hours before her colleagues were slaughtered?Sanders is now the prime suspect, but finding her creates more problems for Anderson than it solves. Partnered with a rogue alien agent he can't trust and pursued by an assassin he can't escape, Anderson battles impossible odds on uncharted worlds to uncover a sinister conspiracy . . . one he won't live to tell about. Or so the enemy thinks.",
-					paperback: "323 pages",
-					published: "May 1st 2007 by Del Rey",
-					editionlanguage: "English",
-					image:
-						"https://images.gr-assets.com/books/1389736825l/231599.jpg"
-				}
-			],
+			wishlist: [1, 2, 3, 4],
 
-			library: [],
+			library: [4, 2],
 
 			books: [
 				{
@@ -106,13 +93,15 @@ const getState = scope => {
 					username: "scotth527",
 					library: [1, 5],
 					wishlist: [4],
-					city: "Miami, FL"
+					city: "Miami, FL",
+					id: 1
 				},
 				{
 					username: "goonsville",
 					library: [1, 4],
 					wishlist: [2],
-					city: "New York"
+					city: "New York, NY",
+					id: 2
 				}
 			]
 		},

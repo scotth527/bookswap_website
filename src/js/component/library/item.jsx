@@ -41,11 +41,10 @@ export class Item extends React.Component {
 								<h5>{this.props.title}</h5>
 							</div>
 							<div className="col-4 text-right" alt="Rating">
-								<i className="far fa-star" />
-								<i className="far fa-star" />
-								<i className="far fa-star" />
-								<i className="far fa-star" />
-								<i className="far fa-star" />
+								<i
+									onClick={() => this.props.deleteStuff()}
+									className="btn far fa-times-circle"
+								/>
 							</div>
 						</div>
 						<div className="row">
@@ -71,7 +70,8 @@ Item.propTypes = {
 	title: PropTypes.string,
 	description: PropTypes.string,
 	buttonName: PropTypes.string,
-	addStuff: PropTypes.func
+	addStuff: PropTypes.func,
+	deleteStuff: PropTypes.func
 };
 Item.defaultProps = {
 	title: "Placeholder",

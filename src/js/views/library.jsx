@@ -10,7 +10,8 @@ export class Library extends React.Component {
 		this.state = {
 			showModal: false,
 			showOwnersModal: false,
-			bookid: 0
+			bookid: 0,
+			key: ""
 		};
 	}
 	render() {
@@ -24,14 +25,17 @@ export class Library extends React.Component {
 						return store.library.map((item, index) => {
 							return (
 								<Item
-									key={index}
-									title={item.title}
-									description={item.description}
+									key={store.books[item].id}
+									title={store.books[item].title}
+									description={store.books[item].description}
 									buttonName="Find users who want this book"
+									deleteStuff={() =>
+										actions.deleteFromLibrary(index)
+									}
 									addStuff={() =>
 										this.setState({
 											key: "wishlist",
-											bookid: item.id,
+											bookid: store.books[item].id,
 											showOwnersModal: true
 										})
 									}
@@ -48,6 +52,7 @@ export class Library extends React.Component {
 						}
 						userKey={this.state.key}
 						id={parseInt(this.state.bookid)}
+						divtitle="Users who are interested in the book"
 					/>
 				)}
 			</div>

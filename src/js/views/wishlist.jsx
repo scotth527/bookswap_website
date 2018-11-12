@@ -14,7 +14,8 @@ export class Wishlist extends React.Component {
 		this.state = {
 			showModal: false,
 			showOwnersModal: false,
-			bookid: 0
+			bookid: 0,
+			key: ""
 		};
 	}
 
@@ -29,14 +30,22 @@ export class Wishlist extends React.Component {
 								return store.wishlist.map((item, index) => {
 									return (
 										<Item
-											key={index}
-											title={item.title}
-											description={item.description}
+											key={store.books[item].id}
+											title={store.books[item].title}
+											description={
+												store.books[item].description
+											}
 											buttonName="Find users who own this book"
+											deleteStuff={() => {
+												actions.deleteFromWishlist(
+													index
+												);
+											}}
 											addStuff={() =>
 												this.setState({
 													key: "library",
-													bookid: item.id,
+													bookid:
+														store.books[item].id,
 													showOwnersModal: true
 												})
 											}
@@ -59,6 +68,7 @@ export class Wishlist extends React.Component {
 						}
 						userKey={this.state.key}
 						id={parseInt(this.state.bookid)}
+						divtitle="Users who own this book"
 					/>
 				)}
 				<div className="row mt-5 text-right">

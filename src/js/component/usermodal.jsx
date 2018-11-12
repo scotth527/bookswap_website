@@ -16,7 +16,7 @@ export class Usermodal extends React.Component {
 					<div className="modal-content col-12">
 						<div className="modal-header">
 							<h5 className="modal-title  mx-auto text-center">
-								Users who own this book
+								{this.props.divtitle}
 							</h5>
 							{this.props.onClose ? (
 								<button
@@ -78,7 +78,8 @@ Usermodal.propTypes = {
 	onClose: PropTypes.func,
 	show: PropTypes.bool,
 	id: PropTypes.number,
-	userKey: PropTypes.string
+	userKey: PropTypes.string,
+	divtitle: PropTypes.string
 };
 
 /**
@@ -87,7 +88,8 @@ Usermodal.propTypes = {
  **/
 Usermodal.defaultProps = {
 	show: false,
-	onClose: null
+	onClose: null,
+	divtitle: "Users"
 };
 
 export default withRouter(Usermodal);

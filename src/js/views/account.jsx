@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import YourShop from "../component/shopbutton.jsx";
 import Profilebanner from "../component/profilejumbotron.jsx";
 import "../../styles/bookpage.css";
+import Wishprev from "../component/wishlistprev.jsx";
+import { Context } from "../store/appContext.jsx";
 
 export class Account extends React.Component {
 	render() {
@@ -38,24 +40,39 @@ export class Account extends React.Component {
 
 		return (
 			<div
-				className="wrapper"
+				className="container-fluid wrapper"
 				style={{
 					flexGrow: "1",
 					position: "relative"
 				}}>
 				<Profilebanner />
 				<div className="row">
-					{options.map((item, index) => {
-						return (
-							<YourShop
-								key={index}
-								pagetitle={item.name}
-								pagedescription={item.description}
-								link={item.link}
-								uniqueinfo={item.uniqueinfo}
-							/>
-						);
-					})}
+					<Context.Consumer>
+						{({ store, actions }) => {
+							return (
+								<React.Fragment>
+									<YourShop
+										pagetitle={options[0].name}
+										pagedescription={options[0].description}
+										link={options[0].link}
+										uniqueinfo={store.library.length}
+									/>
+									<Wishprev
+										pagetitle={options[1].name}
+										pagedescription={options[1].description}
+										link={options[1].link}
+										uniqueinfo={store.wishlist.length}
+									/>
+									<YourShop
+										pagetitle={options[2].name}
+										pagedescription={options[2].description}
+										link={options[2].link}
+										uniqueinfo={options[2].uniqueinfo}
+									/>
+								</React.Fragment>
+							);
+						}}
+					</Context.Consumer>
 				</div>
 			</div>
 		);
