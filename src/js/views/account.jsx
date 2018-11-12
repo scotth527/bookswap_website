@@ -67,7 +67,7 @@ export class Account extends React.Component {
 										pagetitle={options[2].name}
 										pagedescription={options[2].description}
 										link={options[2].link}
-										uniqueinfo={options[2].uniqueinfo}
+										uniqueinfo={store.tradeRequests.length}
 									/>
 								</React.Fragment>
 							);

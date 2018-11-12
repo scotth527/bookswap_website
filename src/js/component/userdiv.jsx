@@ -18,6 +18,7 @@ function Userdiv(props) {
 						""
 					);
 				}
+				//props.getUserID();
 			}}>
 			<div className="d-flex">
 				<img
@@ -33,9 +34,6 @@ function Userdiv(props) {
 					<p> {props.City}</p>
 				</div>
 			</div>
-			<button type="button" className="btn btn-primary btn-sm">
-				Request Book
-			</button>
 		</div>
 	);
 }
@@ -45,7 +43,8 @@ Userdiv.propTypes = {
 	Picurl: PropTypes.string,
 	City: PropTypes.string,
 	//index: PropTypes.number,
-	id: PropTypes.number
+	id: PropTypes.number,
+	//getUserID: PropTypes.func
 };
 
 Userdiv.defaultProps = {
