@@ -5,6 +5,7 @@ import ReactDOM from "react-dom";
 import { Link, withRouter } from "react-router-dom";
 import { LogIn } from "../component/login.jsx";
 import { SignUp } from "../component/signup.jsx";
+//import DropDown from "../component/dropdown.jsx";
 
 export class NavBar extends React.Component {
 	constructor(props) {
