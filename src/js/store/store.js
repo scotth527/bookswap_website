@@ -150,9 +150,7 @@ const getState = scope => {
 			},
 
 			searchUser: id => {
-				return scope.state.store.users[
-					scope.state.store.users.find(item => item.id === id)
-				];
+				return scope.state.store.users.find(e => e.id === id);
 			},
 
 			searchUsersForID: (id, key) => {

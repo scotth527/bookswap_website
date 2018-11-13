@@ -53,7 +53,7 @@ export class BookPage extends React.Component {
 									parseInt(this.props.match.params.theid)
 								);
 							});
-							console.log(theBook);
+							//console.log(theBook);
 							if (theBook.length > 0) {
 								return (
 									<div className="mx-auto col-12 text-center">
