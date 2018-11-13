@@ -1,19 +1,60 @@
 import React from "react";
 import NewItem from "../component/library/new_item.jsx";
 import Item from "../component/library/item.jsx";
+import { Context } from "../store/appContext.jsx";
+import Usermodal from "../component/usermodal.jsx";
 
 export class Library extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			showModal: false,
+			showOwnersModal: false,
+			bookid: 0,
+			key: ""
+		};
+	}
 	render() {
 		return (
 			<div
 				className="container"
 				style={{ wordWrap: "break-word", marginTop: "50px" }}>
 				<NewItem className="modal-dialog" />
-				<Item />
-				<Item
-					title="The Hunchback of Notre Dame"
-					description="Hugo’s grand medieval melodrama tells the story of the beautiful Esmeralda, a gypsy girl loved by three men: Archdeacon Frollo, his adoptive son Quasimodo, bell-ringer of Notre-Dame cathedral, and Captain Phoebus. Falsely accused of trying to murder Phoebus, who attempts to rape her, Esmeralda is sentenced to death and rescued from the gallows by Quasimodo who defends her to the last."
-				/>
+				<Context.Consumer>
+					{({ store, actions }) => {
+						return store.library.map((item, index) => {
+							return (
+								<Item
+									key={store.books[item].id}
+									title={store.books[item].title}
+									description={store.books[item].description}
+									buttonName="Find users who want this book"
+									deleteStuff={() =>
+										actions.deleteFromLibrary(index)
+									}
+									addStuff={() =>
+										this.setState({
+											key: "wishlist",
+											bookid: store.books[item].id,
+											showOwnersModal: true
+										})
+									}
+								/>
+							);
+						});
+					}}
+				</Context.Consumer>
+				{this.state.showOwnersModal && (
+					<Usermodal
+						show={this.state.showOwnersModal}
+						onClose={() =>
+							this.setState({ key: "", showOwnersModal: false })
+						}
+						userKey={this.state.key}
+						id={parseInt(this.state.bookid)}
+						divtitle="Users who are interested in the book"
+					/>
+				)}
 			</div>
 		);
 	}

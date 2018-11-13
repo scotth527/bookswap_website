@@ -31,6 +31,7 @@ export class NavBar extends React.Component {
 					aria-label="Toggle navigation">
 					<span className="navbar-toggler-icon" />
 				</button>
+
 				<div style={{ display: this.props.show }}>
 					<div
 						className="collapse navbar-collapse"
@@ -52,6 +53,42 @@ export class NavBar extends React.Component {
 							/>
 						</form>
 						<div>
+							<Link to="/wishlist">
+								<button
+									type="button"
+									style={{
+										whiteSpace: "normal"
+									}}
+									className="btn btn-dark
+														mb-2 ">
+									{" "}
+									Wishlist
+								</button>
+							</Link>
+							<Link to="/library">
+								<button
+									type="button"
+									style={{
+										whiteSpace: "normal"
+									}}
+									className="btn btn-dark
+														mb-2 ">
+									{" "}
+									Library
+								</button>
+							</Link>
+							<Link to="/account">
+								<button
+									type="button"
+									style={{
+										whiteSpace: "normal"
+									}}
+									className="btn btn-dark
+														mb-2 ">
+									{" "}
+									My Account
+								</button>
+							</Link>
 							<button
 								onClick={() =>
 									this.setState({

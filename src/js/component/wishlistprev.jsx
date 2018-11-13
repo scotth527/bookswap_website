@@ -6,8 +6,8 @@ import PropTypes from "prop-types";
 import { Context } from "../store/appContext.jsx";
 import Preview from "../component/accountprevdiv.jsx";
 
-function YourShop(props) {
-	YourShop.propTypes = {
+function Wishprev(props) {
+	Wishprev.propTypes = {
 		pagetitle: PropTypes.string,
 		pagedescription: PropTypes.string,
 		link: PropTypes.string,
@@ -29,7 +29,7 @@ function YourShop(props) {
 					<h5>{props.pagetitle + " preview"} </h5>
 					<Context.Consumer>
 						{({ store, actions }) => {
-							return store.library
+							return store.wishlist
 								.slice(0, 3)
 								.map((item, index) => {
 									return (
@@ -63,4 +63,4 @@ function YourShop(props) {
 	);
 }
 
-export default YourShop;
+export default Wishprev;
