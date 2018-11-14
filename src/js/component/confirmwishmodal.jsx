@@ -45,9 +45,7 @@ export class WishAddModal extends React.Component {
 											type="button"
 											onClick={() => {
 												actions.addToWishlist(
-													actions.searchBookByID(
-														this.props.id
-													)
+													this.props.id
 												);
 												this.props.onClose();
 											}}

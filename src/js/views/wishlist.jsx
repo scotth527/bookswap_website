@@ -36,18 +36,8 @@ export class Wishlist extends React.Component {
 								return store.wishlist.map((item, index) => {
 									return (
 										<Item
-											id={actions.searchBookByID(item).id}
-											userKey={
-												actions.searchBookByID(item).id
-											}
-											title={
-												actions.searchBookByID(item)
-													.title
-											}
-											description={
-												actions.searchBookByID(item)
-													.description
-											}
+											key={index}
+											id={item}
 											buttonName="Find users who own this book"
 											deleteStuff={() => {
 												actions.deleteFromWishlist(

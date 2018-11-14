@@ -12,6 +12,20 @@ export class Usermodal extends React.Component {
 		};
 	}
 
+	selector = (e, id, prop) => {
+		let key = e.currentTarget.parentNode.childNodes.find(
+			e => e.id === this.state.userid.toString()
+		);
+
+		if (key !== undefined) {
+			key.className = key.className.replace(" bg-secondary", "");
+			prop(null);
+		} else {
+			e.currentTarget.className += " bg-secondary";
+			prop(id);
+		}
+	};
+
 	render() {
 		return (
 			<div
@@ -57,18 +71,7 @@ export class Usermodal extends React.Component {
 													Picurl="https://picsum.photos/50/50/?random"
 													City={item.city}
 													Username={item.username}
-													selector={e => {
-														if (
-															e.currentTarget
-																.id !=
-															this.userid
-														) {
-															e.target.className.replace(
-																" bg-secondary",
-																""
-															);
-														}
-													}}
+													selector={this.selector}
 													getUserID={id =>
 														this.setState({
 															userid: id

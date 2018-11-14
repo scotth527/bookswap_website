@@ -23,8 +23,10 @@ function Userdiv(props) {
 					);
 					props.getUserID(null);
 				}
-				props.selector();
-			}}>
+			}}
+			//onClick=
+			//{e => props.selector(e, props.id, props.getUserID)}
+		>
 			<div className="d-flex">
 				<img
 					src={props.Picurl}

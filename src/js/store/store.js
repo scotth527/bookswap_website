@@ -126,9 +126,7 @@ const getState = scope => {
 			},
 
 			searchBookByID: bookindex => {
-				return scope.state.store.books.find(e => {
-					if (e.id === bookindex) return e;
-				});
+				return scope.state.store.books.find(e => e.id === bookindex);
 			},
 
 			addToLibrary: bookid => {
