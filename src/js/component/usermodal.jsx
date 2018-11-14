@@ -3,15 +3,12 @@ import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { Context } from "../store/appContext.jsx";
 import Userdiv from "./userdiv.jsx";
-import Trade from "./trade.jsx";
 
 export class Usermodal extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			userid: null,
-			showSelf: this.props.show,
-			showTrade: false
+			userid: null
 		};
 	}
 
@@ -22,7 +19,7 @@ export class Usermodal extends React.Component {
 				tabIndex="-1"
 				role="dialog"
 				style={{
-					display: this.state.showSelf ? "inline-block" : "none"
+					display: this.props.show ? "inline-block" : "none"
 				}}>
 				<div className="modal-dialog " role="document">
 					<div className="modal-content col-12">
@@ -81,8 +78,7 @@ export class Usermodal extends React.Component {
 							</button>
 							<button
 								onClick={() => {
-									this.props.onClose();
-									this.setState({ showTrade: true });
+									this.props.onConfirm(this.state.userid);
 								}}
 								type="button"
 								className="btn btn-primary btn"
@@ -92,15 +88,6 @@ export class Usermodal extends React.Component {
 						</div>
 					</div>
 				</div>
-
-				{this.state.userid && (
-					<Trade
-						show={this.state.showTrade}
-						book={this.props.id}
-						sender={this.state.userid}
-						receiver={3}
-					/>
-				)}
 			</div>
 		);
 	}
@@ -111,6 +98,7 @@ export class Usermodal extends React.Component {
  **/
 Usermodal.propTypes = {
 	history: PropTypes.object,
+	onConfirm: PropTypes.func,
 	onClose: PropTypes.func,
 	show: PropTypes.bool,
 	id: PropTypes.number,

@@ -1,10 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
+
 import { Context } from "../store/appContext.jsx";
+
 import "../../styles/bookpage.css";
 import StoreAddModal from "../component/confirmtostoremodal.jsx";
 import WishAddModal from "../component/confirmwishmodal.jsx";
 import Usermodal from "../component/usermodal.jsx";
+import Trade from "../component/trade.jsx";
 
 export class BookPage extends React.Component {
 	constructor(props) {
@@ -14,7 +17,9 @@ export class BookPage extends React.Component {
 			itemToAdd: 0,
 			key: "",
 			showConfirmWishModal: false,
-			showOwnersModal: false
+			showOwnersModal: false,
+			user: null,
+			showTradeModal: false
 		};
 	}
 
@@ -198,11 +203,39 @@ export class BookPage extends React.Component {
 				{this.state.showOwnersModal && (
 					<Usermodal
 						show={this.state.showOwnersModal}
+						onConfirm={id =>
+							this.setState({
+								showOwnersModal: false,
+								user: id,
+								showTradeModal: true
+							})
+						}
 						onClose={() =>
 							this.setState({ key: "", showOwnersModal: false })
 						}
 						userKey={this.state.key}
 						id={parseInt(this.props.match.params.theid)}
+					/>
+				)}
+				{this.state.showTradeModal && (
+					<Trade
+						show={this.state.showTradeModal}
+						book={parseInt(this.props.match.params.theid)}
+						sender={this.state.user}
+						receiver={3}
+						onReturn={() =>
+							this.setState({
+								showOwnersModal: true,
+								showTradeModal: false
+							})
+						}
+						onConfirm={() =>
+							this.setState({
+								key: "",
+								user: null,
+								showTradeModal: false
+							})
+						}
 					/>
 				)}
 			</div>
