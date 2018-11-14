@@ -67,22 +67,21 @@ export class LogIn extends React.Component {
 												}
 											/>
 										</div>
-										<div className="row">
-											<div className="form-inline">
-												<h2>Password</h2>
-											</div>
-											<input
-												className="form-control"
-												type="Password"
-												placeholder="Password"
-												onChange={event =>
-													this.State({
-														password:
-															event.target.value
-													})
-												}
-											/>
+									</div>
+									<div className="row">
+										<div className="form-inline">
+											<h2>Password</h2>
 										</div>
+										<input
+											className="form-control"
+											type="Password"
+											placeholder="Password"
+											onChange={event =>
+												this.State({
+													password: event.target.value
+												})
+											}
+										/>
 									</div>
 									<button
 										className="btn btn-primary"

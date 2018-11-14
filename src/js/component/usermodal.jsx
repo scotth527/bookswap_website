@@ -3,23 +3,29 @@ import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { Context } from "../store/appContext.jsx";
 import Userdiv from "./userdiv.jsx";
+import Trade from "./trade.jsx";
 
 export class Usermodal extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			userid: 0,
+			userid: null,
+			showSelf: this.props.show,
 			showTrade: false,
-			showSelf: false
+			selected: "",
+			unselected: ""
 		};
 	}
+
 	render() {
 		return (
 			<div
 				className="modal"
 				tabIndex="-1"
 				role="dialog"
-				style={{ display: this.props.show ? "inline-block" : "none" }}>
+				style={{
+					display: this.state.showSelf ? "inline-block" : "none"
+				}}>
 				<div className="modal-dialog " role="document">
 					<div className="modal-content col-12">
 						<div className="modal-header">
@@ -52,13 +58,25 @@ export class Usermodal extends React.Component {
 												<Userdiv
 													key={index}
 													id={item.id}
-													index={index}
+													//index={index}
 													Picurl="https://picsum.photos/50/50/?random"
 													City={item.city}
 													Username={item.username}
-													getUserID={() =>
+													selector={e => {
+														if (
+															e.currentTarget
+																.id !=
+															this.userid
+														) {
+															e.target.className.replace(
+																" bg-secondary",
+																""
+															);
+														}
+													}}
+													getUserID={id =>
 														this.setState({
-															userid: item.id
+															userid: id
 														})
 													}
 												/>
@@ -81,12 +99,22 @@ export class Usermodal extends React.Component {
 									this.setState({ showTrade: true });
 								}}
 								type="button"
-								className="btn btn-primary btn">
+								className="btn btn-primary btn"
+								disabled={this.state.userid ? false : true}>
 								Request Trade
 							</button>
 						</div>
 					</div>
 				</div>
+
+				{this.state.userid && (
+					<Trade
+						show={this.state.showTrade}
+						book={this.props.id}
+						sender={this.state.userid}
+						receiver={3}
+					/>
+				)}
 			</div>
 		);
 	}

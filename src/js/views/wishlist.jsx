@@ -4,7 +4,6 @@ import SearchModal from "../component/searchmodal.jsx";
 import Item from "../component/library/item.jsx";
 import PropTypes from "prop-types";
 import "../../styles/wishlist.css";
-import "../../styles/bookpage.css";
 import { Context } from "../store/appContext.jsx";
 import Usermodal from "../component/usermodal.jsx";
 
@@ -21,7 +20,14 @@ export class Wishlist extends React.Component {
 
 	render() {
 		return (
-			<div className="container-fluid">
+			<div
+				className="container-fluid wrapper"
+				style={{
+					wordWrap: "break-word",
+					marginTop: "50px",
+					flexGrow: "1",
+					position: "relative"
+				}}>
 				<div className="row">
 					<div className="col-9 mx-auto">
 						<h1 className="text-center">Wishlist</h1>
@@ -30,10 +36,17 @@ export class Wishlist extends React.Component {
 								return store.wishlist.map((item, index) => {
 									return (
 										<Item
-											key={store.books[item].id}
-											title={store.books[item].title}
+											id={actions.searchBookByID(item).id}
+											userKey={
+												actions.searchBookByID(item).id
+											}
+											title={
+												actions.searchBookByID(item)
+													.title
+											}
 											description={
-												store.books[item].description
+												actions.searchBookByID(item)
+													.description
 											}
 											buttonName="Find users who own this book"
 											deleteStuff={() => {
@@ -44,8 +57,9 @@ export class Wishlist extends React.Component {
 											addStuff={() =>
 												this.setState({
 													key: "library",
-													bookid:
-														store.books[item].id,
+													bookid: actions.searchBookByID(
+														item
+													).id,
 													showOwnersModal: true
 												})
 											}

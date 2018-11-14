@@ -7,18 +7,23 @@ import PropTypes from "prop-types";
 function Userdiv(props) {
 	return (
 		<div
-			className="col-12 mb-3 d-flex justify-content-around border border-dark rounded"
-			id={props.index}
+			className={
+				"col-12 mb-3 d-flex justify-content-around border border-dark rounded " +
+				props.background
+			}
+			id={props.id}
 			onClick={e => {
 				if (e.currentTarget.className.search(" bg-secondary") == -1) {
 					e.currentTarget.className += " bg-secondary";
+					props.getUserID(props.id);
 				} else {
 					e.currentTarget.className = e.currentTarget.className.replace(
 						" bg-secondary",
 						""
 					);
+					props.getUserID(null);
 				}
-				props.getUserID();
+				props.selector();
 			}}>
 			<div className="d-flex">
 				<img
@@ -42,9 +47,11 @@ Userdiv.propTypes = {
 	Username: PropTypes.string,
 	Picurl: PropTypes.string,
 	City: PropTypes.string,
-	index: PropTypes.number,
+	//index: PropTypes.number,
 	id: PropTypes.number,
-	getUserID: PropTypes.func
+	getUserID: PropTypes.func,
+	selector: PropTypes.func,
+	background: PropTypes.string
 };
 
 Userdiv.defaultProps = {

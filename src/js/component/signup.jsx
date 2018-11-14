@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
+//import DropDown from "../component/dropdown.jsx";
 
 export class SignUp extends React.Component {
 	constructor(props) {
@@ -13,7 +14,8 @@ export class SignUp extends React.Component {
 			address: "",
 			phone: "",
 			birthday: "",
-			genre: ""
+			genre: "",
+			showDrop: false
 		};
 	}
 
@@ -26,7 +28,8 @@ export class SignUp extends React.Component {
 			address,
 			phone,
 			birthday,
-			genre
+			genre,
+			showDrop
 		} = this.state;
 	}
 
@@ -110,32 +113,36 @@ export class SignUp extends React.Component {
 										}
 									/>
 								</div>
-								<div className="form-inline">
-									<h2>Address</h2>
+								<div className="row">
+									<div className="form-inline">
+										<h2>Address</h2>
+									</div>
+									<input
+										className="form-control"
+										type="text"
+										placeholder="Address"
+										onChange={event =>
+											this.State({
+												address: event.target.value
+											})
+										}
+									/>
 								</div>
-								<input
-									className="form-control"
-									type="text"
-									placeholder="Address"
-									onChange={event =>
-										this.State({
-											address: event.target.value
-										})
-									}
-								/>
-								<div className="form-inline">
-									<h2>Phone</h2>
+								<div className="row">
+									<div className="form-inline">
+										<h2>Phone</h2>
+									</div>
+									<input
+										className="form-control"
+										type="text"
+										placeholder="Phone"
+										onChange={event =>
+											this.State({
+												phone: event.target.value
+											})
+										}
+									/>
 								</div>
-								<input
-									className="form-control"
-									type="text"
-									placeholder="Phone"
-									onChange={event =>
-										this.State({
-											phone: event.target.value
-										})
-									}
-								/>
 								<div className="form-inline">
 									<h2>Birthday</h2>
 								</div>
@@ -155,25 +162,52 @@ export class SignUp extends React.Component {
 								<div className="nav-item dropdown">
 									<a
 										className="nav-link dropdown-toggle"
-										href="#"
 										id="navbarDropdown"
 										role="button"
 										data-toggle="dropdown"
 										aria-haspopup="true"
-										aria-expanded="false">
+										aria-expanded="false"
+										onClick={() =>
+											this.setState({ showDrop: true })
+										}>
 										Genre
 									</a>
 									<div
 										className="dropdown-menu"
+										style={{
+											display: this.state.showDrop
+												? "inline-block"
+												: "hidden"
+										}}
 										aria-labelledby="navbarDropdown">
-										<a className="dropdown-item" href="#">
-											Action
-										</a>
-										<a className="dropdown-item" href="#">
+										<div
+											onClick={() =>
+												this.setState({
+													showDrop: !this.state
+														.showDrop
+												})
+											}>
+											<a className="dropdown-item">
+												Action
+											</a>
+										</div>
+										<a
+											className="dropdown-item"
+											onClick={() =>
+												this.setState({
+													showDrop: false
+												})
+											}>
 											Another action
 										</a>
 										<div className="dropdown-divider" />
-										<a className="dropdown-item" href="#">
+										<a
+											className="dropdown-item"
+											onClick={() =>
+												this.setState({
+													showDrop: false
+												})
+											}>
 											Something else here
 										</a>
 									</div>
