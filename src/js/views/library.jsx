@@ -3,6 +3,7 @@ import NewItem from "../component/library/new_item.jsx";
 import Item from "../component/library/item.jsx";
 import { Context } from "../store/appContext.jsx";
 import Usermodal from "../component/usermodal.jsx";
+import "../../styles/library.css";
 
 export class Library extends React.Component {
 	constructor(props) {
@@ -17,17 +18,26 @@ export class Library extends React.Component {
 	render() {
 		return (
 			<div
-				className="container"
-				style={{ wordWrap: "break-word", marginTop: "50px" }}>
+				className="container-fluid wrapper"
+				style={{
+					wordWrap: "break-word",
+					marginTop: "50px",
+					flexGrow: "1",
+					position: "relative"
+				}}>
 				<NewItem className="modal-dialog" />
 				<Context.Consumer>
 					{({ store, actions }) => {
 						return store.library.map((item, index) => {
+							console.log(actions.searchBookByID(item).id);
 							return (
 								<Item
-									key={store.books[item].id}
-									title={store.books[item].title}
-									description={store.books[item].description}
+									id={actions.searchBookByID(item).id}
+									key={index}
+									title={actions.searchBookByID(item).title}
+									description={
+										actions.searchBookByID(item).description
+									}
 									buttonName="Find users who want this book"
 									deleteStuff={() =>
 										actions.deleteFromLibrary(index)
@@ -35,7 +45,8 @@ export class Library extends React.Component {
 									addStuff={() =>
 										this.setState({
 											key: "wishlist",
-											bookid: store.books[item].id,
+											bookid: actions.searchBookByID(item)
+												.id,
 											showOwnersModal: true
 										})
 									}

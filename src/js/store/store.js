@@ -102,6 +102,13 @@ const getState = scope => {
 					wishlist: [2],
 					city: "New York, NY",
 					id: 2
+				},
+				{
+					username: "bloodedge",
+					library: [2, 3],
+					wishlist: [1, 5],
+					city: "New York, NY",
+					id: 3
 				}
 			]
 		},
@@ -119,9 +126,7 @@ const getState = scope => {
 			},
 
 			searchBookByID: bookindex => {
-				return scope.state.store.books.find(e => {
-					if (e.id === bookindex) return e;
-				});
+				return scope.state.store.books.find(e => e.id === bookindex);
 			},
 
 			addToLibrary: bookid => {
@@ -140,6 +145,10 @@ const getState = scope => {
 				let mistake = scope.state.store;
 				mistake.library.splice(id, 1);
 				scope.setState(mistake);
+			},
+
+			searchUser: id => {
+				return scope.state.store.users.find(e => e.id === id);
 			},
 
 			searchUsersForID: (id, key) => {

@@ -8,18 +8,33 @@ export class Usermodal extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			userid: 0,
-			showTrade: false,
-			showSelf: false
+			userid: null
 		};
 	}
+
+	selector = (e, id, prop) => {
+		let key = e.currentTarget.parentNode.childNodes.find(
+			e => e.id === this.state.userid.toString()
+		);
+
+		if (key !== undefined) {
+			key.className = key.className.replace(" bg-secondary", "");
+			prop(null);
+		} else {
+			e.currentTarget.className += " bg-secondary";
+			prop(id);
+		}
+	};
+
 	render() {
 		return (
 			<div
 				className="modal"
 				tabIndex="-1"
 				role="dialog"
-				style={{ display: this.props.show ? "inline-block" : "none" }}>
+				style={{
+					display: this.props.show ? "inline-block" : "none"
+				}}>
 				<div className="modal-dialog " role="document">
 					<div className="modal-content col-12">
 						<div className="modal-header">
@@ -52,13 +67,14 @@ export class Usermodal extends React.Component {
 												<Userdiv
 													key={index}
 													id={item.id}
-													index={index}
+													//index={index}
 													Picurl="https://picsum.photos/50/50/?random"
 													City={item.city}
 													Username={item.username}
-													getUserID={() =>
+													selector={this.selector}
+													getUserID={id =>
 														this.setState({
-															userid: item.id
+															userid: id
 														})
 													}
 												/>
@@ -77,11 +93,11 @@ export class Usermodal extends React.Component {
 							</button>
 							<button
 								onClick={() => {
-									this.props.onClose();
-									this.setState({ showTrade: true });
+									this.props.onConfirm(this.state.userid);
 								}}
 								type="button"
-								className="btn btn-primary btn">
+								className="btn btn-primary btn"
+								disabled={this.state.userid ? false : true}>
 								Request Trade
 							</button>
 						</div>
@@ -97,6 +113,7 @@ export class Usermodal extends React.Component {
  **/
 Usermodal.propTypes = {
 	history: PropTypes.object,
+	onConfirm: PropTypes.func,
 	onClose: PropTypes.func,
 	show: PropTypes.bool,
 	id: PropTypes.number,

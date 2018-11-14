@@ -34,12 +34,20 @@ function YourShop(props) {
 								.map((item, index) => {
 									return (
 										<Preview
-											key={store.books[item].id}
-											link={store.books[
-												item
-											].id.toString()}
-											picurl={store.books[item].image}
-											title={store.books[item].title}
+											key={
+												actions.searchBookByID(item).id
+											}
+											link={actions
+												.searchBookByID(item)
+												.id.toString()}
+											picurl={
+												actions.searchBookByID(item)
+													.image
+											}
+											title={
+												actions.searchBookByID(item)
+													.title
+											}
 										/>
 									);
 								});
