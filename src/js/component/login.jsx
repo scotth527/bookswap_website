@@ -46,49 +46,53 @@ export class LogIn extends React.Component {
 								""
 							)}
 						</div>
-						<div className="modal-body mx-auto col-12">
-							<div className="form-inline">
-								<h2>Log In</h2>
-								<div className="container">
-									<div className="row">
-										<div className="form-group">
+						<div className="container mx-auto">
+							<h2>Log In</h2>
+							<div className="row">
+								<div className="modal-body mx-auto col-4">
+									<div className="mx-auto">
+										<div className="row">
+											<div className="form-group">
+												<div className="form-inline">
+													<h2>Email</h2>
+												</div>
+												<input
+													className="form-control"
+													type="text"
+													placeholder=""
+													onChange={event =>
+														this.State({
+															email:
+																event.target
+																	.value
+														})
+													}
+												/>
+											</div>
+										</div>
+										<div className="row">
 											<div className="form-inline">
-												<h2>Email</h2>
+												<h2>Password</h2>
 											</div>
 											<input
 												className="form-control"
-												type="text"
-												placeholder="Email"
+												type="Password"
+												placeholder=""
 												onChange={event =>
 													this.State({
-														email:
+														password:
 															event.target.value
 													})
 												}
 											/>
 										</div>
+										<button
+											className="btn btn-primary"
+											type="button"
+											onClick={() => this.logIn()}>
+											Submit
+										</button>
 									</div>
-									<div className="row">
-										<div className="form-inline">
-											<h2>Password</h2>
-										</div>
-										<input
-											className="form-control"
-											type="Password"
-											placeholder="Password"
-											onChange={event =>
-												this.State({
-													password: event.target.value
-												})
-											}
-										/>
-									</div>
-									<button
-										className="btn btn-primary"
-										type="button"
-										onClick={() => this.logIn()}>
-										Submit
-									</button>
 								</div>
 							</div>
 						</div>

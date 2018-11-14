@@ -7,5 +7,3 @@ import LogIn from '../components/LogIn.jsx';
 
 
 
-ReactDOM.render(
-    <Router path="/signup"    )

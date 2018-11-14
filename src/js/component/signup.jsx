@@ -60,164 +60,168 @@ export class SignUp extends React.Component {
 								""
 							)}
 						</div>
-						<div className="row">
-							<div className="modal-body mx-auto col-12">
-								<div className="form-inline">
-									<h2>Sign Up</h2>
-								</div>
-								<div className="row">
-									<div className="form-group">
+						<div className="container mx-auto">
+							<h2>Sign Up</h2>
+							<div className="row">
+								<div className="modal-body mx-auto col-6">
+									<div className="row">
+										<div className="form-group">
+											<div className="form-inline">
+												<h2>First Name</h2>
+											</div>
+											<input
+												className="form-control"
+												type="text"
+												placeholder=""
+												onChange={event =>
+													this.State({
+														firstname:
+															event.target.value
+													})
+												}
+											/>
+										</div>
+									</div>
+									<div className="row">
 										<div className="form-inline">
-											<h2>First Name</h2>
+											<h2>Last Name</h2>
 										</div>
 										<input
 											className="form-control"
 											type="text"
-											placeholder="first name"
+											placeholder=""
 											onChange={event =>
 												this.State({
-													firstname:
-														event.target.value
+													lastname: event.target.value
 												})
 											}
 										/>
 									</div>
-								</div>
-								<div className="row">
-									<div className="form-inline">
-										<h2>Last Name</h2>
+									<div className="row">
+										<div className="form-inline">
+											<h2>Email</h2>
+										</div>
+										<input
+											className="form-control"
+											type="text"
+											placeholder=""
+											onChange={event =>
+												this.State({
+													email: event.target.value
+												})
+											}
+										/>
 									</div>
-									<input
-										className="form-control"
-										type="text"
-										placeholder="last name"
-										onChange={event =>
-											this.State({
-												lastname: event.target.value
-											})
-										}
-									/>
-								</div>
-								<div className="row">
-									<div className="form-inline">
-										<h2>Email</h2>
+									<div className="row">
+										<div className="form-inline">
+											<h2>Address</h2>
+										</div>
+										<input
+											className="form-control"
+											type="text"
+											placeholder=""
+											onChange={event =>
+												this.State({
+													address: event.target.value
+												})
+											}
+										/>
 									</div>
-									<input
-										className="form-control"
-										type="text"
-										placeholder="Email"
-										onChange={event =>
-											this.State({
-												email: event.target.value
-											})
-										}
-									/>
-								</div>
-								<div className="row">
-									<div className="form-inline">
-										<h2>Address</h2>
+									<div className="row">
+										<div className="form-inline">
+											<h2>Phone</h2>
+										</div>
+										<input
+											className="form-control"
+											type="text"
+											placeholder=""
+											onChange={event =>
+												this.State({
+													phone: event.target.value
+												})
+											}
+										/>
 									</div>
-									<input
-										className="form-control"
-										type="text"
-										placeholder="Address"
-										onChange={event =>
-											this.State({
-												address: event.target.value
-											})
-										}
-									/>
-								</div>
-								<div className="row">
-									<div className="form-inline">
-										<h2>Phone</h2>
+									<div className="row">
+										<div className="form-inline">
+											<h2>Birthday</h2>
+										</div>
+										<input
+											className="form-control"
+											type="text"
+											placeholder="Month/Day/Year"
+											onChange={event =>
+												this.State({
+													birthday: event.target.value
+												})
+											}
+										/>
 									</div>
-									<input
-										className="form-control"
-										type="text"
-										placeholder="Phone"
-										onChange={event =>
-											this.State({
-												phone: event.target.value
-											})
-										}
-									/>
-								</div>
-								<div className="form-inline">
-									<h2>Birthday</h2>
-								</div>
-								<input
-									className="form-control"
-									type="text"
-									placeholder="Birthday"
-									onChange={event =>
-										this.State({
-											birthday: event.target.value
-										})
-									}
-								/>
-								<div className="form-inline">
-									<h2>Genre</h2>
-								</div>
-								<div className="nav-item dropdown">
-									<a
-										className="nav-link dropdown-toggle"
-										id="navbarDropdown"
-										role="button"
-										data-toggle="dropdown"
-										aria-haspopup="true"
-										aria-expanded="false"
-										onClick={() =>
-											this.setState({ showDrop: true })
-										}>
-										Genre
-									</a>
-									<div
-										className="dropdown-menu"
-										style={{
-											display: this.state.showDrop
-												? "inline-block"
-												: "hidden"
-										}}
-										aria-labelledby="navbarDropdown">
-										<div
+									<div className="mx-auto">
+										<h2>Genre</h2>
+									</div>
+									<div className="nav-item dropdown">
+										<a
+											className="nav-link dropdown-toggle"
+											id="navbarDropdown"
+											role="button"
+											data-toggle="dropdown"
+											aria-haspopup="true"
+											aria-expanded="false"
 											onClick={() =>
 												this.setState({
-													showDrop: !this.state
-														.showDrop
+													showDrop: true
 												})
-											}>
-											<a className="dropdown-item">
-												Action
+											}
+											Genre
+										/>
+										<div
+											className="dropdown-menu"
+											style={{
+												display: this.state.showDrop
+													? "inline-block"
+													: "hidden"
+											}}
+											aria-labelledby="navbarDropdown">
+											<div
+												onClick={() =>
+													this.setState({
+														showDrop: !this.state
+															.showDrop
+													})
+												}>
+												<a className="dropdown-item">
+													Action
+												</a>
+											</div>
+											<a
+												className="dropdown-item"
+												onClick={() =>
+													this.setState({
+														showDrop: false
+													})
+												}>
+												Another action
+											</a>
+											<div className="dropdown-divider" />
+											<a
+												className="dropdown-item"
+												onClick={() =>
+													this.setState({
+														showDrop: false
+													})
+												}>
+												Something else here
 											</a>
 										</div>
-										<a
-											className="dropdown-item"
-											onClick={() =>
-												this.setState({
-													showDrop: false
-												})
-											}>
-											Another action
-										</a>
-										<div className="dropdown-divider" />
-										<a
-											className="dropdown-item"
-											onClick={() =>
-												this.setState({
-													showDrop: false
-												})
-											}>
-											Something else here
-										</a>
 									</div>
+									<button
+										className="btn btn-primary"
+										type="button"
+										onClick={() => this.signUp}>
+										Submit
+									</button>
 								</div>
-								<button
-									className="btn btn-primary"
-									type="button"
-									onClick={() => this.signUp}>
-									Submit
-								</button>
 							</div>
 						</div>
 					</div>
