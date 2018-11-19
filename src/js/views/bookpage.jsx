@@ -5,6 +5,11 @@ import "../../styles/bookpage.css";
 import StoreAddModal from "../component/confirmtostoremodal.jsx";
 import WishAddModal from "../component/confirmwishmodal.jsx";
 import Usermodal from "../component/usermodal.jsx";
+<<<<<<< HEAD
+=======
+import Trade from "../component/trade.jsx";
+import ErrorModal from "../component/errormodal.jsx";
+>>>>>>> 76d355694f9c8978d4c3c55c01c7beb688ab6a27
 
 export class BookPage extends React.Component {
 	constructor(props) {
@@ -14,7 +19,14 @@ export class BookPage extends React.Component {
 			itemToAdd: 0,
 			key: "",
 			showConfirmWishModal: false,
+<<<<<<< HEAD
 			showOwnersModal: false
+=======
+			showOwnersModal: false,
+			user: null,
+			showTradeModal: false,
+			showError: false
+>>>>>>> 76d355694f9c8978d4c3c55c01c7beb688ab6a27
 		};
 	}
 
@@ -184,6 +196,13 @@ export class BookPage extends React.Component {
 							this.setState({ showConfirmLibModal: false })
 						}
 						id={parseInt(this.props.match.params.theid)}
+						errorAlert={() =>
+							this.setState({
+								showConfirmLibModal: false,
+								showConfirmWishModal: false,
+								showError: true
+							})
+						}
 					/>
 				)}
 				{this.state.showConfirmWishModal && (
@@ -193,6 +212,13 @@ export class BookPage extends React.Component {
 							this.setState({ showConfirmWishModal: false })
 						}
 						id={parseInt(this.props.match.params.theid)}
+						errorAlert={() =>
+							this.setState({
+								showConfirmLibModal: false,
+								showConfirmWishModal: false,
+								showError: true
+							})
+						}
 					/>
 				)}
 				{this.state.showOwnersModal && (
@@ -205,19 +231,47 @@ export class BookPage extends React.Component {
 						id={parseInt(this.props.match.params.theid)}
 					/>
 				)}
+<<<<<<< HEAD
+=======
+				{this.state.showTradeModal && (
+					<Trade
+						show={this.state.showTradeModal}
+						book={parseInt(this.props.match.params.theid)}
+						sender={this.state.user}
+						receiver={3}
+						onReturn={() =>
+							this.setState({
+								showOwnersModal: true,
+								showTradeModal: false
+							})
+						}
+						onConfirm={() =>
+							this.setState({
+								key: "",
+								user: null,
+								showTradeModal: false
+							})
+						}
+					/>
+				)}
+				{this.state.showError && (
+					<ErrorModal
+						reveal={this.state.showError}
+						onClose={() => this.setState({ showError: false })}
+					/>
+				)}
+>>>>>>> 76d355694f9c8978d4c3c55c01c7beb688ab6a27
 			</div>
 		);
 	}
 }
 
 BookPage.propTypes = {
-	match: PropTypes.object,
-	history: PropTypes.object,
-	onDelete: PropTypes.func,
-	delete: PropTypes.func
+	match: PropTypes.object
 };
 
 BookPage.defaultProps = {
 	show: false,
-	onClose: null
+	onClose: null,
+	showError: false
 };

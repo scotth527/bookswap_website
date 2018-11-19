@@ -4,6 +4,12 @@ import { withRouter } from "react-router-dom";
 import { Context } from "../store/appContext.jsx";
 
 export class WishAddModal extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			showError: false
+		};
+	}
 	render() {
 		return (
 			<div
@@ -44,10 +50,22 @@ export class WishAddModal extends React.Component {
 										<button
 											type="button"
 											onClick={() => {
-												actions.addToWishlist(
-													this.props.id
-												);
-												this.props.onClose();
+												if (
+													store.wishlist.find(
+														item =>
+															item ===
+															this.props.id
+													) == undefined
+												) {
+													actions.addToWishlist(
+														this.props.id
+													);
+													this.props.onClose();
+												} else {
+													{
+														this.props.errorAlert();
+													}
+												}
 											}}
 											className="btn btn-success"
 											data-dismiss="modal">
@@ -71,7 +89,8 @@ WishAddModal.propTypes = {
 	history: PropTypes.object,
 	onClose: PropTypes.func,
 	show: PropTypes.bool,
-	id: PropTypes.number
+	id: PropTypes.number,
+	errorAlert: PropTypes.func
 };
 
 /**

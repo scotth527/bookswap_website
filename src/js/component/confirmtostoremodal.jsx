@@ -2,8 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { Context } from "../store/appContext.jsx";
+import { ErrorModal } from "./errormodal.jsx";
 
 export class StoreAddModal extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {};
+	}
 	render() {
 		return (
 			<div
@@ -45,11 +50,21 @@ export class StoreAddModal extends React.Component {
 									return (
 										<button
 											type="button"
-											onClick={() => {
-												actions.addToLibrary(
-													this.props.id
-												);
-												this.props.onClose();
+											onClick={item => {
+												if (
+													store.library.find(
+														item =>
+															item ===
+															this.props.id
+													) == undefined
+												) {
+													actions.addToLibrary(
+														this.props.id
+													);
+													this.props.onClose();
+												} else {
+													this.props.errorAlert();
+												}
 											}}
 											className="btn btn-success"
 											data-dismiss="modal">
@@ -70,10 +85,11 @@ export class StoreAddModal extends React.Component {
  * your component's properties
  **/
 StoreAddModal.propTypes = {
-	history: PropTypes.object,
 	onClose: PropTypes.func,
+	showError: PropTypes.bool,
+	id: PropTypes.number,
 	show: PropTypes.bool,
-	id: PropTypes.number
+	errorAlert: PropTypes.func
 };
 
 /**
@@ -81,8 +97,9 @@ StoreAddModal.propTypes = {
  * your component's properties
  **/
 StoreAddModal.defaultProps = {
-	show: false,
-	onClose: null
+	showError: false,
+	onClose: null,
+	errorAlert: null
 };
 
 export default withRouter(StoreAddModal);
