@@ -112,8 +112,18 @@ export class NavBar extends React.Component {
 							type="submit">
 							Log In
 						</button>
-						<SignUp show={this.state.showSignUpModal} />
-						<LogIn show={this.state.showLogInModal} />
+						<SignUp
+							show={this.state.showSignUpModal}
+							onClose={() =>
+								this.setState({ showSignUpModal: false })
+							}
+						/>
+						<LogIn
+							show={this.state.showLogInModal}
+							onClose={() =>
+								this.setState({ showLogInModal: false })
+							}
+						/>
 						{console.log(this.state)}
 					</div>
 				</div>

@@ -13,7 +13,7 @@ export class LogIn extends React.Component {
 	}
 
 	logIn() {
-		console.log("this.state", this.state);
+		console.log(this.state);
 		//const { email, password } = this.state;
 	}
 	render() {
@@ -25,17 +25,16 @@ export class LogIn extends React.Component {
 				style={{
 					display: this.props.show ? "inline-block" : "none"
 				}}>
-				<div className="modal-dialog" role="document">
+				<div
+					className="modal-dialog"
+					role="document"
+					style={{ maxWidth: "50vw" }}>
 					<div className="modal-content">
 						<div className="modal-header">
+							<h2>Log In</h2>
 							{this.props.onClose ? (
 								<button
-									onClick={() =>
-										this.setState({
-											showLogInModal: true,
-											showSignUpModal: false
-										})
-									}
+									onClick={() => this.props.onClose()}
 									type="button"
 									className="close"
 									data-dismiss="modal"
@@ -47,30 +46,25 @@ export class LogIn extends React.Component {
 							)}
 						</div>
 						<div className="container mx-auto">
-							<h2>Log In</h2>
 							<div className="row">
 								<div className="modal-body mx-auto col-4">
 									<div className="mx-auto">
-										<div className="row">
-											<div className="form-group">
-												<div className="form-inline">
-													<h2>Email</h2>
-												</div>
-												<input
-													className="form-control"
-													type="text"
-													placeholder=""
-													onChange={event =>
-														this.State({
-															email:
-																event.target
-																	.value
-														})
-													}
-												/>
+										<div className="form-group">
+											<div className="form-inline">
+												<h2>Email</h2>
 											</div>
-										</div>
-										<div className="row">
+											<input
+												className="form-control"
+												type="text"
+												placeholder=""
+												onChange={event =>
+													this.State({
+														email:
+															event.target.value
+													})
+												}
+											/>
+
 											<div className="form-inline">
 												<h2>Password</h2>
 											</div>
@@ -86,6 +80,7 @@ export class LogIn extends React.Component {
 												}
 											/>
 										</div>
+
 										<button
 											className="btn btn-primary"
 											type="button"
