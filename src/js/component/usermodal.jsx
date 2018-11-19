@@ -54,7 +54,7 @@ export class Usermodal extends React.Component {
 								""
 							)}
 						</div>
-						<div className="modal-body mx-auto col-12 d-flex flex-column">
+						<div className="modal-body mx-auto col-10 d-flex flex-column">
 							<Context.Consumer>
 								{({ store, actions }) => {
 									return actions
