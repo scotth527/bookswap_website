@@ -11,6 +11,7 @@ const Store = PassedComponent => {
 		}
 
 		componentDidMount() {
+			this.state.actions.fetchData();
 			// Set your fetchs/Ajax requests here.
 			// make sure you're using the store: this.state.store
 		}

@@ -77,6 +77,18 @@ export class NavBar extends React.Component {
 									Library
 								</button>
 							</Link>
+							<Link to="/trades">
+								<button
+									type="button"
+									style={{
+										whiteSpace: "normal"
+									}}
+									className="btn btn-dark
+														mb-2 ">
+									{" "}
+									Trades
+								</button>
+							</Link>
 							<Link to="/account">
 								<button
 									type="button"
