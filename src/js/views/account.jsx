@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import YourShop from "../component/shopbutton.jsx";
 import Profilebanner from "../component/profilejumbotron.jsx";
-import "../../styles/account.css";
+import "../../styles/bookpage.css";
 import Wishprev from "../component/wishlistprev.jsx";
 import { Context } from "../store/appContext.jsx";
 
