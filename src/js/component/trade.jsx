@@ -10,10 +10,7 @@ export class Trade extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			show: this.props.show,
-			book: this.props.book,
-			sender: this.props.sender,
-			receiver: this.props.receiver
+			show: this.props.show
 		};
 	}
 
@@ -26,9 +23,12 @@ export class Trade extends React.Component {
 				style={{
 					display: this.state.show ? "inline-block" : "none"
 				}}>
-				<div className="modal-dialog" role="document">
+				<div
+					className="modal-dialog"
+					style={{ maxWidth: "90vw" }}
+					role="document">
 					<div className="modal-content">
-						<div className="modal-header">
+						<div className="modal-header col-12">
 							<div className="row justify-context-space-between">
 								<div className="col-12" />
 								<div className="col-12">
@@ -41,36 +41,19 @@ export class Trade extends React.Component {
 							</div>
 						</div>
 						<div className="modal-body">
-							<div className="row justify-content-center">
-								<div className="col-12 mb-2">
-									<div className="row">
-										<div className="mx-auto">
-											<p>The book</p>
-										</div>
-									</div>
-								</div>
-								<div className="col-10">
-									<Item id={this.props.book} simple={true} />
-								</div>
-								<div className="col-12 my-2">
-									<div className="row">
-										<div className="mx-auto">
-											<p>will be sent by</p>
-										</div>
-									</div>
-								</div>
+							<div className="row">
 								<Context.Consumer>
 									{({ store, actions }) => {
 										let sender = actions.searchUser(
-											this.state.sender
+											this.props.sender
 										);
 										let receiver = actions.searchUser(
-											this.state.receiver
+											this.props.receiver
 										);
 
 										return (
 											<React.Fragment>
-												<div className="col-8">
+												<div className="col-5">
 													<Userdiv
 														id={sender.id}
 														//Picurl="https://picsum.photos/50/50/?random"
@@ -79,15 +62,20 @@ export class Trade extends React.Component {
 															sender.username
 														}
 													/>
+													<Item
+														id={this.props.book}
+														simple={true}
+													/>
 												</div>
-												<div className="col-12 my-2">
-													<div className="row">
-														<div className="mx-auto">
-															<p>to</p>
-														</div>
-													</div>
+												<div className="col-2 text-center my-auto">
+													<i
+														className="fas fa-exchange-alt"
+														style={{
+															fontSize: "5vw"
+														}}
+													/>
 												</div>
-												<div className="col-8">
+												<div className="col-5">
 													<Userdiv
 														id={receiver.id}
 														//Picurl="https://picsum.photos/50/50/?random"
@@ -95,6 +83,10 @@ export class Trade extends React.Component {
 														Username={
 															receiver.username
 														}
+													/>
+													<Item
+														id={this.props.book}
+														simple={true}
 													/>
 												</div>
 											</React.Fragment>

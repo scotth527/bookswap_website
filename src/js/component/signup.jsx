@@ -172,9 +172,9 @@ export class SignUp extends React.Component {
 												this.setState({
 													showDrop: true
 												})
-											}
+											}>
 											Genre
-										/>
+										</a>
 										<div
 											className="dropdown-menu"
 											style={{

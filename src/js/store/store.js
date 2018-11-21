@@ -86,13 +86,23 @@ const getState = scope => {
 				}
 			],
 
-			tradeRequests: [],
+			tradeRequests: [
+				{
+					sendBook: 1,
+					send: 2,
+					fromBook: 2,
+					from: 3,
+					isAccepted: false
+				}
+			],
 
 			users: [
 				{
 					username: "scotth527",
 					library: [1, 5],
 					wishlist: [4],
+					requests: [],
+					pending: [],
 					city: "Miami, FL",
 					id: 1
 				},
@@ -100,6 +110,8 @@ const getState = scope => {
 					username: "goonsville",
 					library: [1, 4],
 					wishlist: [2],
+					requests: [0],
+					pending: [],
 					city: "New York, NY",
 					id: 2
 				},
@@ -107,7 +119,9 @@ const getState = scope => {
 					username: "bloodedge",
 					library: [2, 3],
 					wishlist: [1, 5],
-					city: "New York, NY",
+					requests: [],
+					pending: [[1, 2]],
+					city: "Oklahoma City, OK",
 					id: 3
 				}
 			]
@@ -134,6 +148,21 @@ const getState = scope => {
 				store.library.push(bookid);
 				scope.setState(store);
 			},
+			
+			addTradeRequest: (sBook, s, fBook, f) => {
+				let store = scope.state.store;
+				let trade = {
+					sendBook: sBook,
+					send: s,
+					fromBook: fBook,
+					from: f,
+					isAccepted: true
+				};
+				
+				if(store.tradeRequests.find(e => e === trade) !== undefined) return false;
+				trade.isAccepted = false;
+				
+			},
 
 			deleteFromWishlist: id => {
 				let mistake = scope.state.store;
@@ -151,10 +180,10 @@ const getState = scope => {
 				return scope.state.store.users.find(e => e.id === id);
 			},
 
-			searchUsersForID: (id, key) => {
+			searchUsersForID: (id, self=null, key) => {
 				return scope.state.store.users.filter(
-					item => item[key].find(e => e === id) !== undefined
-				);
+					item => item.id !== self
+				).filter(item => item[key].find(e => e === id) !== undefined);
 			},
 
 			search: (q, field = "all", page = 1) => {

@@ -60,6 +60,7 @@ export class Usermodal extends React.Component {
 									return actions
 										.searchUsersForID(
 											this.props.id,
+											this.props.currentUser,
 											this.props.userKey
 										)
 										.map((item, index) => {
@@ -117,6 +118,7 @@ Usermodal.propTypes = {
 	onClose: PropTypes.func,
 	show: PropTypes.bool,
 	id: PropTypes.number,
+	currentUser: PropTypes.number,
 	userKey: PropTypes.string,
 	divtitle: PropTypes.string
 };
