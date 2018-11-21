@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import YourShop from "../component/shopbutton.jsx";
 import Profilebanner from "../component/profilejumbotron.jsx";
-import "../../styles/account.css";
+import "../../styles/bookpage.css";
 import Wishprev from "../component/wishlistprev.jsx";
 import { Context } from "../store/appContext.jsx";
 
@@ -67,7 +67,7 @@ export class Account extends React.Component {
 										pagetitle={options[2].name}
 										pagedescription={options[2].description}
 										link={options[2].link}
-										uniqueinfo={store.tradeRequests.length}
+										uniqueinfo={store.trades.length}
 									/>
 								</React.Fragment>
 							);

@@ -17,10 +17,29 @@ export class NavBar extends React.Component {
 	}
 	render() {
 		return (
-			<nav className="navbar navbar-expand-lg navbar-light bg-light">
-				<Link className="navbar-brand" to="#">
-					Book Pals
-				</Link>
+			<nav className="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between">
+				<ul className="nav">
+					<li className="nav-item">
+						<Link className="navbar-brand" to="#">
+							Book Pals
+						</Link>
+					</li>
+					<li className="nav-item">
+						<Link className="nav-link" to="#">
+							Home <span className="sr-only">(current)</span>
+						</Link>
+					</li>
+					<li className="nav-item">
+						<form className="form-inline my-2 my-lg-0">
+							<input
+								className="form-control mr-sm-2"
+								type="search"
+								placeholder="Search"
+								aria-label="Search"
+							/>
+						</form>
+					</li>
+				</ul>
 				<button
 					className="navbar-toggler"
 					type="button"
@@ -36,85 +55,103 @@ export class NavBar extends React.Component {
 					<div
 						className="collapse navbar-collapse"
 						id="navbarSupportedContent">
-						<ul className="navbar-nav mr-auto">
-							<li className="nav-item active">
-								<Link className="nav-link" to="#">
-									Home{" "}
-									<span className="sr-only">(current)</span>
+						<ul className="navbar-nav">
+							<li className="nav-item mr-1">
+								<Link to="/wishlist">
+									<button
+										type="button"
+										style={{
+											whiteSpace: "normal"
+										}}
+										className="btn btn-dark
+														mb-2 ">
+										{" "}
+										Wishlist
+									</button>
 								</Link>
 							</li>
+							<li className="nav-item mr-1">
+								<Link to="/library">
+									<button
+										type="button"
+										style={{
+											whiteSpace: "normal"
+										}}
+										className="btn btn-dark
+														mb-2 ">
+										{" "}
+										Library
+									</button>
+								</Link>
+							</li>
+							<li className="nav-item mr-1">
+								<Link to="/trades">
+									<button
+										type="button"
+										style={{
+											whiteSpace: "normal"
+										}}
+										className="btn btn-dark
+														mb-2 ">
+										{" "}
+										Trades
+									</button>
+								</Link>
+							</li>
+							<li className="nav-item mr-1">
+								<Link to="/account">
+									<button
+										type="button"
+										style={{
+											whiteSpace: "normal"
+										}}
+										className="btn btn-dark
+														mb-2 ">
+										{" "}
+										My Account
+									</button>
+								</Link>
+							</li>
+							<li className="nav-item mr-1">
+								<button
+									onClick={() =>
+										this.setState({
+											showSignUpModal: true,
+											showLogInModal: false
+										})
+									}
+									className="nav-item btn btn-outline-Sign Up my-2 my-sm-0 ml-auto"
+									type="submit">
+									Sign Up
+								</button>
+							</li>
+							<li className="nav-item mr-1">
+								<button
+									onClick={() =>
+										this.setState({
+											showSignUpModal: false,
+											showLogInModal: true
+										})
+									}
+									className="nav-item btn btn-outline-Log In my-2 my-sm-0"
+									type="submit">
+									Log In
+								</button>
+							</li>
 						</ul>
-						<form className="form-inline my-2 my-lg-0">
-							<input
-								className="form-control mr-sm-2"
-								type="search"
-								placeholder="Search"
-								aria-label="Search"
-							/>
-						</form>
-						<div>
-							<Link to="/wishlist">
-								<button
-									type="button"
-									style={{
-										whiteSpace: "normal"
-									}}
-									className="btn btn-dark
-														mb-2 ">
-									{" "}
-									Wishlist
-								</button>
-							</Link>
-							<Link to="/library">
-								<button
-									type="button"
-									style={{
-										whiteSpace: "normal"
-									}}
-									className="btn btn-dark
-														mb-2 ">
-									{" "}
-									Library
-								</button>
-							</Link>
-							<Link to="/account">
-								<button
-									type="button"
-									style={{
-										whiteSpace: "normal"
-									}}
-									className="btn btn-dark
-														mb-2 ">
-									{" "}
-									My Account
-								</button>
-							</Link>
-							<button
-								onClick={() =>
-									this.setState({
-										showSignUpModal: true,
-										showLogInModal: false
-									})
-								}
-								className="btn btn-outline-Sign Up my-2 my-sm-0 ml-auto"
-								type="submit">
-								Sign Up
-							</button>
-						</div>
-						<button
-							onClick={() =>
-								this.setState({
-									showSignUpModal: false,
-									showLogInModal: true
-								})
+
+						<SignUp
+							show={this.state.showSignUpModal}
+							onClose={() =>
+								this.setState({ showSignUpModal: false })
 							}
-							className="btn btn-outline-Log In my-2 my-sm-0"
-							type="submit">
-							Log In
-						</button>
-						<SignUp show={this.state.showSignUpModal} />
-						<LogIn show={this.state.showLogInModal} />
-						{console.log(this.state)}
+						/>
+						<LogIn
+							show={this.state.showLogInModal}
+							onClose={() =>
+								this.setState({ showLogInModal: false })
+							}
+						/>
 					</div>
 				</div>
 			</nav>

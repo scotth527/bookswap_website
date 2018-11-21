@@ -20,7 +20,7 @@ export class SignUp extends React.Component {
 	}
 
 	signUp() {
-		console.log("this.state", this.state);
+		console.log(this.state);
 		const {
 			firstname,
 			lastname,
@@ -40,16 +40,16 @@ export class SignUp extends React.Component {
 				tabIndex="-1"
 				role="dialog"
 				style={{ display: this.props.show ? "inline-block" : "none" }}>
-				<div className="modal-dialog" role="document">
+				<div
+					className="modal-dialog"
+					role="document"
+					style={{ maxWidth: "60vw" }}>
 					<div className="modal-content">
 						<div className="modal-header">
+							<h2>Sign Up</h2>
 							{this.props.onClose ? (
 								<button
-									onClick={() =>
-										this.setState({
-											showSignUpModal: true
-										})
-									}
+									onClick={() => this.props.onClose()}
 									type="button"
 									className="close"
 									data-dismiss="modal"
@@ -61,9 +61,8 @@ export class SignUp extends React.Component {
 							)}
 						</div>
 						<div className="container mx-auto">
-							<h2>Sign Up</h2>
-							<div className="row">
-								<div className="modal-body mx-auto col-6">
+							<div className="row ml-auto">
+								<div className="modal-body mx-auto col-9">
 									<div className="row">
 										<div className="form-group">
 											<div className="form-inline">
@@ -80,86 +79,92 @@ export class SignUp extends React.Component {
 													})
 												}
 											/>
+
+											<div className="form-inline">
+												<h2>Email</h2>
+											</div>
+											<input
+												className="form-control"
+												type="text"
+												placeholder=""
+												onChange={event =>
+													this.State({
+														email:
+															event.target.value
+													})
+												}
+											/>
+
+											<div className="form-inline">
+												<h2>Phone</h2>
+											</div>
+											<input
+												className="form-control"
+												type="text"
+												placeholder=""
+												onChange={event =>
+													this.State({
+														phone:
+															event.target.value
+													})
+												}
+											/>
+										</div>
+
+										<div className="modal-body ml-auto col-3">
+											<div className="row">
+												<div className="form-group">
+													<div className="form-inline">
+														<h2>Last Name</h2>
+													</div>
+													<input
+														className="form-control"
+														type="text"
+														placeholder=""
+														onChange={event =>
+															this.State({
+																lastname:
+																	event.target
+																		.value
+															})
+														}
+													/>
+													<div className="form-inline">
+														<h2>Address</h2>
+													</div>
+													<input
+														className="form-control"
+														type="text"
+														placeholder=""
+														onChange={event =>
+															this.State({
+																address:
+																	event.target
+																		.value
+															})
+														}
+													/>
+													<div className="form-inline">
+														<h2>Birthday</h2>
+													</div>
+													<input
+														className="form-control"
+														type="text"
+														placeholder="Month/Day/Year"
+														onChange={event =>
+															this.State({
+																birthday:
+																	event.target
+																		.value
+															})
+														}
+													/>
+												</div>
+											</div>
 										</div>
 									</div>
-									<div className="row">
-										<div className="form-inline">
-											<h2>Last Name</h2>
-										</div>
-										<input
-											className="form-control"
-											type="text"
-											placeholder=""
-											onChange={event =>
-												this.State({
-													lastname: event.target.value
-												})
-											}
-										/>
-									</div>
-									<div className="row">
-										<div className="form-inline">
-											<h2>Email</h2>
-										</div>
-										<input
-											className="form-control"
-											type="text"
-											placeholder=""
-											onChange={event =>
-												this.State({
-													email: event.target.value
-												})
-											}
-										/>
-									</div>
-									<div className="row">
-										<div className="form-inline">
-											<h2>Address</h2>
-										</div>
-										<input
-											className="form-control"
-											type="text"
-											placeholder=""
-											onChange={event =>
-												this.State({
-													address: event.target.value
-												})
-											}
-										/>
-									</div>
-									<div className="row">
-										<div className="form-inline">
-											<h2>Phone</h2>
-										</div>
-										<input
-											className="form-control"
-											type="text"
-											placeholder=""
-											onChange={event =>
-												this.State({
-													phone: event.target.value
-												})
-											}
-										/>
-									</div>
-									<div className="row">
-										<div className="form-inline">
-											<h2>Birthday</h2>
-										</div>
-										<input
-											className="form-control"
-											type="text"
-											placeholder="Month/Day/Year"
-											onChange={event =>
-												this.State({
-													birthday: event.target.value
-												})
-											}
-										/>
-									</div>
-									<div className="mx-auto">
-										<h2>Genre</h2>
-									</div>
+
+									<div className="mx-auto" />
 									<div className="nav-item dropdown">
 										<a
 											className="nav-link dropdown-toggle"

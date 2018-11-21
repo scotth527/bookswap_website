@@ -1,13 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-
 import { Context } from "../store/appContext.jsx";
-
 import "../../styles/bookpage.css";
 import StoreAddModal from "../component/confirmtostoremodal.jsx";
 import WishAddModal from "../component/confirmwishmodal.jsx";
 import Usermodal from "../component/usermodal.jsx";
 import Trade from "../component/trade.jsx";
+import ErrorModal from "../component/errormodal.jsx";
 
 export class BookPage extends React.Component {
 	constructor(props) {
@@ -19,7 +18,8 @@ export class BookPage extends React.Component {
 			showConfirmWishModal: false,
 			showOwnersModal: false,
 			user: null,
-			showTradeModal: false
+			showTradeModal: false,
+			showError: false
 		};
 	}
 
@@ -41,7 +41,6 @@ export class BookPage extends React.Component {
 	}
 
 	render() {
-		console.log();
 		return (
 			<div
 				className="container-fluid mt-5 d-flex flex-column wrapper"
@@ -58,7 +57,6 @@ export class BookPage extends React.Component {
 									parseInt(this.props.match.params.theid)
 								);
 							});
-
 							if (theBook.length > 0) {
 								return (
 									<div className="mx-auto col-12 text-center">
@@ -189,6 +187,13 @@ export class BookPage extends React.Component {
 							this.setState({ showConfirmLibModal: false })
 						}
 						id={parseInt(this.props.match.params.theid)}
+						errorAlert={() =>
+							this.setState({
+								showConfirmLibModal: false,
+								showConfirmWishModal: false,
+								showError: true
+							})
+						}
 					/>
 				)}
 				{this.state.showConfirmWishModal && (
@@ -198,18 +203,18 @@ export class BookPage extends React.Component {
 							this.setState({ showConfirmWishModal: false })
 						}
 						id={parseInt(this.props.match.params.theid)}
+						errorAlert={() =>
+							this.setState({
+								showConfirmLibModal: false,
+								showConfirmWishModal: false,
+								showError: true
+							})
+						}
 					/>
 				)}
 				{this.state.showOwnersModal && (
 					<Usermodal
 						show={this.state.showOwnersModal}
-						onConfirm={id =>
-							this.setState({
-								showOwnersModal: false,
-								user: id,
-								showTradeModal: true
-							})
-						}
 						onClose={() =>
 							this.setState({ key: "", showOwnersModal: false })
 						}
@@ -239,19 +244,23 @@ export class BookPage extends React.Component {
 						}
 					/>
 				)}
+				{this.state.showError && (
+					<ErrorModal
+						reveal={this.state.showError}
+						onClose={() => this.setState({ showError: false })}
+					/>
+				)}
 			</div>
 		);
 	}
 }
 
 BookPage.propTypes = {
-	match: PropTypes.object,
-	history: PropTypes.object,
-	onDelete: PropTypes.func,
-	delete: PropTypes.func
+	match: PropTypes.object
 };
 
 BookPage.defaultProps = {
 	show: false,
-	onClose: null
+	onClose: null,
+	showError: false
 };

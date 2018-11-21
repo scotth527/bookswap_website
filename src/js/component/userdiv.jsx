@@ -27,7 +27,7 @@ function Userdiv(props) {
 			//onClick=
 			//{e => props.selector(e, props.id, props.getUserID)}
 		>
-			<div className="d-flex">
+			<div className="d-flex justify-content-between col-9">
 				<img
 					src={props.Picurl}
 					className="floatLeft mt-2 mb-2 mr-3"
