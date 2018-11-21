@@ -5,11 +5,8 @@ import "../../styles/bookpage.css";
 import StoreAddModal from "../component/confirmtostoremodal.jsx";
 import WishAddModal from "../component/confirmwishmodal.jsx";
 import Usermodal from "../component/usermodal.jsx";
-<<<<<<< HEAD
-=======
 import Trade from "../component/trade.jsx";
 import ErrorModal from "../component/errormodal.jsx";
->>>>>>> 76d355694f9c8978d4c3c55c01c7beb688ab6a27
 
 export class BookPage extends React.Component {
 	constructor(props) {
@@ -19,14 +16,10 @@ export class BookPage extends React.Component {
 			itemToAdd: 0,
 			key: "",
 			showConfirmWishModal: false,
-<<<<<<< HEAD
-			showOwnersModal: false
-=======
 			showOwnersModal: false,
 			user: null,
 			showTradeModal: false,
 			showError: false
->>>>>>> 76d355694f9c8978d4c3c55c01c7beb688ab6a27
 		};
 	}
 
@@ -48,7 +41,6 @@ export class BookPage extends React.Component {
 	}
 
 	render() {
-		console.log();
 		return (
 			<div
 				className="container-fluid mt-5 d-flex flex-column wrapper"
@@ -65,7 +57,6 @@ export class BookPage extends React.Component {
 									parseInt(this.props.match.params.theid)
 								);
 							});
-							console.log(theBook);
 							if (theBook.length > 0) {
 								return (
 									<div className="mx-auto col-12 text-center">
@@ -231,8 +222,6 @@ export class BookPage extends React.Component {
 						id={parseInt(this.props.match.params.theid)}
 					/>
 				)}
-<<<<<<< HEAD
-=======
 				{this.state.showTradeModal && (
 					<Trade
 						show={this.state.showTradeModal}
@@ -260,7 +249,6 @@ export class BookPage extends React.Component {
 						onClose={() => this.setState({ showError: false })}
 					/>
 				)}
->>>>>>> 76d355694f9c8978d4c3c55c01c7beb688ab6a27
 			</div>
 		);
 	}

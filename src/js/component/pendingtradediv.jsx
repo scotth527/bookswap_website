@@ -6,8 +6,8 @@ import PropTypes from "prop-types";
 
 function Pendingtrade(props) {
 	return (
-		<div className="d-flex">
-			<div>
+		<div className="d-flex col-10 mx-auto rounded border border-dark text-center">
+			<div className="mr-4">
 				<img src={props.requesterpic} />
 				<h2>{props.requesterusername} </h2>
 				<h3>{props.requestercity} </h3>
