@@ -162,6 +162,32 @@ const getState = scope => {
 				scope.setState(store);
 			},
 
+			registerUser: user => {
+				let store = scope.state.store;
+				store.users.push(user);
+				scope.setState(store);
+			},
+
+			isLegalUser: currentUser => {
+				let store = scope.state.store;
+
+				// get user from store
+				let sessionUser = store.users.filter(
+					user => user.email == currentUser.email
+				)[0];
+
+				// set user session
+				if (
+					sessionUser &&
+					sessionUser.password === currentUser.password
+				) {
+					store.session.loggedIn = true;
+					store.session.user = sessionUser;
+					scope.setState({ store });
+					return true;
+				}
+			},
+
 			fetchData() {
 				fetch(
 					"https://bookexchange-backend-scotth527.c9users.io/api/books/"
@@ -173,18 +199,6 @@ const getState = scope => {
 						scope.setState({ store });
 					})
 					.catch(error => console.log(error));
-			},
-
-			isLegalUser: user => {
-				let store = scope.state.store;
-				if (
-					user.username === store.session.username &&
-					user.email === store.session.email
-				) {
-					store.session.loggedIn = true;
-					scope.setState({ store });
-					return true;
-				}
 			},
 
 			searchBookByID: bookindex => {

@@ -16,7 +16,7 @@ function Wishprev(props) {
 
 	return (
 		<div
-			className="col-xs-12 col-md-9 col-lg-4 mb-xs-3"
+			className="col-xs-12 col-md-9 col-lg-4 mb-5"
 			style={{ width: "588px" }}>
 			<div className="card">
 				<div className="card-header text-left">
@@ -57,7 +57,7 @@ function Wishprev(props) {
 					<Link to={props.link}>
 						<button
 							type="button"
-							className="btn btn-outline-dark btn-lg mb-3 text-right"
+							className="btn btn-outline-dark btn-lg mb-2 text-right"
 							style={{ whiteSpace: "normal" }}>
 							<i className="far fa-arrow-alt-circle-right" />
 						</button>

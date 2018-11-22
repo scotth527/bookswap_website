@@ -11,7 +11,7 @@ export class Preview extends React.Component {
 	}
 	render() {
 		return (
-			<div className="col-11 rounded border d-flex justify-content-around border-dark mx-auto mb-2">
+			<div className="col-11 rounded border d-flex justify-content-around border-dark mx-auto mb-5">
 				<img
 					className="m-1"
 					src={this.picurl}

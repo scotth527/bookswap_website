@@ -26,8 +26,17 @@ export class NavBar extends React.Component {
 						</Link>
 					</li>
 					<li className="nav-item">
-						<Link className="nav-link" to="#">
-							Home <span className="sr-only">(current)</span>
+						<Link to="/">
+							<button
+								type="button"
+								style={{
+									whiteSpace: "normal"
+								}}
+								className="btn btn-dark
+									mb-2 mr-2 ">
+								{" "}
+								Home
+							</button>
 						</Link>
 					</li>
 					<li className="nav-item">

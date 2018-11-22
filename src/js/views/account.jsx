@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import YourShop from "../component/shopbutton.jsx";
 import Profilebanner from "../component/profilejumbotron.jsx";
-import "../../styles/bookpage.css";
+import "../../styles/account.css";
 import Wishprev from "../component/wishlistprev.jsx";
 import { Context } from "../store/appContext.jsx";
 
@@ -33,17 +33,16 @@ export class Account extends React.Component {
 				name: "Your Orders",
 				description:
 					"Keep track of incoming and outgoing orders and pending requests.",
-				link: "/home",
+				link: "/trades",
 				uniqueinfo: "# of Pending Orders"
 			}
 		];
 
 		return (
 			<div
-				className="container-fluid wrapper"
+				className="container-fluid"
 				style={{
-					flexGrow: "1",
-					position: "relative"
+					paddingBottom: "60px"
 				}}>
 				<Profilebanner />
 				<div className="row">

@@ -29,7 +29,6 @@ export class Library extends React.Component {
 				<Context.Consumer>
 					{({ store, actions }) => {
 						return store.library.map((item, index) => {
-							console.log(actions.searchBookByID(item).id);
 							return (
 								<Item
 									id={actions.searchBookByID(item).id}
