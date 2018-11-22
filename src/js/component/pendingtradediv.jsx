@@ -6,12 +6,16 @@ import PropTypes from "prop-types";
 
 function Pendingtrade(props) {
 	return (
-		<div className="d-flex col-10 mx-auto rounded border border-dark text-center">
+		<div className="d-flex col-10 mx-auto rounded border border-dark text-center mb-2">
 			<div className="mr-4">
 				<img src={props.requesterpic} />
 				<h2>{props.requesterusername} </h2>
 				<h3>{props.requestercity} </h3>
 				<h3>{props.requesterbook} </h3>
+			</div>
+
+			<div className="align-middle">
+				<i className="fas fa-exchange-alt" />
 			</div>
 			<div>
 				<img src={props.requestedpic} />

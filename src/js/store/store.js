@@ -112,7 +112,15 @@ const getState = scope => {
 				}
 			],
 
-			sessions: [],
+			sessions: {
+				username: "Rigo",
+				email: "rigocodes@gmail.com",
+				loggedIn: true,
+				firstname: "Rigo",
+				lastname: "Fuentes"
+				profile_id: 4,
+				address: "1234 American Way Miami, Fl. 33126"
+			},
 
 			users: [
 				{
