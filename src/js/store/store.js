@@ -108,7 +108,8 @@ const getState = scope => {
 					requesterbook: 3,
 					requestedid: 3,
 					requestedbook: 1,
-					is_accepted: false
+					is_accepted: false,
+					tradeid: 3
 				}
 			],
 
@@ -119,7 +120,8 @@ const getState = scope => {
 				firstname: "Rigo",
 				lastname: "Fuentes",
 				profile_id: 4,
-				address: "1234 American Way Miami, Fl. 33126"
+				address: "1234 American Way Miami, Fl. 33126",
+				password: "admin123"
 			},
 
 			users: [
@@ -166,6 +168,24 @@ const getState = scope => {
 				let store = scope.state.store;
 				store.users.push(user);
 				scope.setState(store);
+			},
+
+			acceptTrade: trade_id => {
+				let store = scope.state.store;
+				store.trades[trade_id].tradeid = true;
+				scope.setState(store);
+			},
+
+			cancelTrade: tradeindex => {
+				let store = scope.state.store;
+				store.trades.splice(tradeindex, 1);
+				scope.setState(store);
+			},
+
+			searchTradeByID: tradeid => {
+				return scope.state.store.trades.find(
+					e => e.tradeid === tradeid
+				);
 			},
 
 			isLegalUser: currentUser => {

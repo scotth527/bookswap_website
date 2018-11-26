@@ -1,4 +1,6 @@
 footer {
-    position:absolute;
+    position:relative;
     bottom:0;
+    height: 2em;
+    left: 0;
 }

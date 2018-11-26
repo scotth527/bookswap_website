@@ -6,31 +6,45 @@ import PropTypes from "prop-types";
 
 function Pendingtrade(props) {
 	return (
-		<div className="d-flex justify-content-between col-10 mx-auto rounded border border-dark text-center mb-2">
-			<div className="mr-4">
-				<img src={props.requesterpic} />
-				<h2>{props.requesterusername} </h2>
-				<h3>{props.requestercity} </h3>
-				<h3>{props.requesterbook} </h3>
-			</div>
+		<div className="d-flex justify-content-between col-8 mx-auto rounded border border-dark text-center mb-2">
+			<div className="mx-auto col-8 d-flex">
+				<div className="ml-3 mr-4 mb-3">
+					<img src={props.requesterpic} />
+					<h2>{props.requesterusername} </h2>
+					<h3>{"From: " + props.requestercity} </h3>
+					<h3>{"Book: " + props.requesterbook} </h3>
+				</div>
 
-			<div className="align-middle">
-				<i className="fas fa-exchange-alt" />
-			</div>
-			<div>
-				<img src={props.requestedpic} />
-				<h2>{props.requestedusername} </h2>
-				<h3>{props.requestedcity} </h3>
-				<h3>{props.requestedbook} </h3>
-			</div>
+				<div>
+					<i className="mt-5 fas fa-exchange-alt" />
+				</div>
+				<div className="ml-3 mb-3">
+					<img src={props.requestedpic} />
+					<h2>{props.requestedusername} </h2>
+					<h3>{"From: " + props.requestedcity} </h3>
+					<h3>{"Book: " + props.requestedbook} </h3>
+				</div>
 
-			<div
-				style={{
-					display: props.Trade_is_accepted ? "inline-block" : "none"
-				}}
-				className="d-flex">
-				<i className="fas fa-check-circle" />
-				<i className="fas fa-ban" />
+				<div
+					style={{
+						display: props.Trade_is_accepted
+							? "inline-block"
+							: "none"
+					}}
+					className="d-flex ml-5 mt-4">
+					<i
+						onClick={() => {
+							props.rejectTrade();
+						}}
+						className="btn fas fa-ban"
+					/>
+					<i
+						onClick={() => {
+							props.confirmTrade();
+						}}
+						className="btn fas fa-check-circle"
+					/>
+				</div>
 			</div>
 		</div>
 	);
@@ -46,7 +60,9 @@ Pendingtrade.propTypes = {
 	requestedcity: PropTypes.string,
 	requestedbook: PropTypes.string,
 	//index: PropTypes.number,
-	Trade_is_accepted: PropTypes.bool
+	Trade_is_accepted: PropTypes.bool,
+	confirmTrade: PropTypes.func,
+	rejectTrade: PropTypes.func
 };
 
 Pendingtrade.defaultProps = {

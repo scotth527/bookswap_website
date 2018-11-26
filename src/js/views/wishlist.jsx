@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import "../../styles/wishlist.css";
 import { Context } from "../store/appContext.jsx";
 import Usermodal from "../component/usermodal.jsx";
+import Trade from "../component/trade.jsx";
 
 export class Wishlist extends React.Component {
 	constructor(props) {
@@ -14,7 +15,8 @@ export class Wishlist extends React.Component {
 			showModal: false,
 			showOwnersModal: false,
 			bookid: 0,
-			key: ""
+			key: "",
+			showTradeModal: false
 		};
 	}
 
@@ -64,6 +66,27 @@ export class Wishlist extends React.Component {
 					show={this.state.showModal}
 					onClose={() => this.setState({ showModal: false })}
 				/>
+				{this.state.showTradeModal && (
+					<Trade
+						show={this.state.showTradeModal}
+						book={parseInt(this.props.match.params.theid)}
+						sender={this.state.user}
+						receiver={3}
+						onReturn={() =>
+							this.setState({
+								showOwnersModal: true,
+								showTradeModal: false
+							})
+						}
+						onConfirm={() =>
+							this.setState({
+								key: "",
+								user: null,
+								showTradeModal: false
+							})
+						}
+					/>
+				)}
 				{this.state.showOwnersModal && (
 					<Usermodal
 						show={this.state.showOwnersModal}
@@ -103,6 +126,7 @@ export class Wishlist extends React.Component {
 Wishlist.propTypes = {
 	//id: PropTypes.string,
 	history: PropTypes.object,
+	match: PropTypes.object,
 	onDelete: PropTypes.func,
 	delete: PropTypes.func
 };

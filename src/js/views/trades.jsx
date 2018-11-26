@@ -72,6 +72,12 @@ export class Trades extends React.Component {
 												Trade_is_accepted={
 													item.is_accepted
 												}
+												confirmTrade={() => {
+													actions.acceptTrade(index);
+												}}
+												rejectTrade={() => {
+													actions.cancelTrade(index);
+												}}
 											/>
 										);
 									})}
@@ -128,6 +134,12 @@ export class Trades extends React.Component {
 												Trade_is_accepted={
 													item.is_accepted
 												}
+												confirmTrade={() => {
+													actions.acceptTrade(index);
+												}}
+												rejectTrade={() => {
+													actions.cancelTrade(index);
+												}}
 											/>
 										);
 									})}
