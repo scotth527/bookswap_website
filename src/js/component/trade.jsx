@@ -10,7 +10,8 @@ export class Trade extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			show: this.props.show
+			show: this.props.show,
+			offeredBook: -1
 		};
 	}
 
@@ -85,8 +86,12 @@ export class Trade extends React.Component {
 														}
 													/>
 													<Item
-														id={this.props.book}
+														id={
+															this.state
+																.offeredBook
+														}
 														simple={true}
+														drop={true}
 													/>
 												</div>
 											</React.Fragment>

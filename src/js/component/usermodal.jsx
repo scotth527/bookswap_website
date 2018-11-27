@@ -12,20 +12,6 @@ export class Usermodal extends React.Component {
 		};
 	}
 
-	selector = (e, id, prop) => {
-		let key = e.currentTarget.parentNode.childNodes.find(
-			e => e.id === this.state.userid.toString()
-		);
-
-		if (key !== undefined) {
-			key.className = key.className.replace(" bg-secondary", "");
-			prop(null);
-		} else {
-			e.currentTarget.className += " bg-secondary";
-			prop(id);
-		}
-	};
-
 	render() {
 		return (
 			<div
@@ -54,33 +40,32 @@ export class Usermodal extends React.Component {
 								""
 							)}
 						</div>
-						<div className="modal-body mx-auto col-10 d-flex flex-column">
+						<div className="modal-body mx-auto col-12 d-flex flex-column">
 							<Context.Consumer>
 								{({ store, actions }) => {
-									return actions
-										.searchUsersForID(
-											this.props.id,
-											this.props.currentUser,
-											this.props.userKey
-										)
-										.map((item, index) => {
-											return (
-												<Userdiv
-													key={index}
-													id={item.id}
-													//index={index}
-													Picurl="https://picsum.photos/50/50/?random"
-													City={item.city}
-													Username={item.username}
-													selector={this.selector}
-													getUserID={id =>
-														this.setState({
-															userid: id
-														})
-													}
-												/>
-											);
-										});
+									let users = actions.searchUsersForID(
+										this.props.id
+									);
+									let divs = [];
+									for (var item in users) {
+										let profile = actions.getProfile(item);
+										divs.push(
+											<Userdiv
+												key={profile["id"]}
+												id={profile["id"]}
+												//index={index}
+												Picurl="https://picsum.photos/50/50/?random"
+												City={profile["city"]}
+												Username={profile["username"]}
+												getUserID={id =>
+													this.setState({
+														userid: id
+													})
+												}
+											/>
+										);
+									}
+									return divs;
 								}}
 							</Context.Consumer>
 						</div>
@@ -118,7 +103,6 @@ Usermodal.propTypes = {
 	onClose: PropTypes.func,
 	show: PropTypes.bool,
 	id: PropTypes.number,
-	currentUser: PropTypes.number,
 	userKey: PropTypes.string,
 	divtitle: PropTypes.string
 };

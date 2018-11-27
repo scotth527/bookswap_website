@@ -35,7 +35,18 @@ export class Item extends React.Component {
 			<Context.Consumer>
 				{({ store, actions }) => {
 					return (
-						<div className="col-12 bg-light border border-dark rounded mb-2">
+						<div
+							className={
+								"col-12 bg-light border border-dark rounded mb-2" +
+								this.props.drop
+									? "dropdown-toggle"
+									: ""
+							}
+							onClick={() => {
+								if (this.props.drop) {
+									this.toggle();
+								}
+							}}>
 							<div className="row">
 								<div className="col-4 my-auto">
 									<img src="https://via.placeholder.com/75x75" />
@@ -99,6 +110,10 @@ export class Item extends React.Component {
 									)}
 								</div>
 							</div>
+
+							{this.state.toggle && (
+								<div className="dropdown-menu" />
+							)}
 						</div>
 					);
 				}}
@@ -111,10 +126,13 @@ Item.propTypes = {
 	buttonName: PropTypes.string,
 	addStuff: PropTypes.func,
 	deleteStuff: PropTypes.func,
-	simple: PropTypes.bool
+	simple: PropTypes.bool,
+	drop: PropTypes.bool
 };
 Item.defaultProps = {
-	buttonName: "Name of view"
+	buttonName: "Name of view",
+	simple: false,
+	drop: false
 };
 
 export default Item;
