@@ -3,7 +3,7 @@ import NewItem from "../component/library/new_item.jsx";
 import Item from "../component/library/item.jsx";
 import { Context } from "../store/appContext.jsx";
 import Usermodal from "../component/usermodal.jsx";
-import "../../styles/library.css";
+import "../../styles/index.css";
 
 export class Library extends React.Component {
 	constructor(props) {
@@ -29,7 +29,6 @@ export class Library extends React.Component {
 				<Context.Consumer>
 					{({ store, actions }) => {
 						return store.library.map((item, index) => {
-							console.log(actions.searchBookByID(item).id);
 							return (
 								<Item
 									id={actions.searchBookByID(item).id}

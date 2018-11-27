@@ -101,46 +101,48 @@ const getState = scope => {
 				// 	image:
 				// 		"https://images.gr-assets.com/books/1432730315l/256683.jpg"
 				// }
-			]
-
+			],
 			// wishlist: [1, 2, 3, 4],
 
 			// library: [4, 2],
+			
+			trades: [
+				{
+					requesterid: 1,
+					requesterbook: 1,
+					requestedid: 2,
+					requestedbook: 2,
+					is_accepted: false,
+					tradeid: 1
+				},
+				{
+					requesterid: 1,
+					requesterbook: 4,
+					requestedid: 3,
+					requestedbook: 2,
+					is_accepted: true,
+					tradeid: 2
+				},
+				{
+					requesterid: 2,
+					requesterbook: 3,
+					requestedid: 3,
+					requestedbook: 1,
+					is_accepted: false,
+					tradeid: 3
+				}
+			],
 
-			// trades: [
-			// 	{
-			// 		requesterid: 1,
-			// 		requesterbook: 1,
-			// 		requestedid: 2,
-			// 		requestedbook: 2,
-			// 		is_accepted: false,
-			// 		tradeid: 1
-			// 	},
-			// 	{
-			// 		requesterid: 1,
-			// 		requesterbook: 4,
-			// 		requestedid: 3,
-			// 		requestedbook: 2,
-			// 		is_accepted: true,
-			// 		tradeid: 2
-			// 	},
-			// 	{
-			// 		requesterid: 2,
-			// 		requesterbook: 3,
-			// 		requestedid: 3,
-			// 		requestedbook: 1,
-			// 		is_accepted: false
-			// 	}
-			// ],
-
-			// requests: [],
-
-			// session: {
-			// 	username: "",
-			// 	email: "",
-
-			// 	loggedIn: false
-			// }
+			sessions: {
+				username: "Rigo",
+				email: "rigocodes@gmail.com",
+				loggedIn: true,
+				firstname: "Rigo",
+				lastname: "Fuentes",
+				profile_id: 4,
+				address: "1234 American Way Miami, Fl. 33126",
+				password: "admin123"
+			}
 		},
 		actions: {
 			changeColor: (element, color) => {
@@ -164,6 +166,50 @@ const getState = scope => {
 						scope.setState(store);
 					})
 					.catch(error => console.log(error));
+			},
+
+			registerUser: user => {
+				let store = scope.state.store;
+				store.users.push(user);
+				scope.setState(store);
+			},
+
+			acceptTrade: trade_id => {
+				let store = scope.state.store;
+				store.trades[trade_id].tradeid = true;
+				scope.setState(store);
+			},
+
+			cancelTrade: tradeindex => {
+				let store = scope.state.store;
+				store.trades.splice(tradeindex, 1);
+				scope.setState(store);
+			},
+
+			searchTradeByID: tradeid => {
+				return scope.state.store.trades.find(
+					e => e.tradeid === tradeid
+				);
+			},
+
+			isLegalUser: currentUser => {
+				let store = scope.state.store;
+
+				// get user from store
+				let sessionUser = store.users.filter(
+					user => user.email == currentUser.email
+				)[0];
+
+				// set user session
+				if (
+					sessionUser &&
+					sessionUser.password === currentUser.password
+				) {
+					store.session.loggedIn = true;
+					store.session.user = sessionUser;
+					scope.setState({ store });
+					return true;
+				}
 			},
 
 			fetchData() {
@@ -219,18 +265,6 @@ const getState = scope => {
 						scope.setState({ store });
 					})
 					.catch(error => console.log(error));
-			},
-
-			isLegalUser: user => {
-				let store = scope.state.store;
-				if (
-					user.username === store.session.username &&
-					user.email === store.session.email
-				) {
-					store.session.loggedIn = true;
-					scope.setState({ store });
-					return true;
-				}
 			},
 
 			searchBookByID: bookindex => {

@@ -221,6 +221,13 @@ export class BookPage extends React.Component {
 						userKey={this.state.key}
 						currentUser={3}
 						id={parseInt(this.props.match.params.theid)}
+						onConfirm={id =>
+							this.setState({
+								showOwnersModal: false,
+								user: id,
+								showTradeModal: true
+							})
+						}
 					/>
 				)}
 				{this.state.showTradeModal && (
@@ -235,13 +242,14 @@ export class BookPage extends React.Component {
 								showTradeModal: false
 							})
 						}
-						onConfirm={() =>
+						onConfirm={() => {
 							this.setState({
 								key: "",
 								user: null,
+								showOwnersModal: false,
 								showTradeModal: false
-							})
-						}
+							});
+						}}
 					/>
 				)}
 				{this.state.showError && (

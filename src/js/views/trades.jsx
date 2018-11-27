@@ -19,7 +19,7 @@ export class Trades extends React.Component {
 					{({ store, actions }) => {
 						return (
 							<React.Fragment>
-								<h1 className="mx-auto">
+								<h1 className="text-center">
 									Pending trade requests
 								</h1>
 
@@ -72,11 +72,17 @@ export class Trades extends React.Component {
 												Trade_is_accepted={
 													item.is_accepted
 												}
+												confirmTrade={() => {
+													actions.acceptTrade(index);
+												}}
+												rejectTrade={() => {
+													actions.cancelTrade(index);
+												}}
 											/>
 										);
 									})}
 
-								<h1 className="mx-auto">
+								<h1 className="text-center">
 									Accepted trade requests
 								</h1>
 								{store.trades
@@ -128,6 +134,12 @@ export class Trades extends React.Component {
 												Trade_is_accepted={
 													item.is_accepted
 												}
+												confirmTrade={() => {
+													actions.acceptTrade(index);
+												}}
+												rejectTrade={() => {
+													actions.cancelTrade(index);
+												}}
 											/>
 										);
 									})}
