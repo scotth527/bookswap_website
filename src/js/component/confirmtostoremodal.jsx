@@ -2,12 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { Context } from "../store/appContext.jsx";
-import { ErrorModal } from "./errormodal.jsx";
 
 export class StoreAddModal extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {};
+		this.state = {
+			book: this.props.id,
+			profileid: 1
+		};
 	}
 	render() {
 		return (
@@ -52,14 +54,20 @@ export class StoreAddModal extends React.Component {
 											type="button"
 											onClick={item => {
 												if (
-													store.library.find(
-														item =>
-															item ===
-															this.props.id
-													) == undefined
+													actions
+														.searchUser(
+															store.sessions
+																.profile
+														)
+														.find(
+															item =>
+																item ===
+																this.props.id
+														) == undefined
 												) {
 													actions.addToLibrary(
-														this.props.id
+														this.state
+															.inventoryEntry
 													);
 													this.props.onClose();
 												} else {

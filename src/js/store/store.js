@@ -7,7 +7,7 @@ let urls = [
 	"https://backend-final-project-crivera09.c9users.io/api/",
 	"https://bookexchange-backend-scotth527.c9users.io/api/"
 ];
-let currentURL = 0;
+let currentURL = 1;
 
 const getState = scope => {
 	return {
@@ -105,7 +105,7 @@ const getState = scope => {
 			// wishlist: [1, 2, 3, 4],
 
 			// library: [4, 2],
-			
+
 			trades: [
 				{
 					requesterid: 1,
@@ -132,16 +132,6 @@ const getState = scope => {
 					tradeid: 3
 				}
 			],
-
-			sessions: {
-				username: "Rigo",
-				email: "rigocodes@gmail.com",
-				loggedIn: true,
-				firstname: "Rigo",
-				lastname: "Fuentes",
-				profile_id: 4,
-				address: "1234 American Way Miami, Fl. 33126"
-			},
 
 			users: [
 				{
@@ -180,15 +170,15 @@ const getState = scope => {
 			addToWishlist: id => {
 				fetch(
 					[
-						"https://bookexchange-backend-scotth527.c9users.io/api/trades/",
+						"https://bookexchange-backend-scotth527.c9users.io/api/profile/",
 						id
 					].join()
 				)
 					.then(response => response.json())
 					.then(data => {
 						let store = scope.state;
-						store.profile.trades = {};
-						store.profile.trades = data;
+						store.profile.wishlist = {};
+						store.profile.wishlist = data;
 						scope.setState(store);
 					})
 					.catch(error => console.log(error));
@@ -281,6 +271,23 @@ const getState = scope => {
 					.catch(error => console.log(error));
 			},
 
+			getLibrary: id => {
+				fetch([urls[currentURL], "library/", id].join(""))
+					.then(response => response.json())
+					.then(data => {
+						let store = scope.state;
+						store.profile.library = {};
+						let libraryplaceholder = data;
+						store.profile.library = libraryplaceholder.map(
+							(item, index) => {
+								return store.profile.library.push(item.profile);
+							}
+						);
+						scope.setState(store);
+					})
+					.catch(error => console.log(error));
+			},
+
 			fetchRequests: id => {
 				fetch([urls[currentURL], "requests/", id].join(""))
 					.then(response => response.json())
@@ -297,10 +304,26 @@ const getState = scope => {
 				return scope.state.store.books.find(e => e.id === bookindex);
 			},
 
-			addToLibrary: bookid => {
-				let store = scope.state.store;
-				store.library.push(bookid);
-				scope.setState(store);
+			addToLibrary: addToInventoryEntry => {
+				// let store = scope.state.store;
+				// store.library.push(bookid);
+				// scope.setState(store);
+
+				fetch([urls[currentURL], "library/"].join(""), {
+					method: "POST", // or 'PUT'
+					body: JSON.stringify(addToInventoryEntry), // data can be `string` or {object}!
+					headers: {
+						"Content-Type": "application/json"
+					}
+				})
+					.then(res => res.json())
+					.then(response => {
+						console.log("Success:", JSON.stringify(response));
+						scope.state.actions.getLibrary(
+							addToInventoryEntry.profile
+						);
+					})
+					.catch(error => console.error("Error:", error));
 			},
 
 			addTradeRequest: (sBook, s, fBook, f) => {
@@ -345,58 +368,58 @@ const getState = scope => {
 						return ids.filter(item => item.id !== self);
 					})
 					.catch(error => console.log(error));
-			},
-
-			search: (q, field = "all", page = 1) => {
-				fetch(
-					cors +
-						"https://www.goodreads.com/search/index.xml?key=" +
-						key +
-						"&q=" +
-						q +
-						"&page=" +
-						page +
-						"&search[field]=" +
-						field
-				)
-					.then(res => res.text())
-					.then(res =>
-						Convert.xml2json(res, {
-							compact: false,
-							spaces: 4
-						})
-					)
-					.then(response => console.log(response))
-					.catch(error => console.log(error));
-			},
-
-			getBookByID: id => {
-				let book = 0;
-
-				fetch(
-					"https://www.goodreads.com/book/isbn_to_id/" +
-						id +
-						"?key=" +
-						key
-				)
-					.then(res => res.json())
-					.then(response => {})
-					.catch(error => console.log(error));
-			},
-
-			getIDByISBN: isbn => {
-				let id = 0;
-
-				fetch(
-					"https://www.goodreads.com/book/isbn_to_id/" +
-						isbn +
-						"?key=" +
-						key
-				)
-					.then(res => res.json())
-					.then(response => {})
-					.catch(error => console.log(error));
 			}
+
+			// search: (q, field = "all", page = 1) => {
+			// 	fetch(
+			// 		cors +
+			// 			"https://www.goodreads.com/search/index.xml?key=" +
+			// 			key +
+			// 			"&q=" +
+			// 			q +
+			// 			"&page=" +
+			// 			page +
+			// 			"&search[field]=" +
+			// 			field
+			// 	)
+			// 		.then(res => res.text())
+			// 		.then(res =>
+			// 			Convert.xml2json(res, {
+			// 				compact: false,
+			// 				spaces: 4
+			// 			})
+			// 		)
+			// 		.then(response => console.log(response))
+			// 		.catch(error => console.log(error));
+			// },
+
+			// getBookByID: id => {
+			// 	let book = 0;
+
+			// 	fetch(
+			// 		"https://www.goodreads.com/book/isbn_to_id/" +
+			// 			id +
+			// 			"?key=" +
+			// 			key
+			// 	)
+			// 		.then(res => res.json())
+			// 		.then(response => {})
+			// 		.catch(error => console.log(error));
+			// },
+
+			// getIDByISBN: isbn => {
+			// 	let id = 0;
+
+			// 	fetch(
+			// 		"https://www.goodreads.com/book/isbn_to_id/" +
+			// 			isbn +
+			// 			"?key=" +
+			// 			key
+			// 	)
+			// 		.then(res => res.json())
+			// 		.then(response => {})
+			// 		.catch(error => console.log(error));
+			// }
 
 			/*
             deleteItem: (contact) => {

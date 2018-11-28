@@ -187,6 +187,7 @@ export class BookPage extends React.Component {
 							this.setState({ showConfirmLibModal: false })
 						}
 						id={parseInt(this.props.match.params.theid)}
+						sender={this.state.user}
 						errorAlert={() =>
 							this.setState({
 								showConfirmLibModal: false,

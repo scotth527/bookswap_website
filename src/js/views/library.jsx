@@ -32,30 +32,35 @@ export class Library extends React.Component {
 				<NewItem className="modal-dialog" />
 				<Context.Consumer>
 					{({ store, actions }) => {
-						return store.library.map((item, index) => {
-							return (
-								<Item
-									id={item}
-									key={index}
-									title={actions.searchBookByID(item).title}
-									description={
-										actions.searchBookByID(item).description
-									}
-									buttonName="Find users who want this book"
-									deleteStuff={() =>
-										actions.deleteFromLibrary(index)
-									}
-									userKey={this.state.key}
-									addStuff={() =>
-										this.setState({
-											key: "wishlist",
-											bookid: item,
-											showOwnersModal: true
-										})
-									}
-								/>
-							);
-						});
+						return actions
+							.searchUser(store.sessions.profile)
+							.library.map((item, index) => {
+								return (
+									<Item
+										id={item}
+										key={index}
+										title={
+											actions.searchBookByID(item).title
+										}
+										description={
+											actions.searchBookByID(item)
+												.description
+										}
+										buttonName="Find users who want this book"
+										deleteStuff={() =>
+											actions.deleteFromLibrary(index)
+										}
+										userKey={this.state.key}
+										addStuff={() =>
+											this.setState({
+												key: "wishlist",
+												bookid: item,
+												showOwnersModal: true
+											})
+										}
+									/>
+								);
+							});
 					}}
 				</Context.Consumer>
 				{this.state.showOwnersModal && (
