@@ -3,27 +3,44 @@ import Convert from "xml-js";
 let cors = "http://cors-anywhere.herokuapp.com/";
 let key = "qnZN4IYfVP3fduRalfrFw";
 
+let urls = [
+	"https://backend-final-project-crivera09.c9users.io/api/",
+	"https://bookexchange-backend-scotth527.c9users.io/api/"
+];
+let currentURL = 0;
+
 const getState = scope => {
 	return {
 		store: {
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			],
+			profile: {
+				first_name: "",
+				last_name: "",
+				address: "",
+				birthday: "",
+				favorite_genre: "",
+				library: [],
+				wishlist: [],
+				user: null
+			},
 
-			wishlist: [1, 2, 3, 4],
-
-			library: [4, 2],
+			sessions: {
+				username: "Rigo",
+				email: "rigocodes@gmail.com",
+				loggedIn: true,
+				profile: 1
+			},
 
 			books: [
+				{
+					id: -1,
+					title: "No Book",
+					author: null,
+					description: null,
+					paperback: null,
+					published: null,
+					editionlanguage: null,
+					image: null
+				}
 				// {
 				// 	id: 1,
 				// 	title: "Mass Effect: Revelation",
@@ -85,7 +102,10 @@ const getState = scope => {
 				// 		"https://images.gr-assets.com/books/1432730315l/256683.jpg"
 				// }
 			],
+			// wishlist: [1, 2, 3, 4],
 
+			// library: [4, 2],
+			
 			trades: [
 				{
 					requesterid: 1,
@@ -157,10 +177,21 @@ const getState = scope => {
 			// 	scope.setState({ store });
 			// },
 
-			addToWishlist: bookid => {
-				let store = scope.state.store;
-				store.wishlist.push(bookid);
-				scope.setState(store);
+			addToWishlist: id => {
+				fetch(
+					[
+						"https://bookexchange-backend-scotth527.c9users.io/api/trades/",
+						id
+					].join()
+				)
+					.then(response => response.json())
+					.then(data => {
+						let store = scope.state;
+						store.profile.trades = {};
+						store.profile.trades = data;
+						scope.setState(store);
+					})
+					.catch(error => console.log(error));
 			},
 
 			registerUser: user => {
@@ -208,13 +239,55 @@ const getState = scope => {
 			},
 
 			fetchData() {
-				fetch(
-					"https://bookexchange-backend-scotth527.c9users.io/api/books/"
-				)
+				fetch(urls[currentURL] + "books/")
 					.then(response => response.json())
 					.then(data => {
 						let { store } = scope.state;
-						store.books = data;
+						store.books = store.books.concat(data);
+						scope.setState({ store });
+					})
+					.catch(error => console.log(error));
+			},
+
+			fetchProfile: id => {
+				fetch([urls[currentURL], "profile/", id].join(""))
+					.then(response => response.json())
+					.then(data => {
+						let store = scope.state;
+						store.books = store.books.concat(data);
+						scope.setState({ store });
+					})
+					.catch(error => console.log(error));
+			},
+
+			getProfile: id => {
+				fetch([urls[currentURL], "profile/", id].join(""))
+					.then(response => response.json())
+					.then(data => {
+						return data;
+					})
+					.catch(error => console.log(error));
+			},
+
+			fetchTrades: id => {
+				fetch([urls[currentURL], "trades/", id].join(""))
+					.then(response => response.json())
+					.then(data => {
+						let store = scope.state;
+						store.profile.trades = {};
+						store.profile.trades = data;
+						scope.setState(store);
+					})
+					.catch(error => console.log(error));
+			},
+
+			fetchRequests: id => {
+				fetch([urls[currentURL], "requests/", id].join(""))
+					.then(response => response.json())
+					.then(data => {
+						let store = scope.state;
+						store.profile.requests = {};
+						store.profile.requests = data;
 						scope.setState({ store });
 					})
 					.catch(error => console.log(error));
@@ -228,6 +301,21 @@ const getState = scope => {
 				let store = scope.state.store;
 				store.library.push(bookid);
 				scope.setState(store);
+			},
+
+			addTradeRequest: (sBook, s, fBook, f) => {
+				let store = scope.state.store;
+				let trade = {
+					sendBook: sBook,
+					send: s,
+					fromBook: fBook,
+					from: f,
+					isAccepted: true
+				};
+
+				if (store.tradeRequests.find(e => e === trade) !== undefined)
+					return false;
+				trade.isAccepted = false;
 			},
 
 			deleteFromWishlist: id => {
@@ -246,10 +334,17 @@ const getState = scope => {
 				return scope.state.store.users.find(e => e.id === id);
 			},
 
-			searchUsersForID: (id, key) => {
-				return scope.state.store.users.filter(
-					item => item[key].find(e => e === id) !== undefined
-				);
+			searchUsersForID: (id, self = null, key) => {
+				fetch([urls[currentURL], "page/", id].join(""))
+					.then(response => response.json())
+					.then(data => {
+						let ids = [];
+						for (var user in data) {
+							ids.push(user["profile"]);
+						}
+						return ids.filter(item => item.id !== self);
+					})
+					.catch(error => console.log(error));
 			},
 
 			search: (q, field = "all", page = 1) => {
