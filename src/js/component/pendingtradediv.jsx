@@ -8,7 +8,7 @@ function Pendingtrade(props) {
 	return (
 		<div className="d-flex justify-content-between col-8 mx-auto rounded border border-dark text-center mb-2">
 			<div className="mx-auto col-8 d-flex">
-				<div className="ml-3 mr-4 mb-3">
+				<div className="col-5 ml-2 mr-2 mb-3">
 					<img src={props.requesterpic} />
 					<h2>{props.requesterusername} </h2>
 					<h3>{"From: " + props.requestercity} </h3>
@@ -16,9 +16,9 @@ function Pendingtrade(props) {
 				</div>
 
 				<div>
-					<i className="mt-5 fas fa-exchange-alt" />
+					<i className="col-1 mt-5 fas fa-exchange-alt" />
 				</div>
-				<div className="ml-3 mb-3">
+				<div className="col-5 ml-2 mb-3">
 					<img src={props.requestedpic} />
 					<h2>{props.requestedusername} </h2>
 					<h3>{"From: " + props.requestedcity} </h3>
@@ -31,19 +31,23 @@ function Pendingtrade(props) {
 							? "inline-block"
 							: "none"
 					}}
-					className="d-flex ml-5 mt-4">
-					<i
+					className="col-4 d-flex ml-2 mr-1 mt-4">
+					<button
+						type="button"
 						onClick={() => {
 							props.rejectTrade();
 						}}
-						className="btn fas fa-ban"
-					/>
-					<i
+						className="btn btn-secondary btn-sm mb-3">
+						Reject
+					</button>
+					<button
+						type="button"
 						onClick={() => {
 							props.confirmTrade();
 						}}
-						className="btn fas fa-check-circle"
-					/>
+						className="btn btn-success btn-sm mb-3">
+						Accept
+					</button>
 				</div>
 			</div>
 		</div>

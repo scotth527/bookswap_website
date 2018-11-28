@@ -4,6 +4,9 @@ import Item from "../component/library/item.jsx";
 import { Context } from "../store/appContext.jsx";
 import Usermodal from "../component/usermodal.jsx";
 import "../../styles/index.css";
+import Trade from "../component/trade.jsx";
+import { withRouter } from "react-router-dom";
+import PropTypes from "prop-types";
 
 export class Library extends React.Component {
 	constructor(props) {
@@ -12,13 +15,14 @@ export class Library extends React.Component {
 			showModal: false,
 			showOwnersModal: false,
 			bookid: 0,
-			key: ""
+			key: "",
+			showTradeModal: false
 		};
 	}
 	render() {
 		return (
 			<div
-				className="container-fluid wrapper"
+				className="container-fluid wrapper mb-5"
 				style={{
 					wordWrap: "break-word",
 					marginTop: "50px",
@@ -31,7 +35,7 @@ export class Library extends React.Component {
 						return store.library.map((item, index) => {
 							return (
 								<Item
-									id={actions.searchBookByID(item).id}
+									id={item}
 									key={index}
 									title={actions.searchBookByID(item).title}
 									description={
@@ -41,11 +45,11 @@ export class Library extends React.Component {
 									deleteStuff={() =>
 										actions.deleteFromLibrary(index)
 									}
+									userKey={this.state.key}
 									addStuff={() =>
 										this.setState({
 											key: "wishlist",
-											bookid: actions.searchBookByID(item)
-												.id,
+											bookid: item,
 											showOwnersModal: true
 										})
 									}
@@ -63,10 +67,44 @@ export class Library extends React.Component {
 						userKey={this.state.key}
 						id={parseInt(this.state.bookid)}
 						divtitle="Users who are interested in the book"
+						onConfirm={id =>
+							this.setState({
+								showOwnersModal: false,
+								user: id,
+								showTradeModal: true
+							})
+						}
 					/>
 				)}
+				<Trade
+					show={this.state.showTradeModal}
+					book={parseInt(this.state.bookid)}
+					sender={this.state.user}
+					receiver={3}
+					onReturn={() =>
+						this.setState({
+							showOwnersModal: true,
+							showTradeModal: false
+						})
+					}
+					onConfirm={() =>
+						this.setState({
+							key: "",
+							user: null,
+							showTradeModal: false
+						})
+					}
+				/>
 			</div>
 		);
 	}
 }
-export default Library;
+
+Library.propTypes = {
+	//id: PropTypes.string,
+	history: PropTypes.object,
+	match: PropTypes.object,
+	onDelete: PropTypes.func,
+	delete: PropTypes.func
+};
+export default withRouter(Library);

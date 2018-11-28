@@ -69,7 +69,7 @@ export class Wishlist extends React.Component {
 				{this.state.showTradeModal && (
 					<Trade
 						show={this.state.showTradeModal}
-						book={parseInt(this.props.match.params.theid)}
+						book={parseInt(this.state.bookid)}
 						sender={this.state.user}
 						receiver={3}
 						onReturn={() =>
@@ -96,6 +96,13 @@ export class Wishlist extends React.Component {
 						userKey={this.state.key}
 						id={parseInt(this.state.bookid)}
 						divtitle="Users who own this book"
+						onConfirm={id =>
+							this.setState({
+								showOwnersModal: false,
+								user: id,
+								showTradeModal: true
+							})
+						}
 					/>
 				)}
 				<div className="row mt-5 text-right">

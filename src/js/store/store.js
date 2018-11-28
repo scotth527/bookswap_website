@@ -120,8 +120,7 @@ const getState = scope => {
 				firstname: "Rigo",
 				lastname: "Fuentes",
 				profile_id: 4,
-				address: "1234 American Way Miami, Fl. 33126",
-				password: "admin123"
+				address: "1234 American Way Miami, Fl. 33126"
 			},
 
 			users: [
@@ -152,11 +151,11 @@ const getState = scope => {
 			]
 		},
 		actions: {
-			changeColor: (element, color) => {
-				let store = scope.state.store;
-				store.demo[element].background = color;
-				scope.setState({ store });
-			},
+			// changeColor: (element, color) => {
+			// 	let store = scope.state.store;
+			// 	store.demo[element].background = color;
+			// 	scope.setState({ store });
+			// },
 
 			addToWishlist: bookid => {
 				let store = scope.state.store;
