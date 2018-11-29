@@ -279,7 +279,7 @@ const getState = scope => {
 						let { store } = scope.state;
 
 						data.map(book => {
-							store.library.push(book.book);
+							store.library.push(book);
 						});
 						console.log(store);
 						scope.setState({ store });
