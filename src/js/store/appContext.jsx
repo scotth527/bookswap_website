@@ -12,7 +12,8 @@ const Store = PassedComponent => {
 
 		componentDidMount() {
 			this.state.actions.fetchData();
-
+			this.state.actions.getLibrary(1);
+			this.state.actions.getWishlist(1);
 			// Set your fetchs/Ajax requests here.
 			// make sure you're using the store: this.state.store
 		}

@@ -100,7 +100,11 @@ export class BookPage extends React.Component {
 																this.setState({
 																	showConfirmLibModal: true,
 																	showConfirmWishModal: false,
-																	showOwnersModal: false
+																	showOwnersModal: false,
+																	user:
+																		store
+																			.sessions
+																			.profile
 																})
 															}
 															type="button"

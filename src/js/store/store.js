@@ -12,16 +12,18 @@ let currentURL = 1;
 const getState = scope => {
 	return {
 		store: {
-			profile: {
-				first_name: "",
-				last_name: "",
-				address: "",
-				birthday: "",
-				favorite_genre: "",
-				library: [],
-				wishlist: [],
-				user: null
-			},
+			// profile: {
+			// 	first_name: "",
+			// 	last_name: "",
+			// 	address: "",
+			// 	birthday: "",
+			// 	favorite_genre: "",
+			// 	library: [],
+			// 	wishlist: [],
+			// 	user: null
+			// },
+
+			profile: {},
 
 			sessions: {
 				username: "Rigo",
@@ -58,7 +60,7 @@ const getState = scope => {
 				// 	title: "Assassin's Creed: The Secret Crusade",
 				// 	author: "Oliver Bowden, Andrew Holmes",
 				// 	description:
-				// 		"NICCOLO POLO, FATHER OF MARCO, WILL FINALLY REVEAL THE STORY HE HAS KEPT SECRET ALL HIS LIFE - THE STORY OF ALTAIR, ONE OF THE BROTHERHOOD'S MOST EXTRAORDINARY ASSASSINS.Altair embarks on a formidable mission - one that takes him throughout the Holy Land and shows him the true meaning of the Assassin's Creed. To demonstrate his commitment, Altair must defeat nine deadly enemies, including Templar leader, Robert de Sable. Altair's life story is told here for the first time: a journey that will change the course of history; his ongoing battle with the Templar conspiracy; a family life that is as tragic as it is shocking; and the ultimate betrayal of an old friend.",
+				// 		"Oliver Bowden, Andrew Holmes",
 				// 	paperback: "384 pages",
 				// 	published: "June 28th 2011 by Ace Books",
 				// 	editionlanguage: "English",
@@ -102,9 +104,9 @@ const getState = scope => {
 				// 		"https://images.gr-assets.com/books/1432730315l/256683.jpg"
 				// }
 			],
-			// wishlist: [1, 2, 3, 4],
+			wishlist: [],
 
-			// library: [4, 2],
+			library: [],
 
 			trades: [
 				{
@@ -132,7 +134,6 @@ const getState = scope => {
 					tradeid: 3
 				}
 			],
-
 			users: [
 				{
 					username: "scotth527",
@@ -244,20 +245,20 @@ const getState = scope => {
 					.then(response => response.json())
 					.then(data => {
 						let store = scope.state;
-						store.books = store.books.concat(data);
+						store.profile = data;
 						scope.setState({ store });
 					})
 					.catch(error => console.log(error));
 			},
 
-			getProfile: id => {
-				fetch([urls[currentURL], "profile/", id].join(""))
-					.then(response => response.json())
-					.then(data => {
-						return data;
-					})
-					.catch(error => console.log(error));
-			},
+			// getProfile: id => {
+			// 	fetch([urls[currentURL], "profile/", id].join(""))
+			// 		.then(response => response.json())
+			// 		.then(data => {
+			// 			return data;
+			// 		})
+			// 		.catch(error => console.log(error));
+			// },
 
 			fetchTrades: id => {
 				fetch([urls[currentURL], "trades/", id].join(""))
@@ -275,14 +276,27 @@ const getState = scope => {
 				fetch([urls[currentURL], "library/", id].join(""))
 					.then(response => response.json())
 					.then(data => {
-						let store = scope.state;
-						store.profile.library = [];
-						for (var x in data) {
-							store.profile.library.push(x["book"]);
-						}
-						scope.setState(store);
+						let { store } = scope.state;
+
+						data.map(book => {
+							store.library.push(book.book);
+						});
+						console.log(store);
+						scope.setState({ store });
 					})
 					.catch(error => console.log(error));
+			},
+
+			getWishlist: id => {
+				fetch([urls[currentURL], "profile/", id].join(""))
+					.then(response => response.json())
+					.then(data => {
+						let { store } = scope.state;
+
+						data.wishlist.map(book => {
+							store.wishlist.push(book);
+						});
+					});
 			},
 
 			fetchRequests: id => {
@@ -298,7 +312,10 @@ const getState = scope => {
 			},
 
 			searchBookByID: bookindex => {
-				return scope.state.store.books.find(e => e.id === bookindex);
+				return scope.state.store.books.find(e => {
+					//console.log(e.id + "===" + bookindex);
+					return e.id === bookindex;
+				});
 			},
 
 			addToLibrary: addToInventoryEntry => {
@@ -345,9 +362,15 @@ const getState = scope => {
 			},
 
 			deleteFromLibrary: id => {
-				let mistake = scope.state.store;
-				mistake.library.splice(id, 1);
-				scope.setState(mistake);
+				fetch([urls[currentURL], "requests/", id].join("")) + id,
+					{
+						method: "DELETE" // or 'PUT'
+					}
+						.then(res => res.json())
+						.then(response =>
+							console.log("Success:", JSON.stringify(response))
+						)
+						.catch(error => console.error("Error:", error));
 			},
 
 			searchUser: id => {
