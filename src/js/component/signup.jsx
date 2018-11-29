@@ -2,35 +2,26 @@ import React from "react";
 import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
+import { Context } from "../store/appContext.jsx";
 //import DropDown from "../component/dropdown.jsx";
 
 export class SignUp extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			firstname: "",
-			lastname: "",
-			email: "",
-			address: "",
-			phone: "",
-			birthday: "",
-			genre: "",
+			user: {
+				firstname: "",
+				lastname: "",
+				email: "",
+				address: "",
+				phone: "",
+				birthday: "",
+				genre: "",
+				library: [],
+				wishlist: []
+			},
 			showDrop: false
 		};
-	}
-
-	signUp() {
-		console.log(this.state);
-		const {
-			firstname,
-			lastname,
-			email,
-			address,
-			phone,
-			birthday,
-			genre,
-			showDrop
-		} = this.state;
 	}
 
 	render() {
@@ -72,10 +63,10 @@ export class SignUp extends React.Component {
 												className="form-control"
 												type="text"
 												placeholder=""
-												onChange={event =>
-													this.State({
+												onChange={e =>
+													this.setState.user({
 														firstname:
-															event.target.value
+															e.target.value
 													})
 												}
 											/>
@@ -88,7 +79,7 @@ export class SignUp extends React.Component {
 												type="text"
 												placeholder=""
 												onChange={event =>
-													this.State({
+													this.setState.user({
 														email:
 															event.target.value
 													})
@@ -103,7 +94,7 @@ export class SignUp extends React.Component {
 												type="text"
 												placeholder=""
 												onChange={event =>
-													this.State({
+													this.setState.user({
 														phone:
 															event.target.value
 													})
@@ -122,7 +113,7 @@ export class SignUp extends React.Component {
 														type="text"
 														placeholder=""
 														onChange={event =>
-															this.State({
+															this.setState.user({
 																lastname:
 																	event.target
 																		.value
@@ -137,7 +128,7 @@ export class SignUp extends React.Component {
 														type="text"
 														placeholder=""
 														onChange={event =>
-															this.State({
+															this.setState.user({
 																address:
 																	event.target
 																		.value
@@ -152,7 +143,7 @@ export class SignUp extends React.Component {
 														type="text"
 														placeholder="Month/Day/Year"
 														onChange={event =>
-															this.State({
+															this.setState.user({
 																birthday:
 																	event.target
 																		.value
@@ -220,12 +211,22 @@ export class SignUp extends React.Component {
 											</a>
 										</div>
 									</div>
-									<button
-										className="btn btn-primary"
-										type="button"
-										onClick={() => this.signUp}>
-										Submit
-									</button>
+									<Context.Consumer>
+										{({ store, actions }) => {
+											return (
+												<button
+													className="btn btn-primary"
+													type="button"
+													onClick={() =>
+														actions.registerUser(
+															this.state.user
+														)
+													}>
+													Submit
+												</button>
+											);
+										}}
+									</Context.Consumer>
 								</div>
 							</div>
 						</div>

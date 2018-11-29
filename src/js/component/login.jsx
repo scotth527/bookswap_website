@@ -2,6 +2,7 @@ import React from "react";
 import ReactDom from "react-dom";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
+import { Context } from "../store/appContext.jsx";
 
 export class LogIn extends React.Component {
 	constructor(props) {
@@ -12,10 +13,6 @@ export class LogIn extends React.Component {
 		};
 	}
 
-	logIn() {
-		console.log(this.state);
-		//const { email, password } = this.state;
-	}
 	render() {
 		return (
 			<div
@@ -80,13 +77,22 @@ export class LogIn extends React.Component {
 												}
 											/>
 										</div>
-
-										<button
-											className="btn btn-primary"
-											type="button"
-											onClick={() => this.logIn()}>
-											Submit
-										</button>
+										<Context.Consumer>
+											{({ store, actions }) => {
+												return (
+													<button
+														className="btn btn-primary"
+														type="button"
+														onClick={() =>
+															actions.isLegalUser(
+																this.state
+															)
+														}>
+														Submit
+													</button>
+												);
+											}}
+										</Context.Consumer>
 									</div>
 								</div>
 							</div>

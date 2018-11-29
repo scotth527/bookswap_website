@@ -41,7 +41,6 @@ export class BookPage extends React.Component {
 	}
 
 	render() {
-		console.log();
 		return (
 			<div
 				className="container-fluid mt-5 d-flex flex-column wrapper"
@@ -58,7 +57,6 @@ export class BookPage extends React.Component {
 									parseInt(this.props.match.params.theid)
 								);
 							});
-							console.log(theBook);
 							if (theBook.length > 0) {
 								return (
 									<div className="mx-auto col-12 text-center">
@@ -102,7 +100,11 @@ export class BookPage extends React.Component {
 																this.setState({
 																	showConfirmLibModal: true,
 																	showConfirmWishModal: false,
-																	showOwnersModal: false
+																	showOwnersModal: false,
+																	user:
+																		store
+																			.sessions
+																			.profile
 																})
 															}
 															type="button"
@@ -189,6 +191,7 @@ export class BookPage extends React.Component {
 							this.setState({ showConfirmLibModal: false })
 						}
 						id={parseInt(this.props.match.params.theid)}
+						sender={this.state.user}
 						errorAlert={() =>
 							this.setState({
 								showConfirmLibModal: false,
@@ -221,7 +224,15 @@ export class BookPage extends React.Component {
 							this.setState({ key: "", showOwnersModal: false })
 						}
 						userKey={this.state.key}
+						currentUser={3}
 						id={parseInt(this.props.match.params.theid)}
+						onConfirm={id =>
+							this.setState({
+								showOwnersModal: false,
+								user: id,
+								showTradeModal: true
+							})
+						}
 					/>
 				)}
 				{this.state.showTradeModal && (
@@ -236,13 +247,14 @@ export class BookPage extends React.Component {
 								showTradeModal: false
 							})
 						}
-						onConfirm={() =>
+						onConfirm={() => {
 							this.setState({
 								key: "",
 								user: null,
+								showOwnersModal: false,
 								showTradeModal: false
-							})
-						}
+							});
+						}}
 					/>
 				)}
 				{this.state.showError && (

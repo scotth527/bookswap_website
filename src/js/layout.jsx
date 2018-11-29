@@ -13,6 +13,7 @@ import Store from "./store/appContext.jsx";
 import { NavBar } from "./component/navbar.jsx";
 import { Footer } from "./component/footer.jsx";
 import { BookPage } from "./views/bookpage.jsx";
+import { Trades } from "./views/trades.jsx";
 
 //create your first component
 export class Layout extends React.Component {
@@ -26,6 +27,7 @@ export class Layout extends React.Component {
 						<Route exact path="/account" component={Account} />
 						<Route exact path="/library" component={Library} />
 						<Route exact path="/wishlist" component={Wishlist} />
+						<Route exact path="/trades" component={Trades} />
 						<Route exact path="/search" component={Single} />
 						<Route
 							exact
