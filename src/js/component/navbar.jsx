@@ -87,6 +87,12 @@ export class NavBar extends React.Component {
 											<li className="nav-item mr-1">
 												<Link to="/library">
 													<button
+														onClick={() => {
+															actions.getLibrary(
+																store.sessions
+																	.profile
+															);
+														}}
 														type="button"
 														style={{
 															whiteSpace: "normal"

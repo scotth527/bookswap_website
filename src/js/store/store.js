@@ -276,13 +276,10 @@ const getState = scope => {
 					.then(response => response.json())
 					.then(data => {
 						let store = scope.state;
-						store.profile.library = {};
-						let libraryplaceholder = data;
-						store.profile.library = libraryplaceholder.map(
-							(item, index) => {
-								return store.profile.library.push(item.profile);
-							}
-						);
+						store.profile.library = [];
+						for (var x in data) {
+							store.profile.library.push(x["book"]);
+						}
 						scope.setState(store);
 					})
 					.catch(error => console.log(error));

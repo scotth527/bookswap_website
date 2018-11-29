@@ -19,6 +19,7 @@ export class Library extends React.Component {
 			showTradeModal: false
 		};
 	}
+
 	render() {
 		return (
 			<div
@@ -32,6 +33,7 @@ export class Library extends React.Component {
 				<NewItem className="modal-dialog" />
 				<Context.Consumer>
 					{({ store, actions }) => {
+						actions.getLibrary(store.sessions.profile);
 						return actions
 							.searchUser(store.sessions.profile)
 							.library.map((item, index) => {
@@ -81,25 +83,6 @@ export class Library extends React.Component {
 						}
 					/>
 				)}
-				<Trade
-					show={this.state.showTradeModal}
-					book={parseInt(this.state.bookid)}
-					sender={this.state.user}
-					receiver={3}
-					onReturn={() =>
-						this.setState({
-							showOwnersModal: true,
-							showTradeModal: false
-						})
-					}
-					onConfirm={() =>
-						this.setState({
-							key: "",
-							user: null,
-							showTradeModal: false
-						})
-					}
-				/>
 			</div>
 		);
 	}
