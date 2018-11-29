@@ -8,7 +8,8 @@ export class StoreAddModal extends React.Component {
 		super(props);
 		this.state = {
 			book: this.props.id,
-			profileid: 1
+			profile: this.props.sender,
+			status: true
 		};
 	}
 	render() {
@@ -54,20 +55,14 @@ export class StoreAddModal extends React.Component {
 											type="button"
 											onClick={item => {
 												if (
-													actions
-														.searchUser(
-															store.sessions
-																.profile
-														)
-														.find(
-															item =>
-																item ===
-																this.props.id
-														) == undefined
+													store.library.find(
+														item =>
+															item ===
+															this.props.id
+													) == undefined
 												) {
 													actions.addToLibrary(
 														this.state
-															.inventoryEntry
 													);
 													this.props.onClose();
 												} else {
@@ -97,7 +92,8 @@ StoreAddModal.propTypes = {
 	showError: PropTypes.bool,
 	id: PropTypes.number,
 	show: PropTypes.bool,
-	errorAlert: PropTypes.func
+	errorAlert: PropTypes.func,
+	sender: PropTypes.number
 };
 
 /**
