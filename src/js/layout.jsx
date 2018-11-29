@@ -22,7 +22,7 @@ export class Layout extends React.Component {
 				<ScrollToTop>
 					<NavBar show="inline-block" />
 					<Switch>
-						<Route exact path="/home" component={Home} />
+						<Route exact path="/" component={Home} />
 						<Route exact path="/account" component={Account} />
 						<Route exact path="/library" component={Library} />
 						<Route exact path="/wishlist" component={Wishlist} />
