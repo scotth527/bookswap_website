@@ -108,32 +108,34 @@ const getState = scope => {
 
 			library: [],
 
-			trades: [
-				{
-					requesterid: 1,
-					requesterbook: 1,
-					requestedid: 2,
-					requestedbook: 2,
-					is_accepted: false,
-					tradeid: 1
-				},
-				{
-					requesterid: 1,
-					requesterbook: 4,
-					requestedid: 3,
-					requestedbook: 2,
-					is_accepted: true,
-					tradeid: 2
-				},
-				{
-					requesterid: 2,
-					requesterbook: 3,
-					requestedid: 3,
-					requestedbook: 1,
-					is_accepted: false,
-					tradeid: 3
-				}
-			],
+			// trades: [
+			// 	{
+			// 		requesterid: 1,
+			// 		requesterbook: 1,
+			// 		requestedid: 2,
+			// 		requestedbook: 2,
+			// 		is_accepted: false,
+			// 		tradeid: 1
+			// 	},
+			// 	{
+			// 		requesterid: 1,
+			// 		requesterbook: 4,
+			// 		requestedid: 3,
+			// 		requestedbook: 2,
+			// 		is_accepted: true,
+			// 		tradeid: 2
+			// 	},
+			// 	{
+			// 		requesterid: 2,
+			// 		requesterbook: 3,
+			// 		requestedid: 3,
+			// 		requestedbook: 1,
+			// 		is_accepted: false,
+			// 		tradeid: 3
+			// 	}
+			// ],
+
+			trades: {},
 			users: [
 				{
 					username: "scotth527",
@@ -168,38 +170,9 @@ const getState = scope => {
 			// 	scope.setState({ store });
 			// },
 
-			addToWishlist: id => {
-				fetch(
-					[
-						"https://bookexchange-backend-scotth527.c9users.io/api/profile/",
-						id
-					].join()
-				)
-					.then(response => response.json())
-					.then(data => {
-						let store = scope.state;
-						store.profile.wishlist = {};
-						store.profile.wishlist = data;
-						scope.setState(store);
-					})
-					.catch(error => console.log(error));
-			},
-
 			registerUser: user => {
 				let store = scope.state.store;
 				store.users.push(user);
-				scope.setState(store);
-			},
-
-			acceptTrade: trade_id => {
-				let store = scope.state.store;
-				store.trades[trade_id].tradeid = true;
-				scope.setState(store);
-			},
-
-			cancelTrade: tradeindex => {
-				let store = scope.state.store;
-				store.trades.splice(tradeindex, 1);
 				scope.setState(store);
 			},
 
@@ -230,6 +203,7 @@ const getState = scope => {
 			},
 
 			fetchData() {
+				//fetches books
 				fetch(urls[currentURL] + "books/")
 					.then(response => response.json())
 					.then(data => {
@@ -251,40 +225,27 @@ const getState = scope => {
 					.catch(error => console.log(error));
 			},
 
-			// getProfile: id => {
-			// 	fetch([urls[currentURL], "profile/", id].join(""))
-			// 		.then(response => response.json())
-			// 		.then(data => {
-			// 			return data;
-			// 		})
-			// 		.catch(error => console.log(error));
-			// },
-
 			fetchTrades: id => {
 				fetch([urls[currentURL], "trades/", id].join(""))
 					.then(response => response.json())
 					.then(data => {
-						let store = scope.state;
-						store.profile.trades = {};
+						let { store } = scope.state;
 						store.profile.trades = data;
-						scope.setState(store);
+						scope.setState({ store });
 					})
 					.catch(error => console.log(error));
 			},
 
-			getLibrary: id => {
-				fetch([urls[currentURL], "library/", id].join(""))
-					.then(response => response.json())
-					.then(data => {
-						let { store } = scope.state;
+			acceptTrade: trade_id => {
+				let store = scope.state.store;
+				store.trades[trade_id].tradeid = true;
+				scope.setState(store);
+			},
 
-						data.map(book => {
-							store.library.push(book);
-						});
-						console.log(store);
-						scope.setState({ store });
-					})
-					.catch(error => console.log(error));
+			cancelTrade: tradeindex => {
+				let store = scope.state.store;
+				store.trades.splice(tradeindex, 1);
+				scope.setState(store);
 			},
 
 			getWishlist: id => {
@@ -297,6 +258,23 @@ const getState = scope => {
 							store.wishlist.push(book);
 						});
 					});
+			},
+
+			addToWishlist: id => {
+				// 	fetch(
+				// 		[
+				// 			"https://bookexchange-backend-scotth527.c9users.io/api/profile/",
+				// 			id
+				// 		].join()
+				// 	)
+				// 		.then(response => response.json())
+				// 		.then(data => {
+				// 			let store = scope.state;
+				// 			store.profile.wishlist = {};
+				// 			store.profile.wishlist = data;
+				// 			scope.setState(store);
+				// 		})
+				// 		.catch(error => console.log(error));
 			},
 
 			fetchRequests: id => {
@@ -318,6 +296,22 @@ const getState = scope => {
 				});
 			},
 
+			getLibrary: id => {
+				console.log(id);
+				fetch([urls[currentURL], "library/", id].join(""))
+					.then(response => response.json())
+					.then(data => {
+						let { store } = scope.state;
+
+						data.map(book => {
+							store.library.push(book);
+						});
+						console.log(store);
+						scope.setState({ store });
+					})
+					.catch(error => console.log(error));
+			},
+
 			addToLibrary: addToInventoryEntry => {
 				// let store = scope.state.store;
 				// store.library.push(bookid);
@@ -333,9 +327,19 @@ const getState = scope => {
 					.then(res => res.json())
 					.then(response => {
 						console.log("Success:", JSON.stringify(response));
-						scope.state.actions.getLibrary(
-							addToInventoryEntry.profile
-						);
+						scope.actions.getLibrary(scope.profile.id);
+					})
+					.catch(error => console.error("Error:", error));
+			},
+
+			deleteFromLibrary: id => {
+				fetch([urls[currentURL], "library/", id].join(""), {
+					method: "DELETE" // or 'PUT'
+				})
+					.then(res => res.json())
+					.then(response => {
+						console.log("Success:", JSON.stringify(response));
+						scope.actions.getLibrary(scope.profile.id);
 					})
 					.catch(error => console.error("Error:", error));
 			},
@@ -359,18 +363,6 @@ const getState = scope => {
 				let mistake = scope.state.store;
 				mistake.wishlist.splice(id, 1);
 				scope.setState(mistake);
-			},
-
-			deleteFromLibrary: id => {
-				fetch([urls[currentURL], "requests/", id].join("")) + id,
-					{
-						method: "DELETE" // or 'PUT'
-					}
-						.then(res => res.json())
-						.then(response =>
-							console.log("Success:", JSON.stringify(response))
-						)
-						.catch(error => console.error("Error:", error));
 			},
 
 			searchUser: id => {
@@ -440,14 +432,6 @@ const getState = scope => {
 			// 		.then(response => {})
 			// 		.catch(error => console.log(error));
 			// }
-
-			/*
-            deleteItem: (contact) => {
-                let mistake = scope.state.store;
-                mistake.contacts.splice(contact, 1);
-                scope.setState(mistake);
-            },
-            */
 		}
 	};
 };
