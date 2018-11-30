@@ -333,6 +333,7 @@ const getState = scope => {
 			},
 
 			deleteFromLibrary: id => {
+				console.log(id);
 				fetch([urls[currentURL], "library/", id].join(""), {
 					method: "DELETE" // or 'PUT'
 				})
