@@ -22,7 +22,7 @@ export class NavBar extends React.Component {
 				<ul className="nav">
 					<li className="nav-item">
 						<Link className="navbar-brand" to="#">
-							Book Pals
+							BookSwap ⇌
 						</Link>
 					</li>
 					<li className="nav-item">
