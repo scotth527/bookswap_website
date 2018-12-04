@@ -10,7 +10,6 @@ export class Footer extends Component {
 					background: "#00ffff",
 					position: "relative",
 					bottom: "0",
-					left: "0",
 					flexShrink: "0",
 					height: "40px"
 				}}

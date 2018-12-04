@@ -19,7 +19,7 @@ export class HomePage extends React.Component {
 									Mass Effect: Revelation
 								</h5>
 								<div
-									className="card"
+									className="card mx-auto"
 									style={{
 										width: "20rem",
 										margin: "60px"
@@ -41,7 +41,7 @@ export class HomePage extends React.Component {
 											height: "15rem",
 											margin: "7px"
 										}}>
-										<p className="card-text">
+										<p className="card-text mx-auto">
 											Every advanced society in the galaxy
 											relies on the technology of the
 											Protheans, an ancient species that
@@ -55,20 +55,26 @@ export class HomePage extends React.Component {
 										</p>
 									</div>
 								</div>
-								<a
-									className="btn btn-warning"
-									style={{
-										width: "5rem",
-										margin: "30px",
-										padding: "2px"
-									}}>
-									Book Info
-								</a>
+								<li className="homepage mx-auto">
+									<Link to="/account">
+										<button
+											type="button"
+											style={{
+												background: "#ffc107",
+												whiteSpace: "normal"
+											}}
+											className="btn btn-dark
+																mb-2 ">
+											{" "}
+											Book Info
+										</button>
+									</Link>
+								</li>
 							</div>
 						</div>
 
 						<div className="col-md-4">
-							<div className="card">
+							<div className="card mx-auto">
 								<h5
 									className="card-title text-center"
 									style={{
@@ -112,15 +118,21 @@ export class HomePage extends React.Component {
 										</p>
 									</div>
 								</div>
-								<a
-									className="btn btn-warning"
-									style={{
-										width: "5rem",
-										margin: "30px",
-										padding: "2px"
-									}}>
-									Book Info
-								</a>
+								<li className="homepage mx-auto">
+									<Link to="/account">
+										<button
+											type="button"
+											style={{
+												background: "#ffc107",
+												whiteSpace: "normal"
+											}}
+											className="btn btn-dark
+																mb-2 ">
+											{" "}
+											Book Info
+										</button>
+									</Link>
+								</li>
 							</div>
 						</div>
 
@@ -141,7 +153,7 @@ export class HomePage extends React.Component {
 										margin: "60px"
 									}}>
 									<img
-										className="card-img-top"
+										className="card-img-top mx-auto"
 										src="https://img.thriftbooks.com/api/images/l/2ccd4c14a9c11747b1b06272ff7f377d1c025924.jpg"
 										alt="Card image cap"
 										style={{
@@ -171,15 +183,21 @@ export class HomePage extends React.Component {
 										</p>
 									</div>
 								</div>
-								<a
-									className="btn btn-warning"
-									style={{
-										width: "5rem",
-										margin: "30px",
-										padding: "2px"
-									}}>
-									Book Info
-								</a>
+								<li className="homepage mx-auto">
+									<Link to="/account">
+										<button
+											type="button"
+											style={{
+												background: "#ffc107",
+												whiteSpace: "normal"
+											}}
+											className="btn btn-dark
+																mb-2 ">
+											{" "}
+											Book Info
+										</button>
+									</Link>
+								</li>
 							</div>
 						</div>
 					</div>
@@ -194,7 +212,16 @@ export class HomePage extends React.Component {
 					Other Books{" "}
 				</h6>
 				<div className="d-flex justify-content col-10 mx-auto rounded border border-dark text-center mb-6">
-					<div className="row">
+					<button
+						className="btn btn-dark"
+						type="button"
+						style={{
+							padding: "10px",
+							marginTop: "70px",
+							marginBottom: "70px"
+						}}
+					/>
+					<div className="row" style={{ margin: "10px" }}>
 						<div className="mx-auto col-10 d-flex" />
 						<div className="">
 							<img
