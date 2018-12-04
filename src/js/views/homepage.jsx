@@ -55,15 +55,18 @@ export class HomePage extends React.Component {
 										</p>
 									</div>
 								</div>
-								<a
-									className="btn btn-warning"
-									style={{
-										width: "5rem",
-										margin: "30px",
-										padding: "2px"
-									}}>
-									Book Info
-								</a>
+								<Link to="/bookpage/1">
+									<button
+										className="btn btn-warning"
+										style={{
+											width: "5rem",
+											margin: "30px",
+											padding: "2px"
+										}}>
+										{" "}
+										Book Info
+									</button>
+								</Link>
 							</div>
 						</div>
 
@@ -112,15 +115,18 @@ export class HomePage extends React.Component {
 										</p>
 									</div>
 								</div>
-								<a
-									className="btn btn-warning"
-									style={{
-										width: "5rem",
-										margin: "30px",
-										padding: "2px"
-									}}>
-									Book Info
-								</a>
+								<Link to="/bookpage/2">
+									<button
+										className="btn btn-warning"
+										style={{
+											width: "5rem",
+											margin: "30px",
+											padding: "2px"
+										}}>
+										{" "}
+										Book Info
+									</button>
+								</Link>
 							</div>
 						</div>
 
@@ -171,15 +177,18 @@ export class HomePage extends React.Component {
 										</p>
 									</div>
 								</div>
-								<a
-									className="btn btn-warning"
-									style={{
-										width: "5rem",
-										margin: "30px",
-										padding: "2px"
-									}}>
-									Book Info
-								</a>
+								<Link to="/bookpage/3">
+									<button
+										className="btn btn-warning"
+										style={{
+											width: "5rem",
+											margin: "30px",
+											padding: "2px"
+										}}>
+										{" "}
+										Book Info
+									</button>
+								</Link>
 							</div>
 						</div>
 					</div>
