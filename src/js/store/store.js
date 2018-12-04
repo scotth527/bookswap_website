@@ -347,6 +347,11 @@ const getState = scope => {
 							console.log("Something went wrong oops");
 						}
 					})
+					.then(res => {
+						scope.state.actions.getWishlist(
+							scope.state.store.sessions.profile
+						);
+					})
 
 					.catch(error => console.error("Error:", error));
 			},
@@ -426,7 +431,11 @@ const getState = scope => {
 							console.log("Something went wrong oops");
 						}
 					})
-
+					.then(res => {
+						scope.state.actions.getLibrary(
+							scope.state.store.sessions.profile
+						);
+					})
 					.catch(error => console.error("Error:", error));
 			},
 
