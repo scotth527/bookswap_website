@@ -39,9 +39,11 @@ export class Library extends React.Component {
 									id={item.book}
 									key={index}
 									title={
+										actions.searchBookByID(item.book) &&
 										actions.searchBookByID(item.book).title
 									}
 									description={
+										actions.searchBookByID(item.book) &&
 										actions.searchBookByID(item.book)
 											.description
 									}

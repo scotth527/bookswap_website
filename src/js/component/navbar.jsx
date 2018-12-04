@@ -63,8 +63,8 @@ export class NavBar extends React.Component {
 
 				<div style={{ display: this.props.show }}>
 					<div
-						className="collapse navbar-collapse"
-						id="navbarSupportedContent">
+						id="navbarSupportedContent"
+						className="collapse navbar-collapse">
 						<Context.Consumer>
 							{({ store, actions }) => {
 								if (store.sessions.loggedIn) {

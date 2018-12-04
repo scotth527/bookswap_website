@@ -29,7 +29,7 @@ function Wishprev(props) {
 					<h5>{props.pagetitle + " preview"} </h5>
 					<Context.Consumer>
 						{({ store, actions }) => {
-							return store.wishlist
+							return store.profile.wishlist
 								.slice(0, 3)
 								.map((item, index) => {
 									return (
