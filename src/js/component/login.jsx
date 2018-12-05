@@ -8,7 +8,7 @@ export class LogIn extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			email: "",
+			username: "",
 			password: ""
 		};
 	}
@@ -48,7 +48,7 @@ export class LogIn extends React.Component {
 									<div className="mx-auto">
 										<div className="form-group">
 											<div className="form-inline">
-												<h2>Email</h2>
+												<h2>Username</h2>
 											</div>
 											<input
 												className="form-control"
@@ -56,7 +56,7 @@ export class LogIn extends React.Component {
 												placeholder=""
 												onChange={event =>
 													this.State({
-														email:
+														username:
 															event.target.value
 													})
 												}

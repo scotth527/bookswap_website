@@ -7,7 +7,8 @@ export class WishAddModal extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			showError: false
+			showError: false,
+			bookid: this.props.id
 		};
 	}
 	render() {
@@ -54,11 +55,11 @@ export class WishAddModal extends React.Component {
 													store.wishlist.find(
 														item =>
 															item ===
-															this.props.id
+															this.state.bookid
 													) == undefined
 												) {
 													actions.addToWishlist(
-														this.props.id
+														this.state.bookid
 													);
 													this.props.onClose();
 												} else {

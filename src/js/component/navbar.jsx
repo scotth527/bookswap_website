@@ -21,8 +21,8 @@ export class NavBar extends React.Component {
 			<nav className="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between">
 				<ul className="nav">
 					<li className="nav-item">
-						<Link className="navbar-brand" to="#">
-							Book Pals
+						<Link className="navbar-brand" to="/">
+							BookSwap ⇌
 						</Link>
 					</li>
 					<li className="nav-item">
@@ -63,8 +63,8 @@ export class NavBar extends React.Component {
 
 				<div style={{ display: this.props.show }}>
 					<div
-						className="collapse navbar-collapse"
-						id="navbarSupportedContent">
+						id="navbarSupportedContent"
+						className="collapse navbar-collapse">
 						<Context.Consumer>
 							{({ store, actions }) => {
 								if (store.sessions.loggedIn) {
@@ -94,7 +94,7 @@ export class NavBar extends React.Component {
 														className="btn btn-dark
 																mb-2 ">
 														{" "}
-														Library
+														My Library
 													</button>
 												</Link>
 											</li>

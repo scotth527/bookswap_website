@@ -34,48 +34,79 @@ export class Item extends React.Component {
 		return (
 			<Context.Consumer>
 				{({ store, actions }) => {
-					return (
-						<div
-							className={
-								"col-12 bg-light border border-dark rounded mb-2" +
-								this.props.drop
-									? "dropdown-toggle"
-									: ""
-							}
-							onClick={() => {
-								if (this.props.drop) {
-									this.toggle();
+					const book = actions.searchBookByID(this.props.id);
+					if (typeof book === "undefined") {
+						return <h2> No book selected</h2>;
+					} else {
+						return (
+							<div
+								className={
+									"col-12 bg-light border border-dark rounded mb-2" +
+									this.props.drop
+										? "dropdown-toggle"
+										: ""
 								}
-							}}>
-							<div className="row">
-								<div className="col-4 my-auto">
-									<img src="https://via.placeholder.com/75x75" />
-								</div>
-								<div className="col-xs-12 col-lg-8 py-2">
-									<div className="row">
-										<div
-											className={
-												"col-" + this.props.simple
-													? "12"
-													: "8"
-											}
-											alt="Title">
-											<h5 className="px-1">
-												{actions.searchBookByID(
-													this.props.id
-												).title || "Placeholder"}
-											</h5>
+								onClick={() => {
+									if (this.props.drop) {
+										this.toggle();
+									}
+								}}>
+								<div className="row">
+									<div className="col-4 my-auto">
+										<img src="https://via.placeholder.com/75x75" />
+									</div>
+									<div className="col-xs-12 col-lg-8 py-2">
+										<div className="row">
+											<div
+												className={
+													"col-" + this.props.simple
+														? "12"
+														: "8"
+												}
+												alt="Title">
+												<h5 className="px-1">
+													{book.title ||
+														"Placeholder"}
+												</h5>
+											</div>
+											{!this.props.simple && (
+												<div
+													className="col-4 text-right"
+													alt="Rating">
+													<i
+														onClick={() =>
+															this.props.deleteStuff()
+														}
+														className="btn far fa-times-circle"
+													/>
+												</div>
+											)}
 										</div>
 										{!this.props.simple && (
-											<div
-												className="col-4 text-right"
-												alt="Rating">
-												<i
+											<div className="row">
+												<div
+													className="col-12"
+													alt="Description">
+													<p>
+														{this.shorten(
+															book.description
+														) || "PLACEHOLDER"}
+													</p>
+												</div>
+											</div>
+										)}
+										{!this.props.simple && (
+											<div className="row justify-content-end pr-2">
+												<button
 													onClick={() =>
-														this.props.deleteStuff()
+														this.props.addStuff()
 													}
-													className="btn far fa-times-circle"
-												/>
+													className="btn btn-sm"
+													style={{
+														whiteSpace: "normal"
+													}}>
+													{this.props.buttonName}
+												</button>
 											</div>
 										)}
 										{this.props.drop && (
@@ -86,43 +117,14 @@ export class Item extends React.Component {
 											</div>
 										)}
 									</div>
-									{!this.props.simple && (
-										<div className="row">
-											<div
-												className="col-12"
-												alt="Description">
-												<p>
-													{this.shorten(
-														actions.searchBookByID(
-															this.props.id
-														).description
-													) || "PLACEHOLDER"}
-												</p>
-											</div>
-										</div>
-									)}
-									{!this.props.simple && (
-										<div className="row justify-content-end pr-2">
-											<button
-												onClick={() =>
-													this.props.addStuff()
-												}
-												className="btn btn-sm"
-												style={{
-													whiteSpace: "normal"
-												}}>
-												{this.props.buttonName}
-											</button>
-										</div>
-									)}
 								</div>
-							</div>
 
-							{this.state.toggle && (
-								<div className="dropdown-menu" />
-							)}
-						</div>
-					);
+								{this.state.toggle && (
+									<div className="dropdown-menu" />
+								)}
+							</div>
+						);
+					}
 				}}
 			</Context.Consumer>
 		);
