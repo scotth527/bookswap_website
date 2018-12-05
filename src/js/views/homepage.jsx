@@ -70,18 +70,6 @@ export class HomePage extends React.Component {
 										</button>
 									</Link>
 								</li>
-								<Link to="/bookpage/1">
-									<button
-										className="btn btn-warning"
-										style={{
-											width: "5rem",
-											margin: "30px",
-											padding: "2px"
-										}}>
-										{" "}
-										Book Info
-									</button>
-								</Link>
 							</div>
 						</div>
 
@@ -146,19 +134,6 @@ export class HomePage extends React.Component {
 										</button>
 									</Link>
 								</li>
-
-								<Link to="/bookpage/2">
-									<button
-										className="btn btn-warning"
-										style={{
-											width: "5rem",
-											margin: "30px",
-											padding: "2px"
-										}}>
-										{" "}
-										Book Info
-									</button>
-								</Link>
 							</div>
 						</div>
 
@@ -224,19 +199,6 @@ export class HomePage extends React.Component {
 										</button>
 									</Link>
 								</li>
-
-								<Link to="/bookpage/3">
-									<button
-										className="btn btn-warning"
-										style={{
-											width: "5rem",
-											margin: "30px",
-											padding: "2px"
-										}}>
-										{" "}
-										Book Info
-									</button>
-								</Link>
 							</div>
 						</div>
 					</div>
@@ -250,109 +212,113 @@ export class HomePage extends React.Component {
 					{" "}
 					Other Books{" "}
 				</h6>
+
 				<div className="d-flex justify-content col-10 mx-auto rounded border border-dark text-center mb-6">
-					<button
-						className="btn btn-dark"
-						type="button"
-						style={{
-							padding: "10px",
-							marginTop: "70px",
-							marginBottom: "70px"
-						}}
-					/>
-					<div className="row" style={{ margin: "10px" }}>
-						<div className="mx-auto col-10 d-flex" />
-						<div className="">
-							<img
-								src="https://images.gr-assets.com/books/1320522306l/3135895.jpg"
-								alt="Card image"
-								style={{
-									float: "left",
-									width: "7rem",
-									padding: "10px"
-								}}
-							/>
-							<img
-								src="https://images.gr-assets.com/books/1432730315l/256683.jpg"
-								alt="Card image"
-								style={{
-									float: "left",
-									width: "7rem",
-									padding: "10px"
-								}}
-							/>
-							<img
-								src="https://images.gr-assets.com/books/1534130425l/39104180.jpg"
-								alt="Card image"
-								style={{
-									float: "left",
-									width: "7rem",
-									padding: "10px"
-								}}
-							/>
-							<img
-								src="https://images.gr-assets.com/books/1540576045l/21898227.jpg"
-								alt="Card image"
-								style={{
-									float: "left",
-									width: "7rem",
-									padding: "10px"
-								}}
-							/>
-							<img
-								src="https://images.gr-assets.com/books/1531268627l/40779585.jpg"
-								alt="Card image"
-								style={{
-									float: "left",
-									width: "7rem",
-									padding: "10px"
-								}}
-							/>
-							<img
-								src="https://images.gr-assets.com/books/1540605277l/42096026.jpg"
-								alt="Card image"
-								style={{
-									float: "left",
-									width: "7rem",
-									padding: "10px"
-								}}
-							/>
-							<img
-								src="https://images.gr-assets.com/books/1538770998l/39208006.jpg"
-								alt="Card image"
-								style={{
-									float: "left",
-									width: "7rem",
-									padding: "10px"
-								}}
-							/>
-							<img
-								src="https://images.gr-assets.com/books/1513994596l/36680955.jpg"
-								alt="Card image"
-								style={{
-									float: "left",
-									width: "7rem",
-									padding: "10px"
-								}}
-							/>
-							<img
-								src="https://images.gr-assets.com/books/1536676048l/39332510.jpg"
-								alt="Card image"
-								style={{
-									float: "left",
-									width: "7rem",
-									padding: "10px"
-								}}
-							/>
-							<img
-								src="https://images.gr-assets.com/books/1513423421l/36317119.jpg"
-								alt="Card image"
-								style={{
-									float: "left",
-									width: "7rem",
-									padding: "10px"
-								}}
-							/>
+					<div className="row">
+						<button
+							className="btn btn"
+							type="button"
+							style={{
+								padding: "10px",
+								marginTop: "50px",
+								marginBottom: "50px",
+								marginLeft: "5px"
+							}}
+						/>
+						<div className="row" style={{ margin: "10px" }}>
+							<div className="mx-auto col-10 d-flex" />
+							<div className="">
+								<img
+									src="https://images.gr-assets.com/books/1320522306l/3135895.jpg"
+									alt="Card image"
+									style={{
+										float: "left",
+										width: "7rem",
+										padding: "10px"
+									}}
+								/>
+								<img
+									src="https://images.gr-assets.com/books/1432730315l/256683.jpg"
+									alt="Card image"
+									style={{
+										float: "left",
+										width: "7rem",
+										padding: "10px"
+									}}
+								/>
+								<img
+									src="https://images.gr-assets.com/books/1534130425l/39104180.jpg"
+									alt="Card image"
+									style={{
+										float: "left",
+										width: "7rem",
+										padding: "10px"
+									}}
+								/>
+								<img
+									src="https://images.gr-assets.com/books/1540576045l/21898227.jpg"
+									alt="Card image"
+									style={{
+										float: "left",
+										width: "7rem",
+										padding: "10px"
+									}}
+								/>
+								<img
+									src="https://images.gr-assets.com/books/1531268627l/40779585.jpg"
+									alt="Card image"
+									style={{
+										float: "left",
+										width: "7rem",
+										padding: "10px"
+									}}
+								/>
+								<img
+									src="https://images.gr-assets.com/books/1540605277l/42096026.jpg"
+									alt="Card image"
+									style={{
+										float: "left",
+										width: "7rem",
+										padding: "10px"
+									}}
+								/>
+								<img
+									src="https://images.gr-assets.com/books/1538770998l/39208006.jpg"
+									alt="Card image"
+									style={{
+										float: "left",
+										width: "7rem",
+										padding: "10px"
+									}}
+								/>
+								<img
+									src="https://images.gr-assets.com/books/1513994596l/36680955.jpg"
+									alt="Card image"
+									style={{
+										float: "left",
+										width: "7rem",
+										padding: "10px"
+									}}
+								/>
+								<img
+									src="https://images.gr-assets.com/books/1536676048l/39332510.jpg"
+									alt="Card image"
+									style={{
+										float: "left",
+										width: "7rem",
+										padding: "10px"
+									}}
+								/>
+								<img
+									src="https://images.gr-assets.com/books/1513423421l/36317119.jpg"
+									alt="Card image"
+									style={{
+										float: "left",
+										width: "7rem",
+										padding: "10px"
+									}}
+								/>
+							</div>
 						</div>
 					</div>
 				</div>
