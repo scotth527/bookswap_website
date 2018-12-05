@@ -6,8 +6,8 @@ import PropTypes from "prop-types";
 import { Context } from "../store/appContext.jsx";
 import Preview from "../component/accountprevdiv.jsx";
 
-function YourShop(props) {
-	YourShop.propTypes = {
+function TradesPrev(props) {
+	TradesPrev.propTypes = {
 		pagetitle: PropTypes.string,
 		pagedescription: PropTypes.string,
 		link: PropTypes.string,
@@ -29,7 +29,7 @@ function YourShop(props) {
 					<h5>{props.pagetitle + " preview"} </h5>
 					<Context.Consumer>
 						{({ store, actions }) => {
-							console.log(store.library);
+							console.log(store.trades);
 							return store.library
 								.slice(0, 3)
 								.map((item, index) => {
@@ -83,4 +83,4 @@ function YourShop(props) {
 	);
 }
 
-export default YourShop;
+export default TradesPrev;

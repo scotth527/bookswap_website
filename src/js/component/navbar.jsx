@@ -21,7 +21,7 @@ export class NavBar extends React.Component {
 			<nav className="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between">
 				<ul className="nav">
 					<li className="nav-item">
-						<Link className="navbar-brand" to="#">
+						<Link className="navbar-brand" to="/">
 							BookSwap ⇌
 						</Link>
 					</li>
@@ -94,7 +94,7 @@ export class NavBar extends React.Component {
 														className="btn btn-dark
 																mb-2 ">
 														{" "}
-														Library
+														My Library
 													</button>
 												</Link>
 											</li>

@@ -29,27 +29,33 @@ function Wishprev(props) {
 					<h5>{props.pagetitle + " preview"} </h5>
 					<Context.Consumer>
 						{({ store, actions }) => {
-							return store.profile.wishlist
+							return store.wishlist
 								.slice(0, 3)
 								.map((item, index) => {
-									return (
-										<Preview
-											key={
-												actions.searchBookByID(item).id
-											}
-											link={actions
-												.searchBookByID(item)
-												.id.toString()}
-											picurl={
-												actions.searchBookByID(item)
-													.image
-											}
-											title={
-												actions.searchBookByID(item)
-													.title
-											}
-										/>
-									);
+									const book = actions.searchBookByID(item);
+									if (typeof book === "undefined") {
+										return <h2> No book selected</h2>;
+									} else {
+										return (
+											<Preview
+												key={
+													actions.searchBookByID(item)
+														.id
+												}
+												link={actions
+													.searchBookByID(item)
+													.id.toString()}
+												picurl={
+													actions.searchBookByID(item)
+														.image
+												}
+												title={
+													actions.searchBookByID(item)
+														.title
+												}
+											/>
+										);
+									}
 								});
 						}}
 					</Context.Consumer>
