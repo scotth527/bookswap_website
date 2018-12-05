@@ -30,7 +30,7 @@ function TradesPrev(props) {
 					<Context.Consumer>
 						{({ store, actions }) => {
 							console.log(store.trades);
-							return store.library
+							return store.trades
 								.slice(0, 3)
 								.map((item, index) => {
 									const book = actions.searchBookByID(
@@ -40,26 +40,26 @@ function TradesPrev(props) {
 										return <h2> No book selected</h2>;
 									} else {
 										return (
-											<Preview
-												key={
-													actions.searchBookByID(
-														item.book
-													).id
-												}
-												link={actions
-													.searchBookByID(item.book)
-													.id.toString()}
-												picurl={
-													actions.searchBookByID(
-														item.book
-													).image
-												}
-												title={
-													actions.searchBookByID(
-														item.book
-													).title
-												}
-											/>
+											// <Preview
+											// 	key={
+											// 		actions.searchBookByID(
+											// 			item.book
+											// 		).id
+											// 	}
+											// 	link={actions
+											// 		.searchBookByID(item.book)
+											// 		.id.toString()}
+											// 	picurl={
+											// 		actions.searchBookByID(
+											// 			item.book
+											// 		).image
+											// 	}
+											// 	title={
+											// 		actions.searchBookByID(
+											// 			item.book
+											// 		).title
+											// 	}
+											// />
 										);
 									}
 								});
@@ -76,7 +76,7 @@ function TradesPrev(props) {
 					</Link>
 				</div>
 				<div className="card-footer text-center text-muted">
-					{props.uniqueinfo + " books"}
+					{props.uniqueinfo + " pending trades"}
 				</div>
 			</div>
 		</div>
