@@ -47,7 +47,7 @@ export class Usermodal extends React.Component {
 										this.props.id
 									);
 									let divs = [];
-									for (var item in users) {
+									users.map(item => {
 										let profile = actions.getProfile(item);
 										divs.push(
 											<Userdiv
@@ -64,7 +64,7 @@ export class Usermodal extends React.Component {
 												}
 											/>
 										);
-									}
+									});
 									return divs;
 								}}
 							</Context.Consumer>

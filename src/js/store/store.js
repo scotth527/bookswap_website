@@ -7,7 +7,7 @@ let urls = [
 	"https://backend-final-project-crivera09.c9users.io/api/",
 	"https://bookexchange-backend-scotth527.c9users.io/api/"
 ];
-let currentURL = 1;
+let currentURL = 0;
 
 const getState = scope => {
 	return {
@@ -376,6 +376,7 @@ const getState = scope => {
 						let ids = [];
 						for (var user in data) {
 							ids.push(user["profile"]);
+							console.log(ids);
 						}
 						return ids.filter(item => item.id !== self);
 					})
