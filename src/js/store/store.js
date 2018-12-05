@@ -32,7 +32,7 @@ const getState = scope => {
 				profile: 3
 			},
 
-			token: "JWT ",
+			token: "",
 
 			books: [
 				{
@@ -138,32 +138,10 @@ const getState = scope => {
 			// ],
 
 			trades: {},
-			users: [
-				{
-					username: "scotth527",
-					library: [1, 5],
-					wishlist: [4],
-					city: "Miami, FL",
-					image: "",
-					id: 1
-				},
-				{
-					username: "goonsville",
-					library: [1, 4],
-					wishlist: [2],
-					city: "New York, NY",
-					image: "",
-					id: 2
-				},
-				{
-					username: "bloodedge",
-					library: [2, 3],
-					wishlist: [1, 5],
-					city: "New York, NY",
-					image: "",
-					id: 3
-				}
-			]
+
+			owners: [],
+
+			owner_profiles: []
 		},
 		actions: {
 			// changeColor: (element, color) => {
@@ -224,7 +202,7 @@ const getState = scope => {
 				fetch(urls[currentURL] + "books/")
 					.then(response => response.json())
 					.then(data => {
-						let { store } = scope.state;
+						let { store } = scope.state.store;
 						store.books = store.books.concat(data);
 						scope.setState({ store });
 					})
@@ -235,9 +213,49 @@ const getState = scope => {
 				fetch([urls[currentURL], "profile/", id].join(""))
 					.then(response => response.json())
 					.then(data => {
-						let store = scope.state;
+						let store = scope.state.store;
 						store.profile = data;
 						scope.setState({ store });
+					})
+					.catch(error => console.log(error));
+			},
+
+			getProfiles: (id, store, owners) => {
+				fetch([urls[currentURL], "profile/", id].join(""))
+					.then(response => response.json())
+					.then(data => {
+						store.owner_profiles = store.owner_profiles.concat(
+							data
+						);
+						store.owners.splice(0, 1);
+
+						if (store.owners.length > 0)
+							scope.actions.getProfiles(
+								store.owners[0],
+								store,
+								store.owners
+							);
+						else store.owners = owners;
+						scope.setState({ store });
+					})
+					.catch(error => console.log(error));
+			},
+
+			fetchOwners: id => {
+				fetch([urls[currentURL], "page/", id].join(""))
+					.then(response => response.json())
+					.then(data => {
+						let store = scope.state;
+
+						data.map(item => {
+							store.owners.push(item);
+						});
+
+						scope.actions.getProfiles(
+							store.owners[0],
+							store,
+							store.owners
+						);
 					})
 					.catch(error => console.log(error));
 			},
@@ -246,11 +264,18 @@ const getState = scope => {
 				fetch([urls[currentURL], "trades/", id].join(""))
 					.then(response => response.json())
 					.then(data => {
-						let { store } = scope.state;
+						let { store } = scope.state.store;
 						store.profile.trades = data;
 						scope.setState({ store });
 					})
 					.catch(error => console.log(error));
+			},
+
+			clearTrade: () => {
+				let store = scope.state.store;
+				store.owners = [];
+				store.owner_profiles = [];
+				scope.setState(store);
 			},
 
 			acceptTrade: trade_id => {

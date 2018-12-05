@@ -43,29 +43,27 @@ export class Usermodal extends React.Component {
 						<div className="modal-body mx-auto col-12 d-flex flex-column">
 							<Context.Consumer>
 								{({ store, actions }) => {
-									let users = actions.searchUsersForID(
-										this.props.id
-									);
-									let divs = [];
-									users.map(item => {
-										let profile = actions.getProfile(item);
-										divs.push(
-											<Userdiv
-												key={profile["id"]}
-												id={profile["id"]}
-												//index={index}
-												Picurl="https://picsum.photos/50/50/?random"
-												City={profile["city"]}
-												Username={profile["username"]}
-												getUserID={id =>
-													this.setState({
-														userid: id
-													})
-												}
-											/>
-										);
+									actions.fetchOwners(this.props.id);
+
+									return store.owner_profiles.map(item => {
+										<Userdiv
+											key={item["id"]}
+											id={item["id"]}
+											//index={index}
+											Picurl="https://picsum.photos/50/50/?random"
+											City={item["Address"]}
+											Username={
+												item["first_name"] +
+												" " +
+												item["last_name"]
+											}
+											getUserID={id =>
+												this.setState({
+													userid: id
+												})
+											}
+										/>;
 									});
-									return divs;
 								}}
 							</Context.Consumer>
 						</div>

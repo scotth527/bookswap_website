@@ -51,6 +51,7 @@ export class BookPage extends React.Component {
 				<div className="row">
 					<Context.Consumer>
 						{({ store, actions }) => {
+							actions.fetchData();
 							let theBook = store.books.filter(item => {
 								return (
 									item.id ===
