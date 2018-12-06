@@ -43,7 +43,7 @@ export class Usermodal extends React.Component {
 						<div className="modal-body mx-auto col-12 d-flex flex-column">
 							<Context.Consumer>
 								{({ store, actions }) => {
-									return store.owners.map(
+									return store[this.props.userKey].map(
 										(profile, index) => {
 											return (
 												<Userdiv

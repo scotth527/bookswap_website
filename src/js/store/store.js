@@ -112,6 +112,8 @@ const getState = scope => {
 
 			owners: [],
 
+			wishers: [],
+
 			// trades: [
 			// 	{
 			// 		requesterid: 1,
@@ -377,6 +379,27 @@ const getState = scope => {
 						//console.log(store);
 						scope.setState({ store });
 						console.log(store.owners);
+					});
+			},
+
+			fetchInterested: bookid => {
+				fetch([urls[currentURL], "wishers/", bookid].join(""))
+					.then(response => response.json())
+					.then(data => {
+						let { store } = scope.state;
+						store.wishers = [];
+						if (data.length > 0) {
+							data.map(profile => {
+								if (
+									profile.id !=
+									scope.state.store.sessions.profile
+								) {
+									store.wishers.push(profile);
+								}
+							});
+						}
+						//console.log(store);
+						scope.setState({ store });
 					});
 			},
 

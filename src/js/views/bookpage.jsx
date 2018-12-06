@@ -135,7 +135,7 @@ export class BookPage extends React.Component {
 															onClick={() => {
 																this.setState({
 																	key:
-																		"library",
+																		"owners",
 																	showConfirmLibModal: false,
 																	showConfirmWishModal: false,
 																	showOwnersModal: true
@@ -160,15 +160,21 @@ export class BookPage extends React.Component {
 															book
 														</button>
 														<button
-															onClick={() =>
+															onClick={() => {
 																this.setState({
 																	key:
-																		"wishlist",
+																		"wishers",
 																	showConfirmLibModal: false,
 																	showConfirmWishModal: false,
 																	showOwnersModal: true
-																})
-															}
+																});
+																actions.fetchInterested(
+																	this.props
+																		.match
+																		.params
+																		.theid
+																);
+															}}
 															type="button"
 															style={{
 																whiteSpace:
