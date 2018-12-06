@@ -110,6 +110,8 @@ const getState = scope => {
 
 			library: [],
 
+			owners: [],
+
 			// trades: [
 			// 	{
 			// 		requesterid: 1,
@@ -354,6 +356,28 @@ const getState = scope => {
 					})
 
 					.catch(error => console.error("Error:", error));
+			},
+
+			fetchOwners: bookid => {
+				fetch([urls[currentURL], "page/", bookid].join(""))
+					.then(response => response.json())
+					.then(data => {
+						let { store } = scope.state;
+						store.owners = [];
+						if (data.length > 0) {
+							data.map(profile => {
+								if (
+									profile.id !=
+									scope.state.store.sessions.profile
+								) {
+									store.owners.push(profile);
+								}
+							});
+						}
+						//console.log(store);
+						scope.setState({ store });
+						console.log(store.owners);
+					});
 			},
 
 			fetchRequests: id => {

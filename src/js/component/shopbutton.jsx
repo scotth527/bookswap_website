@@ -29,7 +29,6 @@ function YourShop(props) {
 					<h5>{props.pagetitle + " preview"} </h5>
 					<Context.Consumer>
 						{({ store, actions }) => {
-							console.log(store.library);
 							return store.library
 								.slice(0, 3)
 								.map((item, index) => {
@@ -41,11 +40,7 @@ function YourShop(props) {
 									} else {
 										return (
 											<Preview
-												key={
-													actions.searchBookByID(
-														item.book
-													).id
-												}
+												key={item.book}
 												link={actions
 													.searchBookByID(item.book)
 													.id.toString()}
