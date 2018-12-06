@@ -7,7 +7,7 @@ export class Footer extends Component {
 		return (
 			<footer
 				style={{
-					background: "#00ffff",
+					background: "#CCD6DD",
 					position: "relative",
 					bottom: "0",
 					flexShrink: "0",
