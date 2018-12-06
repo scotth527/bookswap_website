@@ -222,15 +222,19 @@ export class HomePage extends React.Component {
 					<div className="row" style={{ margin: "10px" }}>
 						<div className="mx-auto col-10 d-flex" />
 						<div className="">
-							<img
-								src="https://images.gr-assets.com/books/1320522306l/3135895.jpg"
-								alt="Card image"
-								style={{
-									float: "left",
-									width: "7rem",
-									padding: "10px"
-								}}
-							/>
+							<button
+								id="myBtn"
+								style={{ margin: "5px", padding: "0px" }}>
+								<img
+									src="https://images.gr-assets.com/books/1320522306l/3135895.jpg"
+									alt="Card image"
+									style={{
+										float: "left",
+										width: "7rem",
+										padding: "10px"
+									}}
+								/>
+							</button>
 							<img
 								src="https://images.gr-assets.com/books/1432730315l/256683.jpg"
 								alt="Card image"
