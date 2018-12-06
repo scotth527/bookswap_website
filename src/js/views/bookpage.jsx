@@ -51,13 +51,12 @@ export class BookPage extends React.Component {
 				<div className="row">
 					<Context.Consumer>
 						{({ store, actions }) => {
-							actions.fetchData();
-							let theBook = store.books.filter(item => {
-								return (
-									item.id ===
-									parseInt(this.props.match.params.theid)
-								);
-							});
+							actions.fetchBookForPage(
+								parseInt(this.props.match.params.theid)
+							);
+							let theBook = store.books;
+							console.log(theBook);
+
 							if (theBook.length > 0) {
 								return (
 									<div className="mx-auto col-12 text-center">

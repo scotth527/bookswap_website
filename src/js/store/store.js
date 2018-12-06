@@ -35,16 +35,16 @@ const getState = scope => {
 			token: "",
 
 			books: [
-				{
-					id: -1,
-					title: "No Book",
-					author: null,
-					description: null,
-					paperback: null,
-					published: null,
-					editionlanguage: null,
-					image: null
-				}
+				// {
+				// 	id: -1,
+				// 	title: "No Book",
+				// 	author: null,
+				// 	description: null,
+				// 	paperback: null,
+				// 	published: null,
+				// 	editionlanguage: null,
+				// 	image: null
+				// }
 				// {
 				// 	id: 1,
 				// 	title: "Mass Effect: Revelation",
@@ -106,6 +106,7 @@ const getState = scope => {
 				// 		"https://images.gr-assets.com/books/1432730315l/256683.jpg"
 				// }
 			],
+
 			wishlist: [],
 
 			library: [],
@@ -197,13 +198,24 @@ const getState = scope => {
 				}
 			},
 
-			fetchData() {
+			fetchData: () => {
 				//fetches books
 				fetch(urls[currentURL] + "books/")
 					.then(response => response.json())
 					.then(data => {
 						let { store } = scope.state.store;
 						store.books = store.books.concat(data);
+						scope.setState({ store });
+					})
+					.catch(error => console.log(error));
+			},
+
+			fetchBookForPage: id => {
+				fetch([urls[currentURL], "books/", id].join(""))
+					.then(response => response.json())
+					.then(data => {
+						let store = scope.state.store;
+						store.books = [data];
 						scope.setState({ store });
 					})
 					.catch(error => console.log(error));
@@ -220,23 +232,21 @@ const getState = scope => {
 					.catch(error => console.log(error));
 			},
 
-			getProfiles: (id, store, owners) => {
-				fetch([urls[currentURL], "profile/", id].join(""))
+			getProfiles: (index, store) => {
+				fetch(
+					[urls[currentURL], "profile/", store.owners[index]].join("")
+				)
 					.then(response => response.json())
 					.then(data => {
 						store.owner_profiles = store.owner_profiles.concat(
 							data
 						);
-						store.owners.splice(0, 1);
 
-						if (store.owners.length > 0)
-							scope.actions.getProfiles(
-								store.owners[0],
-								store,
-								store.owners
-							);
-						else store.owners = owners;
-						scope.setState({ store });
+						if (index <= store.owners.length)
+							scope.state.actions.getProfiles(index + 1, store);
+						else {
+							scope.setState({ store });
+						}
 					})
 					.catch(error => console.log(error));
 			},
@@ -245,17 +255,13 @@ const getState = scope => {
 				fetch([urls[currentURL], "page/", id].join(""))
 					.then(response => response.json())
 					.then(data => {
-						let store = scope.state;
+						let store = scope.state.store;
 
 						data.map(item => {
-							store.owners.push(item);
+							store.owners.push(item.profile);
 						});
 
-						scope.actions.getProfiles(
-							store.owners[0],
-							store,
-							store.owners
-						);
+						scope.state.actions.getProfiles(0, store);
 					})
 					.catch(error => console.log(error));
 			},
