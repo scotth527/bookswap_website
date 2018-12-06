@@ -132,15 +132,22 @@ export class BookPage extends React.Component {
 														</button>
 														<h2>or</h2>
 														<button
-															onClick={() =>
+															onClick={() => {
 																this.setState({
 																	key:
 																		"library",
 																	showConfirmLibModal: false,
 																	showConfirmWishModal: false,
 																	showOwnersModal: true
-																})
-															}
+																});
+
+																actions.fetchOwners(
+																	this.props
+																		.match
+																		.params
+																		.theid
+																);
+															}}
 															type="button"
 															style={{
 																whiteSpace:

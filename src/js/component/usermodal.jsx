@@ -44,26 +44,29 @@ export class Usermodal extends React.Component {
 							<Context.Consumer>
 								{({ store, actions }) => {
 									actions.fetchOwners(this.props.id);
-
-									return store.owner_profiles.map(item => {
-										<Userdiv
-											key={item["id"]}
-											id={item["id"]}
-											//index={index}
-											Picurl="https://picsum.photos/50/50/?random"
-											City={item["Address"]}
-											Username={
-												item["first_name"] +
-												" " +
-												item["last_name"]
-											}
-											getUserID={id =>
-												this.setState({
-													userid: id
-												})
-											}
-										/>;
-									});
+									
+									return store.owners.map(
+										(profile, index) => {
+											return (
+												<Userdiv
+													key={profile["id"]}
+													id={profile["id"]}
+													//index={index}
+													Picurl="https://picsum.photos/50/50/?random"
+													City={profile["city"]}
+													Username={
+														profile["user"].username
+													}
+													getUserID={id =>
+														this.setState({
+															userid:
+																profile["id"]
+														})
+													}
+												/>
+											);
+										}
+									);
 								}}
 							</Context.Consumer>
 						</div>

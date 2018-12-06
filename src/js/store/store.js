@@ -111,6 +111,8 @@ const getState = scope => {
 
 			library: [],
 
+			owners: [],
+
 			// trades: [
 			// 	{
 			// 		requesterid: 1,
@@ -138,11 +140,7 @@ const getState = scope => {
 			// 	}
 			// ],
 
-			trades: {},
-
-			owners: [],
-
-			owner_profiles: []
+			trades: {}
 		},
 		actions: {
 			// changeColor: (element, color) => {
@@ -232,40 +230,6 @@ const getState = scope => {
 					.catch(error => console.log(error));
 			},
 
-			getProfiles: (index, store) => {
-				fetch(
-					[urls[currentURL], "profile/", store.owners[index]].join("")
-				)
-					.then(response => response.json())
-					.then(data => {
-						store.owner_profiles = store.owner_profiles.concat(
-							data
-						);
-
-						if (index <= store.owners.length)
-							scope.state.actions.getProfiles(index + 1, store);
-						else {
-							scope.setState({ store });
-						}
-					})
-					.catch(error => console.log(error));
-			},
-
-			fetchOwners: id => {
-				fetch([urls[currentURL], "page/", id].join(""))
-					.then(response => response.json())
-					.then(data => {
-						let store = scope.state.store;
-
-						data.map(item => {
-							store.owners.push(item.profile);
-						});
-
-						scope.state.actions.getProfiles(0, store);
-					})
-					.catch(error => console.log(error));
-			},
-
 			fetchTrades: id => {
 				fetch([urls[currentURL], "trades/", id].join(""))
 					.then(response => response.json())
@@ -280,7 +244,6 @@ const getState = scope => {
 			clearTrade: () => {
 				let store = scope.state.store;
 				store.owners = [];
-				store.owner_profiles = [];
 				scope.setState(store);
 			},
 
@@ -385,6 +348,28 @@ const getState = scope => {
 					})
 
 					.catch(error => console.error("Error:", error));
+			},
+
+			fetchOwners: bookid => {
+				fetch([urls[currentURL], "page/", bookid].join(""))
+					.then(response => response.json())
+					.then(data => {
+						let { store } = scope.state;
+						store.owners = [];
+						if (data.length > 0) {
+							data.map(profile => {
+								if (
+									profile.id !=
+									scope.state.store.sessions.profile
+								) {
+									store.owners.push(profile);
+								}
+							});
+						}
+						//console.log(store);
+						scope.setState({ store });
+						console.log(store.owners);
+					});
 			},
 
 			fetchRequests: id => {
