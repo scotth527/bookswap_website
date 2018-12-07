@@ -7,11 +7,17 @@ export class HomePage extends React.Component {
 		return (
 			<React.Fragment>
 				<div
-					className="jumbotron"
-					style={{ background: "#CCD6DD", paddingTop: "15px" }}>
+					className="container-fluid"
+					style={{
+						background: "#CCD6DD",
+						paddingTop: "15px",
+						paddingBottom: "15px"
+					}}>
 					<div className="row">
 						<div className="col-md-4">
-							<div className="card">
+							<div
+								className="card mx-auto"
+								style={{ padding: "10px" }}>
 								<h5
 									className="card-title text-center"
 									style={{
@@ -31,7 +37,7 @@ export class HomePage extends React.Component {
 										src="https://books.google.com/books/content/images/frontcover/fYj94qmCi_MC?fife=w400-h600"
 										alt="Card image cap"
 										style={{
-											width: "15rem",
+											width: "14rem",
 											padding: "1px",
 											margin: "10px"
 										}}
@@ -77,7 +83,9 @@ export class HomePage extends React.Component {
 						</div>
 
 						<div className="col-md-4">
-							<div className="card mx-auto">
+							<div
+								className="card mx-auto"
+								style={{ padding: "10px" }}>
 								<h5
 									className="card-title text-center"
 									style={{
@@ -97,7 +105,7 @@ export class HomePage extends React.Component {
 										src="https://i.ebayimg.com/images/g/yjAAAOSwSlBYv1oS/s-l640.jpg"
 										alt="Card image cap"
 										style={{
-											width: "15rem",
+											width: "14rem",
 											padding: "1px",
 											margin: "10px"
 										}}
@@ -142,7 +150,9 @@ export class HomePage extends React.Component {
 						</div>
 
 						<div className="col-md-4">
-							<div className="card">
+							<div
+								className="card mx-auto"
+								style={{ padding: "10px" }}>
 								<h5
 									className="card-title text-center"
 									style={{
@@ -162,7 +172,7 @@ export class HomePage extends React.Component {
 										src="https://img.thriftbooks.com/api/images/l/2ccd4c14a9c11747b1b06272ff7f377d1c025924.jpg"
 										alt="Card image cap"
 										style={{
-											width: "13rem",
+											width: "12rem",
 											padding: "1px",
 											margin: "10px"
 										}}
@@ -218,28 +228,24 @@ export class HomePage extends React.Component {
 					Other Books{" "}
 				</h6>
 
-				<div className="d-flex justify-content col-10 mx-auto rounded border border-dark text-center mb-6">
-					<div className="row" style={{ margin: "10px" }}>
+				<div className="container-fluid justify-content col-10 mx-auto rounded border border-dark text-center mb-6">
+					<div className="row" style={{ margin: "5px" }}>
 						<div className="mx-auto col-10 d-flex" />
 						<div className="">
-							<button
-								id="myBtn"
-								style={{ margin: "5px", padding: "0px" }}>
-								<img
-									src="https://images.gr-assets.com/books/1320522306l/3135895.jpg"
-									alt="Card image"
-									style={{
-										float: "left",
-										width: "7rem",
-										padding: "10px"
-									}}
-								/>
-							</button>
+							<img
+								src="https://images.gr-assets.com/books/1320522306l/3135895.jpg"
+								alt="Card image"
+								style={{
+									flex: "1",
+									width: "7rem",
+									padding: "10px"
+								}}
+							/>
 							<img
 								src="https://images.gr-assets.com/books/1432730315l/256683.jpg"
 								alt="Card image"
 								style={{
-									float: "left",
+									flex: "1",
 									width: "7rem",
 									padding: "10px"
 								}}
@@ -248,7 +254,7 @@ export class HomePage extends React.Component {
 								src="https://images.gr-assets.com/books/1534130425l/39104180.jpg"
 								alt="Card image"
 								style={{
-									float: "left",
+									flex: "1",
 									width: "7rem",
 									padding: "10px"
 								}}
@@ -257,7 +263,7 @@ export class HomePage extends React.Component {
 								src="https://images.gr-assets.com/books/1540576045l/21898227.jpg"
 								alt="Card image"
 								style={{
-									float: "left",
+									flex: "1",
 									width: "7rem",
 									padding: "10px"
 								}}
@@ -266,7 +272,7 @@ export class HomePage extends React.Component {
 								src="https://images.gr-assets.com/books/1531268627l/40779585.jpg"
 								alt="Card image"
 								style={{
-									float: "left",
+									flex: "1",
 									width: "7rem",
 									padding: "10px"
 								}}
@@ -275,7 +281,7 @@ export class HomePage extends React.Component {
 								src="https://images.gr-assets.com/books/1540605277l/42096026.jpg"
 								alt="Card image"
 								style={{
-									float: "left",
+									flex: "1",
 									width: "7rem",
 									padding: "10px"
 								}}
@@ -284,7 +290,7 @@ export class HomePage extends React.Component {
 								src="https://images.gr-assets.com/books/1538770998l/39208006.jpg"
 								alt="Card image"
 								style={{
-									float: "left",
+									flex: "1",
 									width: "7rem",
 									padding: "10px"
 								}}
@@ -293,7 +299,7 @@ export class HomePage extends React.Component {
 								src="https://images.gr-assets.com/books/1513994596l/36680955.jpg"
 								alt="Card image"
 								style={{
-									float: "left",
+									flex: "1",
 									width: "7rem",
 									padding: "10px"
 								}}
@@ -302,7 +308,7 @@ export class HomePage extends React.Component {
 								src="https://images.gr-assets.com/books/1536676048l/39332510.jpg"
 								alt="Card image"
 								style={{
-									float: "left",
+									flex: "1",
 									width: "7rem",
 									padding: "10px"
 								}}
@@ -311,7 +317,7 @@ export class HomePage extends React.Component {
 								src="https://images.gr-assets.com/books/1513423421l/36317119.jpg"
 								alt="Card image"
 								style={{
-									float: "left",
+									flex: "1",
 									width: "7rem",
 									padding: "10px"
 								}}
