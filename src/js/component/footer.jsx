@@ -24,7 +24,6 @@ export class Footer extends Component {
 					}}>
 					© Book Swap 2018
 				</h2>
-				<a href="#top">Back to Top</a>
 			</footer>
 		);
 	}

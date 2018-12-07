@@ -177,6 +177,14 @@ export class Trades extends React.Component {
 															item.id
 														);
 													}}
+													address={
+														item.requester.profile
+															.address
+													}
+													state={
+														item.requester.profile
+															.state
+													}
 												/>
 											);
 										}
