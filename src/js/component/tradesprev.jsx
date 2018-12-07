@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Context } from "../store/appContext.jsx";
 import Preview from "../component/accountprevdiv.jsx";
+import IndivTrade from "./indivtrade.jsx";
 
 function TradesPrev(props) {
 	TradesPrev.propTypes = {
@@ -33,33 +34,19 @@ function TradesPrev(props) {
 							return store.trades
 								.slice(0, 3)
 								.map((item, index) => {
-									const book = actions.searchBookByID(
-										item.book
-									);
+									const book = item.id;
+
 									if (typeof book === "undefined") {
 										return <h2> No book selected</h2>;
 									} else {
 										return (
-											// <Preview
-											// 	key={
-											// 		actions.searchBookByID(
-											// 			item.book
-											// 		).id
-											// 	}
-											// 	link={actions
-											// 		.searchBookByID(item.book)
-											// 		.id.toString()}
-											// 	picurl={
-											// 		actions.searchBookByID(
-											// 			item.book
-											// 		).image
-											// 	}
-											// 	title={
-											// 		actions.searchBookByID(
-											// 			item.book
-											// 		).title
-											// 	}
-											// />
+											<IndivTrade
+												user={
+													item.requester.profile.user
+														.username
+												}
+												book={item.trader.book.title}
+											/>
 										);
 									}
 								});

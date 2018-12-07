@@ -6,6 +6,7 @@ import Profilebanner from "../component/profilejumbotron.jsx";
 import "../../styles/index.css";
 import Wishprev from "../component/wishlistprev.jsx";
 import { Context } from "../store/appContext.jsx";
+import TradesPrev from "../component/tradesprev.jsx";
 
 export class Account extends React.Component {
 	render() {
@@ -30,7 +31,7 @@ export class Account extends React.Component {
 				uniqueinfo: "# of Books"
 			},
 			{
-				name: "Your Orders",
+				name: "Your Trades",
 				description:
 					"Keep track of incoming and outgoing orders and pending requests.",
 				link: "/trades",
@@ -61,6 +62,12 @@ export class Account extends React.Component {
 										pagedescription={options[1].description}
 										link={options[1].link}
 										uniqueinfo={store.wishlist.length}
+									/>
+									<TradesPrev
+										pagetitle={options[2].name}
+										pagedescription={options[2].description}
+										link={options[2].link}
+										uniqueinfo={store.trades.length}
 									/>
 								</React.Fragment>
 							);

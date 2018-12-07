@@ -8,7 +8,7 @@ export class Usermodal extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			userid: null
+			user: null
 		};
 	}
 
@@ -57,8 +57,7 @@ export class Usermodal extends React.Component {
 													}
 													getUserID={id =>
 														this.setState({
-															userid:
-																profile["id"]
+															user: profile
 														})
 													}
 												/>
@@ -78,11 +77,11 @@ export class Usermodal extends React.Component {
 							</button>
 							<button
 								onClick={() => {
-									this.props.onConfirm(this.state.userid);
+									this.props.onConfirm(this.state.user);
 								}}
 								type="button"
 								className="btn btn-primary btn"
-								disabled={this.state.userid ? false : true}>
+								disabled={this.state.user ? false : true}>
 								Request Trade
 							</button>
 						</div>

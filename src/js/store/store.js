@@ -29,7 +29,7 @@ const getState = scope => {
 				username: "Rigo",
 				email: "rigocodes@gmail.com",
 				loggedIn: true,
-				profile: 3
+				profile: 4
 			},
 
 			token: "JWT ",
@@ -114,6 +114,8 @@ const getState = scope => {
 
 			wishers: [],
 
+			pending: [],
+
 			// trades: [
 			// 	{
 			// 		requesterid: 1,
@@ -141,33 +143,7 @@ const getState = scope => {
 			// 	}
 			// ],
 
-			trades: {},
-			users: [
-				{
-					username: "scotth527",
-					library: [1, 5],
-					wishlist: [4],
-					city: "Miami, FL",
-					image: "",
-					id: 1
-				},
-				{
-					username: "goonsville",
-					library: [1, 4],
-					wishlist: [2],
-					city: "New York, NY",
-					image: "",
-					id: 2
-				},
-				{
-					username: "bloodedge",
-					library: [2, 3],
-					wishlist: [1, 5],
-					city: "New York, NY",
-					image: "",
-					id: 3
-				}
-			]
+			trades: []
 		},
 		actions: {
 			// changeColor: (element, color) => {
@@ -223,13 +199,24 @@ const getState = scope => {
 				}
 			},
 
-			fetchData() {
+			fetchData: () => {
 				//fetches books
 				fetch(urls[currentURL] + "books/")
 					.then(response => response.json())
 					.then(data => {
 						let { store } = scope.state;
-						store.books = store.books.concat(data);
+						store.books = data;
+						scope.setState({ store });
+					})
+					.catch(error => console.log(error));
+			},
+
+			fetchBookForPage: id => {
+				fetch([urls[currentURL], "books/", id].join(""))
+					.then(response => response.json())
+					.then(data => {
+						let store = scope.state.store;
+						store.books = [data];
 						scope.setState({ store });
 					})
 					.catch(error => console.log(error));
@@ -239,7 +226,7 @@ const getState = scope => {
 				fetch([urls[currentURL], "profile/", id].join(""))
 					.then(response => response.json())
 					.then(data => {
-						let store = scope.state;
+						let store = scope.state.store;
 						store.profile = data;
 						scope.setState({ store });
 					})
@@ -250,54 +237,58 @@ const getState = scope => {
 				fetch([urls[currentURL], "trades/", id].join(""))
 					.then(response => response.json())
 					.then(data => {
-						console.log(data);
+						//console.log(data);
 						let { store } = scope.state;
-						store.trades = [];
-						if (data.length > 0) {
-							data.map(trade => {
-								store.trades.push(trade);
-							});
-						}
+						store.trades = data;
+
 						scope.setState({ store });
 					})
 					.catch(error => console.log(error));
 			},
 
-			acceptTrade: tradeEntry => {
-				let { store } = scope.state;
-				store.wishlist.push(wishlistEntry);
-				//scope.setState({ store });
-
-				fetch(
-					[
-						urls[currentURL],
-						"trades/",
-						scope.state.store.sessions.profile
-					].join(""),
-					{
-						method: "PUT",
-						body: JSON.stringify({
-							wishlist: store.wishlist
-						}),
-						headers: {
-							"Content-Type": "application/json"
-						}
-					}
-				)
-					.then(response => {
-						if (response.ok == true) {
-							return response.JSON();
-						} else {
-							console.log("Something went wrong oops");
-						}
-					})
-					.then(res => {
-						scope.state.actions.getWishlist(
-							scope.state.store.sessions.profile
-						);
-					})
-					.catch(error => console.error("Error:", error));
+			clearStore: () => {
+				let store = scope.state.store;
+				store.books = [];
+				store.owners = [];
+				store.pending = [];
+				scope.setState(store);
 			},
+
+			acceptTrade: trade_id => {
+				let store = scope.state.store;
+				store.trades[trade_id].tradeid = true;
+				scope.setState(store);
+			},
+			// 	fetch(
+			// 		[
+			// 			urls[currentURL],
+			// 			"trades/",
+			// 			scope.state.store.sessions.profile
+			// 		].join(""),
+			// 		{
+			// 			method: "PUT",
+			// 			body: JSON.stringify({
+			// 				wishlist: store.wishlist
+			// 			}),
+			// 			headers: {
+			// 				"Content-Type": "application/json"
+			// 			}
+			// 		}
+			// 	)
+			// 		.then(response => {
+			// 			if (response.ok == true) {
+			// 				return response.JSON();
+			// 			} else {
+			// 				console.log("Something went wrong oops");
+			// 			}
+			// 		})
+			// 		.then(res => {
+			// 			scope.state.actions.getWishlist(
+			// 				scope.state.store.sessions.profile
+			// 			);
+			// 		})
+			// 		.catch(error => console.error("Error:", error));
+			// },
 
 			cancelTrade: tradeid => {
 				fetch([urls[currentURL], "trades/", tradeid].join(""), {
@@ -433,6 +424,20 @@ const getState = scope => {
 					});
 			},
 
+			// fetchInv: (bookID, profileID) => {
+			// 	fetch(
+			// 		[urls[currentURL], "inv/", bookID, "/", profileID].join("")
+			// 	)
+			// 		.then(response => response.json())
+			// 		.then(data => {
+			// 			let store = scope.state.store;
+			// 			store.pending = [];
+			// 			store.pending.push(data);
+			// 			scope.setState(store);
+			// 		})
+			// 		.catch(error => console.log(error));
+			// },
+
 			fetchInterested: bookid => {
 				fetch([urls[currentURL], "wishers/", bookid].join(""))
 					.then(response => response.json())
@@ -451,7 +456,8 @@ const getState = scope => {
 						}
 						//console.log(store);
 						scope.setState({ store });
-					});
+					})
+					.catch(error => console.log(error));
 			},
 
 			fetchRequests: id => {
@@ -485,6 +491,7 @@ const getState = scope => {
 								store.library.push(book);
 							});
 						}
+						console.log(store.library);
 						//console.log(store);
 						scope.setState({ store });
 					})
@@ -537,25 +544,28 @@ const getState = scope => {
 					.catch(error => console.error("Error:", error));
 			},
 
-			addTradeRequest: (sBook, s, fBook, f) => {
-				let store = scope.state.store;
-				let trade = {
-					sendBook: sBook,
-					send: s,
-					fromBook: fBook,
-					from: f,
-					isAccepted: true
-				};
-
-				if (store.tradeRequests.find(e => e === trade) !== undefined)
-					return false;
-				trade.isAccepted = false;
+			addTradeRequest: tradeRequest => {
+				fetch([urls[currentURL], "trades/"].join(""), {
+					method: "POST", // or 'PUT'
+					body: JSON.stringify(tradeRequest), // data can be `string` or {object}!
+					headers: {
+						"Content-Type": "application/json"
+					}
+				})
+					.then(res => res.json())
+					.then(response => {
+						console.log("Success:", JSON.stringify(response));
+						console.log(scope);
+						scope.state.actions.getLibrary(
+							scope.state.store.sessions.profile
+						);
+					})
+					.catch(error => console.error("Error:", error));
 			},
 
 			searchUser: id => {
 				return scope.state.store.users.find(e => e.id === id);
 			},
-
 			searchUsersForID: (id, self = null, key) => {
 				fetch([urls[currentURL], "page/", id].join(""))
 					.then(response => response.json())
@@ -563,6 +573,7 @@ const getState = scope => {
 						let ids = [];
 						for (var user in data) {
 							ids.push(user["profile"]);
+							console.log(ids);
 						}
 						return ids.filter(item => item.id !== self);
 					})

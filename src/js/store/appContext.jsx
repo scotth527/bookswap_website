@@ -15,6 +15,7 @@ const Store = PassedComponent => {
 			this.state.actions.getLibrary(this.state.store.sessions.profile);
 			this.state.actions.getWishlist(this.state.store.sessions.profile);
 			this.state.actions.fetchTrades(this.state.store.sessions.profile);
+			this.state.actions.fetchProfile(this.state.store.sessions.profile);
 			// Set your fetchs/Ajax requests here.
 			// make sure you're using the store: this.state.store
 		}

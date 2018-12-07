@@ -84,7 +84,7 @@ export class LogIn extends React.Component {
 														className="btn btn-primary"
 														type="button"
 														onClick={() =>
-															actions.isLegalUser(
+															actions.loggingIn(
 																this.state
 															)
 														}>

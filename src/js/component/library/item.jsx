@@ -109,6 +109,13 @@ export class Item extends React.Component {
 												</button>
 											</div>
 										)}
+										{this.props.drop && (
+											<div
+												className="col-12"
+												alt="Author">
+												<p className="text-secondary" />
+											</div>
+										)}
 									</div>
 								</div>
 

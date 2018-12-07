@@ -19,8 +19,25 @@ export class BookPage extends React.Component {
 			showOwnersModal: false,
 			user: null,
 			showTradeModal: false,
-			showError: false
+			showError: false,
+			book: null
 		};
+	}
+
+	componentDidMount() {
+		fetch(
+			[
+				"https://bookexchange-backend-scotth527.c9users.io/api/books/",
+				this.props.match.params.theid
+			].join("")
+		)
+			.then(response => response.json())
+			.then(data => {
+				let state = this.state;
+				state.book = data;
+				this.setState({ state });
+			})
+			.catch(error => console.log(error));
 	}
 
 	itemToAddChanger(bookNumber) {
@@ -46,50 +63,46 @@ export class BookPage extends React.Component {
 				className="container-fluid mt-5 d-flex flex-column wrapper"
 				style={{
 					flexGrow: "1",
-					position: "relative"
+					position: "relative",
+					marginBottom: "147px"
 				}}>
 				<div className="row">
 					<Context.Consumer>
 						{({ store, actions }) => {
-							let theBook = store.books.filter(item => {
-								return (
-									item.id ===
-									parseInt(this.props.match.params.theid)
-								);
-							});
-							if (theBook.length > 0) {
+							if (this.state.book !== null) {
 								return (
 									<div className="mx-auto col-12 text-center">
 										<div className="d-flex">
 											<img
 												className="col-3 "
-												src={theBook[0].image}
+												src={this.state.book.image}
 												alt="..."
 											/>
 											<div className="col-9 d-flex flex-column mx-auto">
 												<h1 className="text-left mb-3">
 													{"Title: " +
-														theBook[0].title}
+														this.state.book.title}
 												</h1>
 												<div className="row mx-auto" />
 												<div className="col-12 d-flex mx-auto">
 													<div className="col-6 text-left">
 														<p>
 															{"By: " +
-																theBook[0]
+																this.state.book
 																	.author}
 														</p>
 														<p>Genre</p>
 														<p>
 															{"Language: " +
-																theBook[0]
+																this.state.book
 																	.editionlanguage}
 														</p>
 														<p>ISBN</p>
 														<p className="text-wrap">
 															{"Description: " +
 																this.shorten(
-																	theBook[0]
+																	this.state
+																		.book
 																		.description
 																)}
 														</p>
@@ -237,7 +250,6 @@ export class BookPage extends React.Component {
 							this.setState({ key: "", showOwnersModal: false })
 						}
 						userKey={this.state.key}
-						currentUser={3}
 						id={parseInt(this.props.match.params.theid)}
 						onConfirm={id =>
 							this.setState({
@@ -249,26 +261,33 @@ export class BookPage extends React.Component {
 					/>
 				)}
 				{this.state.showTradeModal && (
-					<Trade
-						show={this.state.showTradeModal}
-						book={parseInt(this.props.match.params.theid)}
-						sender={this.state.user}
-						receiver={3}
-						onReturn={() =>
-							this.setState({
-								showOwnersModal: true,
-								showTradeModal: false
-							})
-						}
-						onConfirm={() => {
-							this.setState({
-								key: "",
-								user: null,
-								showOwnersModal: false,
-								showTradeModal: false
-							});
+					<Context.Consumer>
+						{({ store, actions }) => {
+							console.log(store.library);
+							return (
+								<Trade
+									show={this.state.showTradeModal}
+									books={[this.state.book, store.library]}
+									sender={this.state.user}
+									receiver={store.sessions}
+									onReturn={() =>
+										this.setState({
+											showOwnersModal: true,
+											showTradeModal: false
+										})
+									}
+									onConfirm={() => {
+										this.setState({
+											key: "",
+											user: null,
+											showOwnersModal: false,
+											showTradeModal: false
+										});
+									}}
+								/>
+							);
 						}}
-					/>
+					</Context.Consumer>
 				)}
 				{this.state.showError && (
 					<ErrorModal

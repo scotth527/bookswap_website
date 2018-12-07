@@ -65,7 +65,7 @@ export class HomePage extends React.Component {
 									</div>
 								</div>
 								<ol className="homepage mx-auto">
-									<Link to="/account">
+									<Link to="/bookpage/1">
 										<button
 											type="button"
 											style={{
@@ -132,7 +132,7 @@ export class HomePage extends React.Component {
 								</div>
 
 								<ol className="homepage mx-auto">
-									<Link to="/account">
+									<Link to="/bookpage/2">
 										<button
 											type="button"
 											style={{
@@ -200,7 +200,7 @@ export class HomePage extends React.Component {
 									</div>
 								</div>
 								<ol className="homepage mx-auto">
-									<Link to="/account">
+									<Link to="/bookpage/3">
 										<button
 											type="button"
 											style={{

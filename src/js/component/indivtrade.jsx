@@ -12,16 +12,17 @@ export class IndivTrade extends React.Component {
 	render() {
 		return (
 			<div className="col-11 rounded border d-flex justify-content-around border-dark mx-auto mb-2">
-				<h5 className="mt-3">{this.props.user}</h5>
-
+				<h5 className="mt-3">
+					{this.props.user + " is requesting " + this.props.book}
+				</h5>
 			</div>
 		);
 	}
 }
 
-Preview.propTypes = {
-	link: PropTypes.string,
-	picurl: PropTypes.string,
-	title: PropTypes.string
+IndivTrade.propTypes = {
+	user: PropTypes.string,
+	book: PropTypes.string
 };
-export default Preview;
+
+export default IndivTrade;

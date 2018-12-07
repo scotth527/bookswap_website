@@ -32,28 +32,22 @@ function YourShop(props) {
 							return store.library
 								.slice(0, 3)
 								.map((item, index) => {
-									const book = actions.searchBookByID(
-										item.book
-									);
+									const book = item.book;
+									console.log(book);
 									if (typeof book === "undefined") {
-										return <h2> No book selected</h2>;
+										return (
+											<h2 key={item.book.api_id}>
+												{" "}
+												No book selected
+											</h2>
+										);
 									} else {
 										return (
 											<Preview
-												key={item.book}
-												link={actions
-													.searchBookByID(item.book)
-													.id.toString()}
-												picurl={
-													actions.searchBookByID(
-														item.book
-													).image
-												}
-												title={
-													actions.searchBookByID(
-														item.book
-													).title
-												}
+												key={item.book.api_id}
+												link={item.book.api_id.toString()}
+												picurl={item.book.image}
+												title={item.book.title}
 											/>
 										);
 									}

@@ -20,20 +20,20 @@ function Profilebanner(props) {
 								<div className="d-flex flex-column">
 									<h1 className="lead">
 										{"Welcome " +
-											store.sessions.username +
+											store.profile.user.username +
 											"!"}
 									</h1>
 									<p>
 										{" "}
 										{"Full Name: " +
-											store.sessions.firstname +
+											store.profile.first_name +
 											" " +
-											store.sessions.lastname}{" "}
+											store.profile.last_name}{" "}
 									</p>
 									<p>
 										{" "}
 										{"Address: " +
-											store.sessions.address}{" "}
+											store.profile.address}{" "}
 									</p>
 									<p> {"Email: " + store.sessions.email}</p>
 								</div>

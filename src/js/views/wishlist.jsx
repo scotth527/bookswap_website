@@ -51,7 +51,7 @@ export class Wishlist extends React.Component {
 													key: "library",
 													bookid: actions.searchBookByID(
 														item
-													).id,
+													).api_id,
 													showOwnersModal: true
 												})
 											}
