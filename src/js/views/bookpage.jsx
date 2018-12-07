@@ -19,8 +19,25 @@ export class BookPage extends React.Component {
 			showOwnersModal: false,
 			user: null,
 			showTradeModal: false,
-			showError: false
+			showError: false,
+			book: {}
 		};
+	}
+
+	componentDidMount() {
+		fetch(
+			[
+				"https://backend-final-project-crivera09.c9users.io/api/books/",
+				this.props.match.params.theid
+			].join("")
+		)
+			.then(response => response.json())
+			.then(data => {
+				let state = this.state;
+				state.book = data;
+				this.setState({ state });
+			})
+			.catch(error => console.log(error));
 	}
 
 	itemToAddChanger(bookNumber) {
@@ -51,45 +68,40 @@ export class BookPage extends React.Component {
 				<div className="row">
 					<Context.Consumer>
 						{({ store, actions }) => {
-							actions.fetchBookForPage(
-								parseInt(this.props.match.params.theid)
-							);
-							let theBook = store.books;
-							console.log(theBook);
-
-							if (theBook.length > 0) {
+							if (this.state.book.length > 0) {
 								return (
 									<div className="mx-auto col-12 text-center">
 										<div className="d-flex">
 											<img
 												className="col-3 "
-												src={theBook[0].image}
+												src={this.state.book.image}
 												alt="..."
 											/>
 											<div className="col-9 d-flex flex-column mx-auto">
 												<h1 className="text-left mb-3">
 													{"Title: " +
-														theBook[0].title}
+														this.state.book.title}
 												</h1>
 												<div className="row mx-auto" />
 												<div className="col-12 d-flex mx-auto">
 													<div className="col-6 text-left">
 														<p>
 															{"By: " +
-																theBook[0]
+																this.state.book
 																	.author}
 														</p>
 														<p>Genre</p>
 														<p>
 															{"Language: " +
-																theBook[0]
+																this.state.book
 																	.editionlanguage}
 														</p>
 														<p>ISBN</p>
 														<p className="text-wrap">
 															{"Description: " +
 																this.shorten(
-																	theBook[0]
+																	this.state
+																		.book
 																		.description
 																)}
 														</p>

@@ -44,7 +44,7 @@ export class Usermodal extends React.Component {
 							<Context.Consumer>
 								{({ store, actions }) => {
 									actions.fetchOwners(this.props.id);
-									
+
 									return store.owners.map(
 										(profile, index) => {
 											return (
