@@ -1,0 +1,34 @@
+jumbotron {
+    margin: 0;
+    padding: 0;
+}
+body, html {
+    width: 100%;
+    height: 100%;
+}
+search {
+    float: left;
+}
+dropdown {
+    float: right;
+}
+
+@media screen and (max-width: 1440px) {
+    homepage {
+        width: 100%;
+    }
+}
+    
+@media screen and (max-width: 768px) {
+    homepage {
+        width: 100%;
+    }
+}
+@media screen and (max-width: 320px) {
+    homepage {
+        width: 100%;
+    }
+    
+}
+
+
