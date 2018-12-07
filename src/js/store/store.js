@@ -203,8 +203,8 @@ const getState = scope => {
 				fetch(urls[currentURL] + "books/")
 					.then(response => response.json())
 					.then(data => {
-						let { store } = scope.state.store;
-						store.books = [data];
+						let { store } = scope.state;
+						store.books = data;
 						scope.setState({ store });
 					})
 					.catch(error => console.log(error));
@@ -500,19 +500,23 @@ const getState = scope => {
 					.catch(error => console.error("Error:", error));
 			},
 
-			addTradeRequest: (sBook, s, fBook, f) => {
-				let store = scope.state.store;
-				let trade = {
-					sendBook: sBook,
-					send: s,
-					fromBook: fBook,
-					from: f,
-					isAccepted: true
-				};
-
-				if (store.tradeRequests.find(e => e === trade) !== undefined)
-					return false;
-				trade.isAccepted = false;
+			addTradeRequest: tradeRequest => {
+				fetch([urls[currentURL], "trades/"].join(""), {
+					method: "POST", // or 'PUT'
+					body: JSON.stringify(tradeRequest), // data can be `string` or {object}!
+					headers: {
+						"Content-Type": "application/json"
+					}
+				})
+					.then(res => res.json())
+					.then(response => {
+						console.log("Success:", JSON.stringify(response));
+						console.log(scope);
+						scope.state.actions.getLibrary(
+							scope.state.store.sessions.profile
+						);
+					})
+					.catch(error => console.error("Error:", error));
 			},
 
 			searchUser: id => {

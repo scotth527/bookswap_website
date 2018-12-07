@@ -43,61 +43,47 @@ export class Trade extends React.Component {
 						</div>
 						<div className="modal-body">
 							<div className="row">
-								<Context.Consumer>
-									{({ store, actions }) => {
-										let sender = actions.searchUser(
-											this.props.sender
-										);
-										let receiver = actions.searchUser(
-											this.props.receiver
-										);
-
-										return (
-											<React.Fragment>
-												<div className="col-5">
-													<Userdiv
-														id={sender.id}
-														//Picurl="https://picsum.photos/50/50/?random"
-														City={sender.city}
-														Username={
-															sender.username
-														}
-													/>
-													<Item
-														id={this.props.book}
-														simple={true}
-													/>
-												</div>
-												<div className="col-2 text-center my-auto">
-													<i
-														className="fas fa-exchange-alt"
-														style={{
-															fontSize: "5vw"
-														}}
-													/>
-												</div>
-												<div className="col-5">
-													<Userdiv
-														id={receiver.id}
-														//Picurl="https://picsum.photos/50/50/?random"
-														City={receiver.city}
-														Username={
-															receiver.username
-														}
-													/>
-													<Item
-														id={
-															this.state
-																.offeredBook
-														}
-														simple={true}
-														drop={true}
-													/>
-												</div>
-											</React.Fragment>
-										);
-									}}
-								</Context.Consumer>
+								<React.Fragment>
+									<div className="col-5">
+										<Userdiv
+											id={this.props.sender.id}
+											//Picurl="https://picsum.photos/50/50/?random"
+											City={this.props.sender.address}
+											Username={
+												this.props.sender.user.username
+											}
+										/>
+										<Item
+											id={parseInt(
+												this.props.books[0].api_id
+											)}
+											simple={true}
+										/>
+									</div>
+									<div className="col-2 text-center my-auto">
+										<i
+											className="fas fa-exchange-alt"
+											style={{
+												fontSize: "5vw"
+											}}
+										/>
+									</div>
+									<div className="col-5">
+										<Userdiv
+											id={this.props.receiver.id}
+											//Picurl="https://picsum.photos/50/50/?random"
+											City={this.props.receiver.address}
+											Username={
+												this.props.receiver.username
+											}
+										/>
+										<Item
+											id={this.props.books[1][0].book.id}
+											simple={true}
+											drop={true}
+										/>
+									</div>
+								</React.Fragment>
 							</div>
 						</div>
 						<div className="modal-footer">
@@ -113,7 +99,22 @@ export class Trade extends React.Component {
 									return (
 										<button
 											onClick={() => {
-												this.props.onConfirm();
+												actions.addTradeRequest({
+													trader: {
+														book: this.props
+															.books[0],
+														profile: this.props
+															.sender.id,
+														status: false
+													},
+													requester: {
+														book: this.props
+															.books[1][0].id,
+														profile: this.props
+															.receiver.profile,
+														status: false
+													}
+												});
 											}}
 											type="button"
 											className="btn btn-primary btn">
@@ -131,9 +132,9 @@ export class Trade extends React.Component {
 }
 Trade.propTypes = {
 	show: PropTypes.bool,
-	book: PropTypes.number,
-	sender: PropTypes.number,
-	receiver: PropTypes.number,
+	books: PropTypes.array,
+	sender: PropTypes.object,
+	receiver: PropTypes.object,
 	onReturn: PropTypes.func,
 	onConfirm: PropTypes.func
 	//onExit: PropTypes.func

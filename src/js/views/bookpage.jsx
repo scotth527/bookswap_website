@@ -20,7 +20,7 @@ export class BookPage extends React.Component {
 			user: null,
 			showTradeModal: false,
 			showError: false,
-			book: {}
+			book: null
 		};
 	}
 
@@ -68,7 +68,7 @@ export class BookPage extends React.Component {
 				<div className="row">
 					<Context.Consumer>
 						{({ store, actions }) => {
-							if (this.state.book.length > 0) {
+							if (this.state.book !== null) {
 								return (
 									<div className="mx-auto col-12 text-center">
 										<div className="d-flex">
@@ -249,7 +249,6 @@ export class BookPage extends React.Component {
 							this.setState({ key: "", showOwnersModal: false })
 						}
 						userKey={this.state.key}
-						currentUser={3}
 						id={parseInt(this.props.match.params.theid)}
 						onConfirm={id =>
 							this.setState({
@@ -261,26 +260,33 @@ export class BookPage extends React.Component {
 					/>
 				)}
 				{this.state.showTradeModal && (
-					<Trade
-						show={this.state.showTradeModal}
-						book={parseInt(this.props.match.params.theid)}
-						sender={this.state.user}
-						receiver={3}
-						onReturn={() =>
-							this.setState({
-								showOwnersModal: true,
-								showTradeModal: false
-							})
-						}
-						onConfirm={() => {
-							this.setState({
-								key: "",
-								user: null,
-								showOwnersModal: false,
-								showTradeModal: false
-							});
+					<Context.Consumer>
+						{({ store, actions }) => {
+							console.log(store.library);
+							return (
+								<Trade
+									show={this.state.showTradeModal}
+									books={[this.state.book, store.library]}
+									sender={this.state.user}
+									receiver={store.sessions}
+									onReturn={() =>
+										this.setState({
+											showOwnersModal: true,
+											showTradeModal: false
+										})
+									}
+									onConfirm={() => {
+										this.setState({
+											key: "",
+											user: null,
+											showOwnersModal: false,
+											showTradeModal: false
+										});
+									}}
+								/>
+							);
 						}}
-					/>
+					</Context.Consumer>
 				)}
 				{this.state.showError && (
 					<ErrorModal

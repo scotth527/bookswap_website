@@ -36,15 +36,16 @@ export class Library extends React.Component {
 						return store.library.map((item, index) => {
 							return (
 								<Item
-									id={item.book}
+									id={item.book.id}
 									key={index}
 									title={
-										actions.searchBookByID(item.book) &&
-										actions.searchBookByID(item.book).title
+										actions.searchBookByID(item.book.id) &&
+										actions.searchBookByID(item.book.id)
+											.title
 									}
 									description={
-										actions.searchBookByID(item.book) &&
-										actions.searchBookByID(item.book)
+										actions.searchBookByID(item.book.id) &&
+										actions.searchBookByID(item.book.id)
 											.description
 									}
 									buttonName="Find users who want this book"
@@ -55,7 +56,7 @@ export class Library extends React.Component {
 									addStuff={() =>
 										this.setState({
 											key: "wishlist",
-											bookid: item.book,
+											bookid: item.book.id,
 											showOwnersModal: true
 										})
 									}
