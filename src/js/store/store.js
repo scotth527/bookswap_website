@@ -236,8 +236,14 @@ const getState = scope => {
 				fetch([urls[currentURL], "trades/", id].join(""))
 					.then(response => response.json())
 					.then(data => {
-						let { store } = scope.state.store;
-						store.profile.trades = data;
+						//console.log(data);
+						let { store } = scope.state;
+						store.trades = [];
+						if (data.length > 0) {
+							data.map(trade => {
+								store.trades.push(trade);
+							});
+						}
 						scope.setState({ store });
 					})
 					.catch(error => console.log(error));
@@ -256,10 +262,25 @@ const getState = scope => {
 				scope.setState(store);
 			},
 
-			cancelTrade: tradeindex => {
-				let store = scope.state.store;
-				store.trades.splice(tradeindex, 1);
-				scope.setState(store);
+			cancelTrade: tradeid => {
+				fetch([urls[currentURL], "trades/", tradeid].join(""), {
+					method: "DELETE" // or 'PUT'
+				})
+					.then(res => {
+						if (res.ok == true) {
+							scope.state.actions.fetchTrades(
+								scope.state.store.sessions.profile
+							);
+						} else {
+							console.log("Something went wrong oops");
+						}
+					})
+					.then(res => {
+						scope.state.actions.fetchTrades(
+							scope.state.store.sessions.profile
+						);
+					})
+					.catch(error => console.error("Error:", error));
 			},
 
 			getWishlist: id => {

@@ -15,7 +15,7 @@ export class Library extends React.Component {
 			showModal: false,
 			showOwnersModal: false,
 			bookid: 0,
-			key: "",
+			key: "wishers",
 			showTradeModal: false
 		};
 	}
