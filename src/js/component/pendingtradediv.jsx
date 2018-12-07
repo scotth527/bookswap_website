@@ -9,7 +9,11 @@ function Pendingtrade(props) {
 		<div className="d-flex justify-content-between col-8 mx-auto rounded border border-dark text-center mb-2">
 			<div className="mx-auto col-8 d-flex">
 				<div className="col-5 ml-2 mr-2 mb-3">
-					<img src={props.requesterpic} />
+					<img
+						className="mt-3"
+						alt="user pic"
+						src={props.requesterpic}
+					/>
 					<h2>{props.requesterusername} </h2>
 					<h3>{"From: " + props.requestercity} </h3>
 					<h3>{"Book: " + props.requesterbook} </h3>
@@ -19,7 +23,11 @@ function Pendingtrade(props) {
 					<i className="col-1 mt-5 fas fa-exchange-alt" />
 				</div>
 				<div className="col-5 ml-2 mb-3">
-					<img src={props.requestedpic} />
+					<img
+						className="mt-3"
+						alt="user pic"
+						src={props.requestedpic}
+					/>
 					<h2>{props.requestedusername} </h2>
 					<h3>{"From: " + props.requestedcity} </h3>
 					<h3>{"Book: " + props.requestedbook} </h3>

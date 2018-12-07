@@ -17,6 +17,7 @@ export class Trades extends React.Component {
 			<div>
 				<Context.Consumer>
 					{({ store, actions }) => {
+						console.log(store.trades);
 						return (
 							<React.Fragment>
 								<h1 className="text-center">
@@ -26,60 +27,72 @@ export class Trades extends React.Component {
 								{store.trades
 									.filter(item => item.is_accepted == false)
 									.map((item, index) => {
-										return (
-											<Pendingtrade
-												key={index}
-												requesterpic={
-													actions.searchUser(
-														item.requesterid
-													).image
-												}
-												requesterusername={
-													actions.searchUser(
-														item.requesterid
-													).username
-												}
-												requestercity={
-													actions.searchUser(
-														item.requesterid
-													).city
-												}
-												requesterbook={
-													actions.searchBookByID(
-														item.requesterbook
-													).title
-												}
-												requestedpic={
-													actions.searchUser(
-														item.requestedid
-													).image
-												}
-												requestedusername={
-													actions.searchUser(
-														item.requestedid
-													).username
-												}
-												requestedcity={
-													actions.searchUser(
-														item.requestedid
-													).city
-												}
-												requestedbook={
-													actions.searchBookByID(
-														item.requestedbook
-													).title
-												}
-												Trade_is_accepted={
-													item.is_accepted
-												}
-												confirmTrade={() => {
-													actions.acceptTrade(index);
-												}}
-												rejectTrade={() => {
-													actions.cancelTrade(index);
-												}}
-											/>
+										const book = actions.searchBookByID(
+											item.trader.book
 										);
+										if (typeof book === "undefined") {
+											return (
+												<h2 key={index}>
+													{" "}
+													No book selected
+												</h2>
+											);
+										} else {
+											return (
+												<Pendingtrade
+													key={item.id}
+													requesterpic="https://picsum.photos/50/50/?random"
+													requesterusername={
+														item.requester.profile
+															.user.username
+													}
+													requestercity={
+														item.requester.profile
+															.city +
+														"," +
+														item.requester.profile
+															.state
+													}
+													requesterbook={
+														actions.searchBookByID(
+															item.requester.book
+														).title
+													}
+													requestedpic={
+														"https://picsum.photos/50/50/?random"
+													}
+													requestedusername={
+														item.trader.profile.user
+															.username
+													}
+													requestedcity={
+														item.trader.profile
+															.city +
+														"," +
+														item.trader.profile
+															.state
+													}
+													requestedbook={
+														actions.searchBookByID(
+															item.trader.book
+														).title
+													}
+													Trade_is_accepted={
+														item.is_accepted
+													}
+													confirmTrade={() => {
+														actions.acceptTrade(
+															index
+														);
+													}}
+													rejectTrade={() => {
+														actions.cancelTrade(
+															item.id
+														);
+													}}
+												/>
+											);
+										}
 									})}
 
 								<h1 className="text-center">
@@ -88,60 +101,72 @@ export class Trades extends React.Component {
 								{store.trades
 									.filter(item => item.is_accepted == true)
 									.map((item, index) => {
-										return (
-											<Pendingtrade
-												key={index}
-												requesterpic={
-													actions.searchUser(
-														item.requesterid
-													).image
-												}
-												requesterusername={
-													actions.searchUser(
-														item.requesterid
-													).username
-												}
-												requestercity={
-													actions.searchUser(
-														item.requesterid
-													).city
-												}
-												requesterbook={
-													actions.searchBookByID(
-														item.requesterbook
-													).title
-												}
-												requestedpic={
-													actions.searchUser(
-														item.requestedid
-													).image
-												}
-												requestedusername={
-													actions.searchUser(
-														item.requestedid
-													).username
-												}
-												requestedcity={
-													actions.searchUser(
-														item.requestedid
-													).city
-												}
-												requestedbook={
-													actions.searchBookByID(
-														item.requestedbook
-													).title
-												}
-												Trade_is_accepted={
-													item.is_accepted
-												}
-												confirmTrade={() => {
-													actions.acceptTrade(index);
-												}}
-												rejectTrade={() => {
-													actions.cancelTrade(index);
-												}}
-											/>
+										const book = actions.searchBookByID(
+											item.trader.book
 										);
+										if (typeof book === "undefined") {
+											return (
+												<h2 key={index}>
+													{" "}
+													No book selected
+												</h2>
+											);
+										} else {
+											return (
+												<Pendingtrade
+													key={item.id}
+													requesterpic="https://picsum.photos/50/50/?random"
+													requesterusername={
+														item.requester.profile
+															.user.username
+													}
+													requestercity={
+														item.requester.profile
+															.city +
+														"," +
+														item.requester.profile
+															.state
+													}
+													requesterbook={
+														actions.searchBookByID(
+															item.requester.book
+														).title
+													}
+													requestedpic={
+														"https://picsum.photos/50/50/?random"
+													}
+													requestedusername={
+														item.trader.profile.user
+															.username
+													}
+													requestedcity={
+														item.trader.profile
+															.city +
+														"," +
+														item.trader.profile
+															.state
+													}
+													requestedbook={
+														actions.searchBookByID(
+															item.trader.book
+														).title
+													}
+													Trade_is_accepted={
+														item.is_accepted
+													}
+													confirmTrade={() => {
+														actions.acceptTrade(
+															index
+														);
+													}}
+													rejectTrade={() => {
+														actions.cancelTrade(
+															item.id
+														);
+													}}
+												/>
+											);
+										}
 									})}
 							</React.Fragment>
 						);
