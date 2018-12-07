@@ -39,7 +39,7 @@ export class NavBar extends React.Component {
 							</button>
 						</Link>
 					</li>
-					<li className="nav-item">
+					<li className="nav-item" style={{ float: "left" }}>
 						<form className="form-inline my-2 my-lg-0">
 							<input
 								className="form-control mr-sm-2"
@@ -51,6 +51,7 @@ export class NavBar extends React.Component {
 					</li>
 				</ul>
 				<button
+					style={{ float: "right" }}
 					className="navbar-toggler"
 					type="button"
 					data-toggle="collapse"

@@ -7,6 +7,7 @@ export class Footer extends Component {
 		return (
 			<footer
 				style={{
+					flex: "1",
 					background: "#CCD6DD",
 					position: "relative",
 					bottom: "0",
@@ -14,7 +15,15 @@ export class Footer extends Component {
 					height: "40px"
 				}}
 				className="container-fluid mt-2 text-center border-top border-dark">
-				<h2 className="col-12">Footer</h2>
+				<h2
+					className="col-12"
+					style={{
+						width: "100%",
+
+						fontSize: "10px"
+					}}>
+					© Book Swap 2018
+				</h2>
 			</footer>
 		);
 	}
