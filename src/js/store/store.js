@@ -263,10 +263,40 @@ const getState = scope => {
 					.catch(error => console.log(error));
 			},
 
-			acceptTrade: trade_id => {
-				let store = scope.state.store;
-				store.trades[trade_id].tradeid = true;
-				scope.setState(store);
+			acceptTrade: tradeEntry => {
+				let { store } = scope.state;
+				store.wishlist.push(wishlistEntry);
+				//scope.setState({ store });
+
+				fetch(
+					[
+						urls[currentURL],
+						"trades/",
+						scope.state.store.sessions.profile
+					].join(""),
+					{
+						method: "PUT",
+						body: JSON.stringify({
+							wishlist: store.wishlist
+						}),
+						headers: {
+							"Content-Type": "application/json"
+						}
+					}
+				)
+					.then(response => {
+						if (response.ok == true) {
+							return response.JSON();
+						} else {
+							console.log("Something went wrong oops");
+						}
+					})
+					.then(res => {
+						scope.state.actions.getWishlist(
+							scope.state.store.sessions.profile
+						);
+					})
+					.catch(error => console.error("Error:", error));
 			},
 
 			cancelTrade: tradeid => {
