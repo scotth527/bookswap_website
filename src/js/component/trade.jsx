@@ -11,8 +11,27 @@ export class Trade extends React.Component {
 		super(props);
 		this.state = {
 			show: this.props.show,
-			offeredBook: -1
+			offeredBook: -1,
+			trader: null
 		};
+	}
+
+	componentDidMount() {
+		fetch(
+			[
+				"https://backend-final-project-crivera09.c9users.io/api/inv/",
+				this.props.books[0].id,
+				"/",
+				this.props.sender.id
+			].join("")
+		)
+			.then(response => response.json())
+			.then(data => {
+				let state = this.state;
+				state.trader = data.id;
+				this.setState(state);
+			})
+			.catch(error => console.log(error));
 	}
 
 	render() {
@@ -100,21 +119,13 @@ export class Trade extends React.Component {
 										<button
 											onClick={() => {
 												actions.addTradeRequest({
-													trader: {
-														book: this.props
-															.books[0],
-														profile: this.props
-															.sender.id,
-														status: false
-													},
-													requester: {
-														book: this.props
-															.books[1][0].id,
-														profile: this.props
-															.receiver.profile,
-														status: false
-													}
+													trader: this.state.trader,
+													requester: this.props
+														.books[1][0].id,
+													status: true
 												});
+												actions.clearStore();
+												this.props.onConfirm();
 											}}
 											type="button"
 											className="btn btn-primary btn">

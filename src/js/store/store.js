@@ -115,6 +115,8 @@ const getState = scope => {
 
 			wishers: [],
 
+			pending: [],
+
 			// trades: [
 			// 	{
 			// 		requesterid: 1,
@@ -142,7 +144,7 @@ const getState = scope => {
 			// 	}
 			// ],
 
-			trades: {}
+			trades: []
 		},
 		actions: {
 			// changeColor: (element, color) => {
@@ -238,12 +240,8 @@ const getState = scope => {
 					.then(data => {
 						//console.log(data);
 						let { store } = scope.state;
-						store.trades = [];
-						if (data.length > 0) {
-							data.map(trade => {
-								store.trades.push(trade);
-							});
-						}
+						store.trades = data;
+
 						scope.setState({ store });
 					})
 					.catch(error => console.log(error));
@@ -253,6 +251,7 @@ const getState = scope => {
 				let store = scope.state.store;
 				store.books = [];
 				store.owners = [];
+				store.pending = [];
 				scope.setState(store);
 			},
 
@@ -396,6 +395,20 @@ const getState = scope => {
 					});
 			},
 
+			// fetchInv: (bookID, profileID) => {
+			// 	fetch(
+			// 		[urls[currentURL], "inv/", bookID, "/", profileID].join("")
+			// 	)
+			// 		.then(response => response.json())
+			// 		.then(data => {
+			// 			let store = scope.state.store;
+			// 			store.pending = [];
+			// 			store.pending.push(data);
+			// 			scope.setState(store);
+			// 		})
+			// 		.catch(error => console.log(error));
+			// },
+
 			fetchInterested: bookid => {
 				fetch([urls[currentURL], "wishers/", bookid].join(""))
 					.then(response => response.json())
@@ -414,7 +427,8 @@ const getState = scope => {
 						}
 						//console.log(store);
 						scope.setState({ store });
-					});
+					})
+					.catch(error => console.log(error));
 			},
 
 			fetchRequests: id => {
