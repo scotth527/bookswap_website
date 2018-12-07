@@ -254,41 +254,31 @@ const getState = scope => {
 				scope.setState(store);
 			},
 
-			acceptTrade: trade_id => {
-				let store = scope.state.store;
-				store.trades[trade_id].tradeid = true;
-				scope.setState(store);
+			acceptTrade: tradeid => {
+				let { store } = scope.state;
+				fetch([urls[currentURL], "trades/", tradeid].join(""), {
+					method: "PATCH",
+					body: JSON.stringify({
+						is_accepted: true
+					}),
+					headers: {
+						"Content-Type": "application/json"
+					}
+				})
+					.then(response => {
+						if (response.ok == true) {
+							return scope.setState({ store });
+						} else {
+							console.log("Something went wrong oops");
+						}
+					})
+					.then(res => {
+						scope.state.actions.fetchTrades(
+							scope.state.store.sessions.profile
+						);
+					})
+					.catch(error => console.error("Error:", error));
 			},
-			// 	fetch(
-			// 		[
-			// 			urls[currentURL],
-			// 			"trades/",
-			// 			scope.state.store.sessions.profile
-			// 		].join(""),
-			// 		{
-			// 			method: "PUT",
-			// 			body: JSON.stringify({
-			// 				wishlist: store.wishlist
-			// 			}),
-			// 			headers: {
-			// 				"Content-Type": "application/json"
-			// 			}
-			// 		}
-			// 	)
-			// 		.then(response => {
-			// 			if (response.ok == true) {
-			// 				return response.JSON();
-			// 			} else {
-			// 				console.log("Something went wrong oops");
-			// 			}
-			// 		})
-			// 		.then(res => {
-			// 			scope.state.actions.getWishlist(
-			// 				scope.state.store.sessions.profile
-			// 			);
-			// 		})
-			// 		.catch(error => console.error("Error:", error));
-			// },
 
 			cancelTrade: tradeid => {
 				fetch([urls[currentURL], "trades/", tradeid].join(""), {
@@ -566,6 +556,7 @@ const getState = scope => {
 			searchUser: id => {
 				return scope.state.store.users.find(e => e.id === id);
 			},
+
 			searchUsersForID: (id, self = null, key) => {
 				fetch([urls[currentURL], "page/", id].join(""))
 					.then(response => response.json())

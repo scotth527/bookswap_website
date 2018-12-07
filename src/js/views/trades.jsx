@@ -100,7 +100,7 @@ export class Trades extends React.Component {
 													}
 													confirmTrade={() => {
 														actions.acceptTrade(
-															index
+															item.id
 														);
 													}}
 													rejectTrade={() => {
