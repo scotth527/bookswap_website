@@ -36,6 +36,7 @@ export class Wishlist extends React.Component {
 						<Context.Consumer>
 							{({ store, actions }) => {
 								return store.wishlist.map((item, index) => {
+									console.log(item);
 									return (
 										<Item
 											key={index}
@@ -46,15 +47,14 @@ export class Wishlist extends React.Component {
 													index
 												);
 											}}
-											addStuff={() =>
+											addStuff={() => {
 												this.setState({
-													key: "library",
-													bookid: actions.searchBookByID(
-														item
-													).api_id,
+													key: "owners",
+													bookid: item,
 													showOwnersModal: true
-												})
-											}
+												});
+												actions.fetchOwners(item);
+											}}
 										/>
 									);
 								});

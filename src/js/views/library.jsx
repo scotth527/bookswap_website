@@ -37,7 +37,7 @@ export class Library extends React.Component {
 							return (
 								<Item
 									id={parseInt(item.book.api_id)}
-									key={index}
+									key={item.book.api_id}
 									title={item.book.title}
 									description={item.book.description}
 									buttonName="Find users who want this book"
@@ -45,13 +45,16 @@ export class Library extends React.Component {
 										actions.deleteFromLibrary(item.id)
 									}
 									userKey={this.state.key}
-									addStuff={() =>
+									addStuff={() => {
 										this.setState({
-											key: "wishlist",
+											key: "wishers",
 											bookid: item.book.api_id,
 											showOwnersModal: true
-										})
-									}
+										});
+										actions.fetchInterested(
+											item.book.api_id
+										);
+									}}
 								/>
 							);
 						});

@@ -45,23 +45,35 @@ export class Usermodal extends React.Component {
 								{({ store, actions }) => {
 									return store[this.props.userKey].map(
 										(profile, index) => {
-											return (
-												<Userdiv
-													key={profile["id"]}
-													id={profile["id"]}
-													//index={index}
-													Picurl="https://picsum.photos/50/50/?random"
-													City={profile["city"]}
-													Username={
-														profile["user"].username
-													}
-													getUserID={id =>
-														this.setState({
-															user: profile
-														})
-													}
-												/>
-											);
+											console.log(profile);
+											const user = profile["id"];
+											if (typeof user === "undefined") {
+												return (
+													<h2 key={index}>
+														{" "}
+														Error retrieving user
+													</h2>
+												);
+											} else {
+												return (
+													<Userdiv
+														key={profile["id"]}
+														id={profile["id"]}
+														//index={index}
+														Picurl="https://picsum.photos/50/50/?random"
+														City={profile["city"]}
+														Username={
+															profile["user"]
+																.username
+														}
+														getUserID={id =>
+															this.setState({
+																user: profile
+															})
+														}
+													/>
+												);
+											}
 										}
 									);
 								}}

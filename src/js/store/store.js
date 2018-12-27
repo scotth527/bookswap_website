@@ -410,7 +410,6 @@ const getState = scope => {
 						}
 						//console.log(store);
 						scope.setState({ store });
-						console.log(store.owners);
 					});
 			},
 

@@ -40,7 +40,6 @@ export class Trades extends React.Component {
 			<div>
 				<Context.Consumer>
 					{({ store, actions }) => {
-						console.log(store.trades);
 						return (
 							<React.Fragment>
 								<h1 className="text-center">

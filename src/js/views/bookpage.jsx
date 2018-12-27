@@ -40,12 +40,6 @@ export class BookPage extends React.Component {
 			.catch(error => console.log(error));
 	}
 
-	itemToAddChanger(bookNumber) {
-		let toAdd = this.state.itemToAdd;
-		toAdd = bookNumber;
-		this.setState(toAdd);
-	}
-
 	shorten(description) {
 		if (description.length > 150) {
 			return (
@@ -91,7 +85,11 @@ export class BookPage extends React.Component {
 																this.state.book
 																	.author}
 														</p>
-														<p>Genre</p>
+														<p>
+															{"Genre " +
+																this.state.book
+																	.genre}
+														</p>
 														<p>
 															{"Language: " +
 																this.state.book
