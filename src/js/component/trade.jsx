@@ -78,6 +78,37 @@ export class Trade extends React.Component {
 											)}
 											simple={true}
 										/>
+
+										<select
+											id="inputState"
+											className="form-control">
+											<option selected>
+												Select book to offer
+											</option>
+											)
+											<Context.Consumer>
+												{({ store, actions }) => {
+													return store.library.map(
+														(item, index) => {
+															return (
+																<option
+																	key={
+																		item
+																			.book
+																			.api_id
+																	}>
+																	{
+																		item
+																			.book
+																			.title
+																	}
+																</option>
+															);
+														}
+													);
+												}}
+											</Context.Consumer>
+										</select>
 									</div>
 									<div className="col-2 text-center my-auto">
 										<i
