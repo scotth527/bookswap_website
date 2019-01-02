@@ -78,7 +78,29 @@ export class Trade extends React.Component {
 											)}
 											simple={true}
 										/>
-
+									</div>
+									<div className="col-2 text-center my-auto">
+										<i
+											className="fas fa-exchange-alt"
+											style={{
+												fontSize: "5vw"
+											}}
+										/>
+									</div>
+									<div className="col-5">
+										<Userdiv
+											id={this.props.receiver.id}
+											//Picurl="https://picsum.photos/50/50/?random"
+											City={this.props.receiver.address}
+											Username={
+												this.props.receiver.username
+											}
+										/>
+										<Item
+											id={this.props.books[1][0].book.id}
+											simple={true}
+											drop={true}
+										/>
 										<select
 											id="inputState"
 											className="form-control">
@@ -109,29 +131,6 @@ export class Trade extends React.Component {
 												}}
 											</Context.Consumer>
 										</select>
-									</div>
-									<div className="col-2 text-center my-auto">
-										<i
-											className="fas fa-exchange-alt"
-											style={{
-												fontSize: "5vw"
-											}}
-										/>
-									</div>
-									<div className="col-5">
-										<Userdiv
-											id={this.props.receiver.id}
-											//Picurl="https://picsum.photos/50/50/?random"
-											City={this.props.receiver.address}
-											Username={
-												this.props.receiver.username
-											}
-										/>
-										<Item
-											id={this.props.books[1][0].book.id}
-											simple={true}
-											drop={true}
-										/>
 									</div>
 								</React.Fragment>
 							</div>

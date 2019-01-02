@@ -173,6 +173,13 @@ const getState = scope => {
 				scope.setState(store);
 			},
 
+			logout: () => {
+				let store = scope.state.store;
+				store.token = "JWT ";
+				store.sessions.loggedIn = false;
+				scope.setState({ store });
+			},
+
 			searchTradeByID: tradeid => {
 				return scope.state.store.trades.find(
 					e => e.tradeid === tradeid

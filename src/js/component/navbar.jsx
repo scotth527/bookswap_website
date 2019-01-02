@@ -127,6 +127,16 @@ export class NavBar extends React.Component {
 													</button>
 												</Link>
 											</li>
+											<li className="nav-item mr-1">
+												<button
+													onClick={() =>
+														actions.logout()
+													}
+													className="btn btn-danger
+																mb-2 ">
+													Logout
+												</button>
+											</li>
 										</ul>
 									);
 								} else {
