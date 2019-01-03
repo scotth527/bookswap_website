@@ -9,19 +9,33 @@ export class SignUp extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			first_name: "",
+			last_name: "",
+			address: "",
+			city: "",
+			state: "",
+			birthday: "",
+			favorite_genre: "",
+			library: [],
+			wishlist: [],
+			password: "",
 			user: {
-				firstname: "",
-				lastname: "",
-				email: "",
-				address: "",
-				phone: "",
-				birthday: "",
-				genre: "",
-				library: [],
-				wishlist: []
-			},
-			showDrop: false
+				username: "",
+				password: ""
+			}
 		};
+	}
+
+	passwordCheck(event) {
+		event.preventDefault();
+		var user = this.getUser();
+
+		if (user.password1 == user.password2) {
+			user.password = user.password1;
+			return true;
+		} else {
+			alert("The passwords do not match!");
+		}
 	}
 
 	render() {
@@ -65,14 +79,13 @@ export class SignUp extends React.Component {
 												placeholder=""
 												onChange={e =>
 													this.setState.user({
-														firstname:
+														first_name:
 															e.target.value
 													})
 												}
 											/>
-
 											<div className="form-inline">
-												<h2>Email</h2>
+												<h2>Address</h2>
 											</div>
 											<input
 												className="form-control"
@@ -80,14 +93,13 @@ export class SignUp extends React.Component {
 												placeholder=""
 												onChange={event =>
 													this.setState.user({
-														email:
+														address:
 															event.target.value
 													})
 												}
 											/>
-
 											<div className="form-inline">
-												<h2>Phone</h2>
+												<h2>City</h2>
 											</div>
 											<input
 												className="form-control"
@@ -95,14 +107,28 @@ export class SignUp extends React.Component {
 												placeholder=""
 												onChange={event =>
 													this.setState.user({
-														phone:
+														address:
+															event.target.value
+													})
+												}
+											/>
+											<div className="form-inline">
+												<h2>State</h2>
+											</div>
+											<input
+												className="form-control"
+												type="text"
+												placeholder=""
+												onChange={event =>
+													this.setState.user({
+														address:
 															event.target.value
 													})
 												}
 											/>
 										</div>
 
-										<div className="modal-body ml-auto col-3">
+										<div className="modal-body ml-auto col-4">
 											<div className="row">
 												<div className="form-group">
 													<div className="form-inline">
@@ -114,27 +140,55 @@ export class SignUp extends React.Component {
 														placeholder=""
 														onChange={event =>
 															this.setState.user({
-																lastname:
+																last_name:
 																	event.target
 																		.value
 															})
 														}
 													/>
+
 													<div className="form-inline">
-														<h2>Address</h2>
+														<h2>Password</h2>
 													</div>
 													<input
+														type="password"
 														className="form-control"
-														type="text"
-														placeholder=""
-														onChange={event =>
-															this.setState.user({
-																address:
-																	event.target
-																		.value
-															})
+														id="password"
+														placeholder="Password"
+														aria-describedby="password"
+														required
+														onChange={e =>
+															(this.user.password1 =
+																e.target.value)
 														}
 													/>
+													<div className="form-row">
+														<div className="col-md-12 mb-3">
+															<label htmlFor="password1">
+																Confirm Password
+															</label>
+															<div className="input-group">
+																<div className="input-group-prepend">
+																	<span
+																		className="input-group-text"
+																		id="password1"
+																	/>
+																</div>
+																<input
+																	type="password"
+																	className="form-control"
+																	id="password1"
+																	placeholder="Confirm Password"
+																	aria-describedby="password1"
+																	required
+																	onChange={e =>
+																		(this.user.password2 =
+																			e.target.value)
+																	}
+																/>
+															</div>
+														</div>
+													</div>
 													<div className="form-inline">
 														<h2>Birthday</h2>
 													</div>
@@ -154,63 +208,22 @@ export class SignUp extends React.Component {
 											</div>
 										</div>
 									</div>
+									<select
+										id="inputState"
+										className="form-control">
+										<option selected>
+											Favorite Genre{" "}
+										</option>
+										<option>Sci-fi</option>
+										<option>Romance</option>
+										<option>Horror</option>
+										<option>Biography</option>
+										<option>Comedy</option>
+										<option>Teen Drama</option>
+										<option>Adult Fiction</option>
+									</select>
 
 									<div className="mx-auto" />
-									<div className="nav-item dropdown">
-										<a
-											className="nav-link dropdown-toggle"
-											id="navbarDropdown"
-											role="button"
-											data-toggle="dropdown"
-											aria-haspopup="true"
-											aria-expanded="false"
-											onClick={() =>
-												this.setState({
-													showDrop: true
-												})
-											}>
-											Genre
-										</a>
-										<div
-											className="dropdown-menu"
-											style={{
-												display: this.state.showDrop
-													? "inline-block"
-													: "hidden"
-											}}
-											aria-labelledby="navbarDropdown">
-											<div
-												onClick={() =>
-													this.setState({
-														showDrop: !this.state
-															.showDrop
-													})
-												}>
-												<a className="dropdown-item">
-													Action
-												</a>
-											</div>
-											<a
-												className="dropdown-item"
-												onClick={() =>
-													this.setState({
-														showDrop: false
-													})
-												}>
-												Another action
-											</a>
-											<div className="dropdown-divider" />
-											<a
-												className="dropdown-item"
-												onClick={() =>
-													this.setState({
-														showDrop: false
-													})
-												}>
-												Something else here
-											</a>
-										</div>
-									</div>
 									<Context.Consumer>
 										{({ store, actions }) => {
 											return (
@@ -222,7 +235,7 @@ export class SignUp extends React.Component {
 															this.state.user
 														)
 													}>
-													Submit
+													Create Account
 												</button>
 											);
 										}}
