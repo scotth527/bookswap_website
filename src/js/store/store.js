@@ -161,8 +161,15 @@ const getState = scope => {
 					}
 				})
 					.then(res => res.json())
-					.then(response => {
-						console.log("Success:", JSON.stringify(response));
+					.then(data => {
+						let store = scope.state.store;
+						if (data["token"] != undefined) {
+							store.token = "JWT " + data["token"];
+							store.sessions.loggedIn = true;
+							scope.setState({ store });
+						} else {
+							alert("Incorrect username/password");
+						}
 					})
 					.catch(error => console.error("Error:", error));
 			},

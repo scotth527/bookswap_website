@@ -54,10 +54,9 @@ export class LogIn extends React.Component {
 												className="form-control"
 												type="text"
 												placeholder=""
-												onChange={event =>
-													this.State({
-														username:
-															event.target.value
+												onChange={e =>
+													this.setState({
+														username: e.target.value
 													})
 												}
 											/>
@@ -69,10 +68,9 @@ export class LogIn extends React.Component {
 												className="form-control"
 												type="Password"
 												placeholder=""
-												onChange={event =>
-													this.State({
-														password:
-															event.target.value
+												onChange={e =>
+													this.setState({
+														password: e.target.value
 													})
 												}
 											/>
@@ -83,11 +81,17 @@ export class LogIn extends React.Component {
 													<button
 														className="btn btn-primary"
 														type="button"
-														onClick={() =>
-															actions.loggingIn(
+														onClick={() => {
+															actions.loginUser(
 																this.state
-															)
-														}>
+															);
+															if (
+																store.sessions
+																	.loggedIn
+															) {
+																this.props.onClose();
+															}
+														}}>
 														Submit
 													</button>
 												);

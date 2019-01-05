@@ -102,6 +102,11 @@ export class Trade extends React.Component {
 											drop={true}
 										/>
 										<select
+											onChange={e =>
+												this.setState({
+													offeredBook: e.target.key
+												})
+											}
 											id="inputState"
 											className="form-control">
 											<option selected>
