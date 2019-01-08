@@ -33,10 +33,10 @@ function YourShop(props) {
 								.slice(0, 3)
 								.map((item, index) => {
 									const book = item.book;
-									console.log(book);
+									console.log(item);
 									if (typeof book === "undefined") {
 										return (
-											<h2 key={item.book.api_id}>
+											<h2 key={book.api_id}>
 												{" "}
 												No book selected
 											</h2>
@@ -45,7 +45,7 @@ function YourShop(props) {
 										return (
 											<Preview
 												key={item.book.api_id}
-												link={item.book.api_id.toString()}
+												link={item.book.api_id}
 												picurl={item.book.image}
 												title={item.book.title}
 											/>

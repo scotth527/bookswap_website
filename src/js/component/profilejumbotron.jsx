@@ -35,7 +35,10 @@ function Profilebanner(props) {
 										{"Address: " +
 											store.profile.address}{" "}
 									</p>
-									<p> {"Email: " + store.sessions.email}</p>
+									<p>
+										{" "}
+										{"Email: " + store.sessions.user.email}
+									</p>
 								</div>
 							</div>
 						</div>

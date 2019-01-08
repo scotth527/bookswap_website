@@ -26,10 +26,12 @@ const getState = scope => {
 			profile: {},
 
 			sessions: {
-				username: "Rigo",
-				email: "rigocodes@gmail.com",
-				loggedIn: true,
-				profile: 4
+				user: {
+					username: "",
+					email: "",
+					id: null
+				},
+				loggedIn: false
 			},
 
 			token: "JWT ",
@@ -116,33 +118,6 @@ const getState = scope => {
 
 			pending: [],
 
-			// trades: [
-			// 	{
-			// 		requesterid: 1,
-			// 		requesterbook: 1,
-			// 		requestedid: 2,
-			// 		requestedbook: 2,
-			// 		is_accepted: false,
-			// 		tradeid: 1
-			// 	},
-			// 	{
-			// 		requesterid: 1,
-			// 		requesterbook: 4,
-			// 		requestedid: 3,
-			// 		requestedbook: 2,
-			// 		is_accepted: true,
-			// 		tradeid: 2
-			// 	},
-			// 	{
-			// 		requesterid: 2,
-			// 		requesterbook: 3,
-			// 		requestedid: 3,
-			// 		requestedbook: 1,
-			// 		is_accepted: false,
-			// 		tradeid: 3
-			// 	}
-			// ],
-
 			trades: []
 		},
 		actions: {
@@ -151,6 +126,41 @@ const getState = scope => {
 			// 	store.demo[element].background = color;
 			// 	scope.setState({ store });
 			// },
+			clearStore: () => {
+				let store = scope.state.store;
+				store.owners = [];
+				store.pending = [];
+				scope.setState(store);
+			},
+
+			getUserData(scope) {
+				let store = scope.state.store;
+				if (store.sessions.loggedIn) {
+					fetch([urls[currentURL], "retrieveuser/"].join(""), {
+						headers: {
+							"Content-Type": "application/json",
+							Authorization: store.token
+						}
+					})
+						.then(response => response.json())
+						.then(data => {
+							store.sessions.user = data;
+							scope.setState({ store });
+							scope.state.actions.fetchProfile(
+								store.sessions.user.id
+							);
+							scope.state.actions.getLibrary(
+								store.sessions.user.id
+							);
+							scope.state.actions.getWishlist(
+								store.sessions.user.id
+							);
+							scope.state.actions.fetchTrades(
+								store.sessions.user.id
+							);
+						});
+				}
+			},
 
 			loginUser: user => {
 				fetch([urls[currentURL], "login/"].join(""), {
@@ -167,6 +177,7 @@ const getState = scope => {
 							store.token = "JWT " + data["token"];
 							store.sessions.loggedIn = true;
 							scope.setState({ store });
+							scope.state.actions.getUserData(scope);
 						} else {
 							alert("Incorrect username/password");
 						}
@@ -184,6 +195,7 @@ const getState = scope => {
 				let store = scope.state.store;
 				store.token = "JWT ";
 				store.sessions.loggedIn = false;
+				scope.state.actions.clearStore();
 				scope.setState({ store });
 			},
 
@@ -191,26 +203,6 @@ const getState = scope => {
 				return scope.state.store.trades.find(
 					e => e.tradeid === tradeid
 				);
-			},
-
-			isLegalUser: currentUser => {
-				let store = scope.state.store;
-
-				// get user from store
-				let sessionUser = store.users.filter(
-					user => user.email == currentUser.email
-				)[0];
-
-				// set user session
-				if (
-					sessionUser &&
-					sessionUser.password === currentUser.password
-				) {
-					store.session.loggedIn = true;
-					store.session.user = sessionUser;
-					scope.setState({ store });
-					return true;
-				}
 			},
 
 			fetchData: () => {
@@ -237,6 +229,7 @@ const getState = scope => {
 			},
 
 			fetchProfile: id => {
+				console.log(id);
 				fetch([urls[currentURL], "profile/", id].join(""))
 					.then(response => response.json())
 					.then(data => {
@@ -260,14 +253,6 @@ const getState = scope => {
 					.catch(error => console.log(error));
 			},
 
-			clearStore: () => {
-				let store = scope.state.store;
-				store.books = [];
-				store.owners = [];
-				store.pending = [];
-				scope.setState(store);
-			},
-
 			acceptTrade: tradeid => {
 				let { store } = scope.state;
 				fetch([urls[currentURL], "trades/", tradeid].join(""), {
@@ -288,7 +273,7 @@ const getState = scope => {
 					})
 					.then(res => {
 						scope.state.actions.fetchTrades(
-							scope.state.store.sessions.profile
+							scope.state.store.sessions.user.id
 						);
 					})
 					.catch(error => console.error("Error:", error));
@@ -301,7 +286,7 @@ const getState = scope => {
 					.then(res => {
 						if (res.ok == true) {
 							scope.state.actions.fetchTrades(
-								scope.state.store.sessions.profile
+								scope.state.store.sessions.user.id
 							);
 						} else {
 							console.log("Something went wrong oops");
@@ -309,7 +294,7 @@ const getState = scope => {
 					})
 					.then(res => {
 						scope.state.actions.fetchTrades(
-							scope.state.store.sessions.profile
+							scope.state.store.sessions.user.id
 						);
 					})
 					.catch(error => console.error("Error:", error));
@@ -340,7 +325,7 @@ const getState = scope => {
 					[
 						urls[currentURL],
 						"profile/",
-						scope.state.store.sessions.profile
+						scope.state.store.sessions.user.id
 					].join(""),
 					{
 						method: "PATCH",
@@ -361,7 +346,7 @@ const getState = scope => {
 					})
 					.then(res => {
 						scope.state.actions.getWishlist(
-							scope.state.store.sessions.profile
+							scope.state.store.sessions.user.id
 						);
 					})
 					.catch(error => console.error("Error:", error));
@@ -378,7 +363,7 @@ const getState = scope => {
 					[
 						urls[currentURL],
 						"profile/",
-						scope.state.store.sessions.profile
+						scope.state.store.sessions.user.id
 					].join(""),
 					{
 						method: "PATCH",
@@ -391,7 +376,7 @@ const getState = scope => {
 					.then(res => {
 						if (res.ok == true) {
 							scope.state.actions.getWishlist(
-								scope.state.store.sessions.profile
+								scope.state.store.sessions.user.id
 							);
 						} else {
 							console.log("Something went wrong oops");
@@ -399,7 +384,7 @@ const getState = scope => {
 					})
 					.then(res => {
 						scope.state.actions.getWishlist(
-							scope.state.store.sessions.profile
+							scope.state.store.sessions.user.id
 						);
 					})
 
@@ -416,7 +401,7 @@ const getState = scope => {
 							data.map(profile => {
 								if (
 									profile.id !=
-									scope.state.store.sessions.profile
+									scope.state.store.sessions.user.id
 								) {
 									store.owners.push(profile);
 								}
@@ -451,7 +436,7 @@ const getState = scope => {
 							data.map(profile => {
 								if (
 									profile.id !=
-									scope.state.store.sessions.profile
+									scope.state.store.sessions.user.id
 								) {
 									store.wishers.push(profile);
 								}
@@ -518,7 +503,7 @@ const getState = scope => {
 						console.log("Success:", JSON.stringify(response));
 						console.log(scope);
 						scope.state.actions.getLibrary(
-							scope.state.store.sessions.profile
+							scope.state.store.sessions.user.id
 						);
 					})
 					.catch(error => console.error("Error:", error));
@@ -533,7 +518,7 @@ const getState = scope => {
 						console.log(res.body);
 						if (res.ok == true) {
 							scope.state.actions.getLibrary(
-								scope.state.store.sessions.profile
+								scope.state.store.sessions.user.id
 							);
 						} else {
 							console.log("Something went wrong oops");
@@ -541,7 +526,7 @@ const getState = scope => {
 					})
 					.then(res => {
 						scope.state.actions.getLibrary(
-							scope.state.store.sessions.profile
+							scope.state.store.sessions.user.id
 						);
 					})
 					.catch(error => console.error("Error:", error));
@@ -560,7 +545,7 @@ const getState = scope => {
 						console.log("Success:", JSON.stringify(response));
 						console.log(scope);
 						scope.state.actions.getLibrary(
-							scope.state.store.sessions.profile
+							scope.state.store.sessions.user.id
 						);
 					})
 					.catch(error => console.error("Error:", error));

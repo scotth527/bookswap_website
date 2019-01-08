@@ -93,7 +93,7 @@ export class BookPage extends React.Component {
 														<p>
 															{"Language: " +
 																this.state.book
-																	.editionlanguage}
+																	.language}
 														</p>
 														<p>ISBN</p>
 														<p className="text-wrap">

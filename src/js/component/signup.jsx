@@ -211,9 +211,7 @@ export class SignUp extends React.Component {
 									<select
 										id="inputState"
 										className="form-control">
-										<option selected>
-											Favorite Genre{" "}
-										</option>
+										<option>Favorite Genre</option>
 										<option>Sci-fi</option>
 										<option>Romance</option>
 										<option>Horror</option>

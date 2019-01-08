@@ -86,8 +86,8 @@ export class LogIn extends React.Component {
 																this.state
 															);
 															if (
-																store.sessions
-																	.loggedIn
+																store.token !=
+																undefined
 															) {
 																this.props.onClose();
 															}

@@ -16,6 +16,7 @@ export class Wishlist extends React.Component {
 			showOwnersModal: false,
 			bookid: 0,
 			key: "owners",
+			user: null,
 			showTradeModal: false
 		};
 	}
