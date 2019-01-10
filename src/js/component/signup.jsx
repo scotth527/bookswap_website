@@ -119,12 +119,12 @@ export class SignUp extends React.Component {
 												className="form-control"
 												type="text"
 												placeholder=""
-												onChange={event =>
-													this.setState.user({
-														address:
-															event.target.value
-													})
-												}
+												// onChange={event =>
+												// 	this.setState.user({
+												// 		address:
+												// 			event.target.value
+												// 	})
+												// }
 											/>
 										</div>
 
@@ -211,6 +211,12 @@ export class SignUp extends React.Component {
 									<select
 										id="inputState"
 										className="form-control">
+										onChange=
+										{e =>
+											this.setState.user({
+												favorite_genre: e.target.value
+											})
+										}
 										<option>Favorite Genre</option>
 										<option>Sci-fi</option>
 										<option>Romance</option>

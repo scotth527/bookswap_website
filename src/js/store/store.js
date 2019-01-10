@@ -206,8 +206,13 @@ const getState = scope => {
 			},
 
 			fetchData: () => {
+				console.log(scope.state.store.token);
 				//fetches books
-				fetch(urls[currentURL] + "books/")
+				fetch(urls[currentURL] + "books/", {
+					headers: {
+						"Content-Type": "application/json"
+					}
+				})
 					.then(response => response.json())
 					.then(data => {
 						let { store } = scope.state;
@@ -218,7 +223,12 @@ const getState = scope => {
 			},
 
 			fetchBookForPage: id => {
-				fetch([urls[currentURL], "books/", id].join(""))
+				fetch([urls[currentURL], "books/", id].join(""), {
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: scope.state.store.token
+					}
+				})
 					.then(response => response.json())
 					.then(data => {
 						let store = scope.state.store;
@@ -230,7 +240,12 @@ const getState = scope => {
 
 			fetchProfile: id => {
 				console.log(id);
-				fetch([urls[currentURL], "profile/", id].join(""))
+				fetch([urls[currentURL], "profile/", id].join(""), {
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: scope.state.store.token
+					}
+				})
 					.then(response => response.json())
 					.then(data => {
 						let store = scope.state.store;
@@ -241,7 +256,12 @@ const getState = scope => {
 			},
 
 			fetchTrades: id => {
-				fetch([urls[currentURL], "trades/", id].join(""))
+				fetch([urls[currentURL], "trades/", id].join(""), {
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: scope.state.store.token
+					}
+				})
 					.then(response => response.json())
 					.then(data => {
 						//console.log(data);
@@ -261,7 +281,8 @@ const getState = scope => {
 						is_accepted: true
 					}),
 					headers: {
-						"Content-Type": "application/json"
+						"Content-Type": "application/json",
+						Authorization: scope.state.store.token
 					}
 				})
 					.then(response => {
@@ -281,7 +302,10 @@ const getState = scope => {
 
 			cancelTrade: tradeid => {
 				fetch([urls[currentURL], "trades/", tradeid].join(""), {
-					method: "DELETE" // or 'PUT'
+					method: "DELETE",
+					headers: {
+						Authorization: scope.state.store.token
+					} // or 'PUT'
 				})
 					.then(res => {
 						if (res.ok == true) {
@@ -301,7 +325,12 @@ const getState = scope => {
 			},
 
 			getWishlist: id => {
-				fetch([urls[currentURL], "profile/", id].join(""))
+				fetch([urls[currentURL], "profile/", id].join(""), {
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: scope.state.store.token
+					}
+				})
 					.then(response => response.json())
 					.then(data => {
 						let { store } = scope.state;
@@ -333,7 +362,8 @@ const getState = scope => {
 							wishlist: store.wishlist
 						}),
 						headers: {
-							"Content-Type": "application/json"
+							"Content-Type": "application/json",
+							Authorization: scope.state.store.token
 						}
 					}
 				)
@@ -358,7 +388,6 @@ const getState = scope => {
 				store.wishlist.splice(wishlistIndex, 1);
 
 				//scope.setState({ store });
-				console.log(store.wishlist);
 				fetch(
 					[
 						urls[currentURL],
@@ -369,7 +398,8 @@ const getState = scope => {
 						method: "PATCH",
 						body: JSON.stringify({ wishlist: store.wishlist }),
 						headers: {
-							"Content-Type": "application/json"
+							"Content-Type": "application/json",
+							Authorization: scope.state.store.token
 						}
 					}
 				)
@@ -392,7 +422,12 @@ const getState = scope => {
 			},
 
 			fetchOwners: bookid => {
-				fetch([urls[currentURL], "page/", bookid].join(""))
+				fetch([urls[currentURL], "page/", bookid].join(""), {
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: scope.state.store.token
+					}
+				})
 					.then(response => response.json())
 					.then(data => {
 						let { store } = scope.state;
@@ -427,7 +462,12 @@ const getState = scope => {
 			// },
 
 			fetchInterested: bookid => {
-				fetch([urls[currentURL], "wishers/", bookid].join(""))
+				fetch([urls[currentURL], "wishers/", bookid].join(""), {
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: scope.state.store.token
+					}
+				})
 					.then(response => response.json())
 					.then(data => {
 						let { store } = scope.state;
@@ -449,7 +489,12 @@ const getState = scope => {
 			},
 
 			fetchRequests: id => {
-				fetch([urls[currentURL], "requests/", id].join(""))
+				fetch([urls[currentURL], "requests/", id].join(""), {
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: scope.state.store.token
+					}
+				})
 					.then(response => response.json())
 					.then(data => {
 						let store = scope.state;
@@ -469,7 +514,12 @@ const getState = scope => {
 
 			getLibrary: id => {
 				//console.log(id);
-				fetch([urls[currentURL], "library/", id].join(""))
+				fetch([urls[currentURL], "library/", id].join(""), {
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: scope.state.store.token
+					}
+				})
 					.then(response => response.json())
 					.then(data => {
 						let { store } = scope.state;
@@ -495,7 +545,8 @@ const getState = scope => {
 					method: "POST", // or 'PUT'
 					body: JSON.stringify(addToInventoryEntry), // data can be `string` or {object}!
 					headers: {
-						"Content-Type": "application/json"
+						"Content-Type": "application/json",
+						Authorization: scope.state.store.token
 					}
 				})
 					.then(res => res.json())
@@ -512,7 +563,12 @@ const getState = scope => {
 			deleteFromLibrary: id => {
 				console.log(id);
 				fetch([urls[currentURL], "library/", id].join(""), {
-					method: "DELETE" // or 'PUT'
+					method: "DELETE",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: scope.state.store.token
+					}
+					// or 'PUT'
 				})
 					.then(res => {
 						console.log(res.body);
@@ -537,7 +593,8 @@ const getState = scope => {
 					method: "POST", // or 'PUT'
 					body: JSON.stringify(tradeRequest), // data can be `string` or {object}!
 					headers: {
-						"Content-Type": "application/json"
+						"Content-Type": "application/json",
+						Authorization: scope.state.store.token
 					}
 				})
 					.then(res => res.json())
