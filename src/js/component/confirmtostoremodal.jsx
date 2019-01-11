@@ -54,10 +54,11 @@ export class StoreAddModal extends React.Component {
 										<button
 											type="button"
 											onClick={item => {
+												console.log(store.library);
 												if (
 													store.library.find(
 														item =>
-															item.book ===
+															item.book.api_id ===
 															this.props.id
 													) == undefined
 												) {

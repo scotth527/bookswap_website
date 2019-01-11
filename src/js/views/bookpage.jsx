@@ -86,7 +86,7 @@ export class BookPage extends React.Component {
 																	.author}
 														</p>
 														<p>
-															{"Genre " +
+															{"Genre: " +
 																this.state.book
 																	.genre}
 														</p>
@@ -115,7 +115,8 @@ export class BookPage extends React.Component {
 																	user:
 																		store
 																			.sessions
-																			.profile
+																			.user
+																			.id
 																})
 															}
 															type="button"

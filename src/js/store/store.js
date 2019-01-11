@@ -540,6 +540,7 @@ const getState = scope => {
 				// let store = scope.state.store;
 				// store.library.push(bookid);
 				// scope.setState(store);
+				console.log(addToInventoryEntry);
 
 				fetch([urls[currentURL], "library/"].join(""), {
 					method: "POST", // or 'PUT'
