@@ -21,10 +21,15 @@ export class SignUp extends React.Component {
 			password: "",
 			user: {
 				username: "",
+				email: "",
 				password: ""
 			}
 		};
 	}
+
+	change = function(event) {
+		this.setState({ favorite_genre: event.target.value });
+	};
 
 	passwordCheck(event) {
 		event.preventDefault();
@@ -71,14 +76,17 @@ export class SignUp extends React.Component {
 									<div className="row">
 										<div className="form-group">
 											<div className="form-inline">
-												<h2>First Name</h2>
+												<h2 htmlFor="validationDefault01">
+													First Name
+												</h2>
 											</div>
 											<input
+												id="validationDefault01"
 												className="form-control"
 												type="text"
 												placeholder=""
 												onChange={e =>
-													this.setState.user({
+													this.setState({
 														first_name:
 															e.target.value
 													})
@@ -92,7 +100,7 @@ export class SignUp extends React.Component {
 												type="text"
 												placeholder=""
 												onChange={event =>
-													this.setState.user({
+													this.setState({
 														address:
 															event.target.value
 													})
@@ -106,9 +114,8 @@ export class SignUp extends React.Component {
 												type="text"
 												placeholder=""
 												onChange={event =>
-													this.setState.user({
-														address:
-															event.target.value
+													this.setState({
+														city: event.target.value
 													})
 												}
 											/>
@@ -119,12 +126,46 @@ export class SignUp extends React.Component {
 												className="form-control"
 												type="text"
 												placeholder=""
-												// onChange={event =>
-												// 	this.setState.user({
-												// 		address:
-												// 			event.target.value
-												// 	})
-												// }
+												onChange={event =>
+													this.setState({
+														state:
+															event.target.value
+													})
+												}
+											/>
+											<div className="form-inline">
+												<h2>Username</h2>
+											</div>
+											<input
+												className="form-control"
+												type="text"
+												placeholder=""
+												onChange={event => {
+													let user = Object.assign(
+														{},
+														this.state.user
+													); //creating copy of object
+													user.username =
+														event.target.value; //updating value
+													this.setState({ user });
+												}}
+											/>
+											<div className="form-inline">
+												<h2>Email</h2>
+											</div>
+											<input
+												className="form-control"
+												type="text"
+												placeholder=""
+												onChange={event => {
+													let user = Object.assign(
+														{},
+														this.state.user
+													); //creating copy of object
+													user.email =
+														event.target.value; //updating value
+													this.setState({ user });
+												}}
 											/>
 										</div>
 
@@ -139,7 +180,7 @@ export class SignUp extends React.Component {
 														type="text"
 														placeholder=""
 														onChange={event =>
-															this.setState.user({
+															this.setState({
 																last_name:
 																	event.target
 																		.value
@@ -153,7 +194,7 @@ export class SignUp extends React.Component {
 													<input
 														type="password"
 														className="form-control"
-														id="password"
+														id="password1"
 														placeholder="Password"
 														aria-describedby="password"
 														required
@@ -177,7 +218,7 @@ export class SignUp extends React.Component {
 																<input
 																	type="password"
 																	className="form-control"
-																	id="password1"
+																	id="password2"
 																	placeholder="Confirm Password"
 																	aria-describedby="password1"
 																	required
@@ -195,9 +236,9 @@ export class SignUp extends React.Component {
 													<input
 														className="form-control"
 														type="text"
-														placeholder="Month/Day/Year"
+														placeholder="Month/Day/Year e.g. 12/31/1984"
 														onChange={event =>
-															this.setState.user({
+															this.setState({
 																birthday:
 																	event.target
 																		.value
@@ -209,23 +250,31 @@ export class SignUp extends React.Component {
 										</div>
 									</div>
 									<select
+										onChange={e => {
+											this.change(e);
+										}}
+										value={this.state.favorite_genre}
 										id="inputState"
-										className="form-control">
-										onChange=
-										{e =>
-											this.setState.user({
-												favorite_genre: e.target.value
-											})
-										}
-										<option>Favorite Genre</option>
-										<option>Sci-fi</option>
-										<option>Romance</option>
-										<option>Horror</option>
-										<option>Biography</option>
-										<option>Comedy</option>
-										<option>Teen Drama</option>
-										<option>Adult Fiction</option>
+										className="form-control mb-2">
+										<option value="Nothing Selected">
+											Favorite Genre
+										</option>
+										<option value="Sci-fi">Sci-fi</option>
+										<option value="Romance">Romance</option>
+										<option value="Horror">Horror</option>
+										<option value="Biography">
+											Biography
+										</option>
+										<option value="Comedy">Comedy</option>
+										<option value="Teen Drama">
+											Teen Drama
+										</option>
+										<option value="Adult Fiction">
+											Adult Fiction
+										</option>
 									</select>
+
+									<p>{this.state.favorite_genre}</p>
 
 									<div className="mx-auto" />
 									<Context.Consumer>

@@ -206,7 +206,6 @@ const getState = scope => {
 			},
 
 			fetchData: () => {
-				console.log(scope.state.store.token);
 				//fetches books
 				fetch(urls[currentURL] + "books/", {
 					headers: {
@@ -239,7 +238,6 @@ const getState = scope => {
 			},
 
 			fetchProfile: id => {
-				console.log(id);
 				fetch([urls[currentURL], "profile/", id].join(""), {
 					headers: {
 						"Content-Type": "application/json",
@@ -553,7 +551,6 @@ const getState = scope => {
 					.then(res => res.json())
 					.then(response => {
 						console.log("Success:", JSON.stringify(response));
-						console.log(scope);
 						scope.state.actions.getLibrary(
 							scope.state.store.sessions.user.id
 						);
@@ -562,7 +559,6 @@ const getState = scope => {
 			},
 
 			deleteFromLibrary: id => {
-				console.log(id);
 				fetch([urls[currentURL], "library/", id].join(""), {
 					method: "DELETE",
 					headers: {
@@ -572,7 +568,6 @@ const getState = scope => {
 					// or 'PUT'
 				})
 					.then(res => {
-						console.log(res.body);
 						if (res.ok == true) {
 							scope.state.actions.getLibrary(
 								scope.state.store.sessions.user.id
@@ -601,7 +596,6 @@ const getState = scope => {
 					.then(res => res.json())
 					.then(response => {
 						console.log("Success:", JSON.stringify(response));
-						console.log(scope);
 						scope.state.actions.getLibrary(
 							scope.state.store.sessions.user.id
 						);
@@ -620,7 +614,6 @@ const getState = scope => {
 						let ids = [];
 						for (var user in data) {
 							ids.push(user["profile"]);
-							console.log(ids);
 						}
 						return ids.filter(item => item.id !== self);
 					})

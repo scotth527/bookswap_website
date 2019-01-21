@@ -34,7 +34,6 @@ export class Library extends React.Component {
 				<Context.Consumer>
 					{({ store, actions }) => {
 						return store.library.map((item, index) => {
-							console.log(item.book.api_id);
 							return (
 								<Item
 									id={parseInt(item.book.api_id)}

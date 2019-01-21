@@ -262,7 +262,6 @@ export class BookPage extends React.Component {
 				{this.state.showTradeModal && (
 					<Context.Consumer>
 						{({ store, actions }) => {
-							console.log(store.library);
 							return (
 								<Trade
 									show={this.state.showTradeModal}

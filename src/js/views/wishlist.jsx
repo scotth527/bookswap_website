@@ -37,7 +37,6 @@ export class Wishlist extends React.Component {
 						<Context.Consumer>
 							{({ store, actions }) => {
 								return store.wishlist.map((item, index) => {
-									console.log(item);
 									return (
 										<Item
 											key={index}
@@ -109,7 +108,6 @@ export class Wishlist extends React.Component {
 				{this.state.showTradeModal && (
 					<Context.Consumer>
 						{({ store, actions }) => {
-							console.log(store.library);
 							return (
 								<Trade
 									show={this.state.showTradeModal}

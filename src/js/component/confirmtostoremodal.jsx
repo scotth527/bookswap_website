@@ -58,7 +58,7 @@ export class StoreAddModal extends React.Component {
 												if (
 													store.library.find(
 														item =>
-															item.book.api_id ===
+															item.book.id ===
 															this.props.id
 													) == undefined
 												) {
