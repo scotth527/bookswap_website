@@ -440,24 +440,10 @@ const getState = scope => {
 								}
 							});
 						}
-						//console.log(store);
 						scope.setState({ store });
 					});
 			},
 
-			// fetchInv: (bookID, profileID) => {
-			// 	fetch(
-			// 		[urls[currentURL], "inv/", bookID, "/", profileID].join("")
-			// 	)
-			// 		.then(response => response.json())
-			// 		.then(data => {
-			// 			let store = scope.state.store;
-			// 			store.pending = [];
-			// 			store.pending.push(data);
-			// 			scope.setState(store);
-			// 		})
-			// 		.catch(error => console.log(error));
-			// },
 
 			fetchInterested: bookid => {
 				fetch([urls[currentURL], "wishers/", bookid].join(""), {
@@ -480,7 +466,6 @@ const getState = scope => {
 								}
 							});
 						}
-						//console.log(store);
 						scope.setState({ store });
 					})
 					.catch(error => console.log(error));
@@ -511,7 +496,6 @@ const getState = scope => {
 			},
 
 			getLibrary: id => {
-				//console.log(id);
 				fetch([urls[currentURL], "library/", id].join(""), {
 					headers: {
 						"Content-Type": "application/json",
@@ -535,10 +519,6 @@ const getState = scope => {
 			},
 
 			addToLibrary: addToInventoryEntry => {
-				// let store = scope.state.store;
-				// store.library.push(bookid);
-				// scope.setState(store);
-				console.log(addToInventoryEntry);
 
 				fetch([urls[currentURL], "library/"].join(""), {
 					method: "POST", // or 'PUT'

@@ -36,6 +36,7 @@ export class Item extends React.Component {
 				{({ store, actions }) => {
 					const book = actions.searchBookByID(this.props.id);
 					console.log(this.props.id);
+					console.log(book);
 					if (typeof book === "undefined") {
 						return <h2> No book selected</h2>;
 					} else {
