@@ -121,11 +121,6 @@ const getState = scope => {
 			trades: []
 		},
 		actions: {
-			// changeColor: (element, color) => {
-			// 	let store = scope.state.store;
-			// 	store.demo[element].background = color;
-			// 	scope.setState({ store });
-			// },
 			clearStore: () => {
 				let store = scope.state.store;
 				store.owners = [];
@@ -444,7 +439,6 @@ const getState = scope => {
 					});
 			},
 
-
 			fetchInterested: bookid => {
 				fetch([urls[currentURL], "wishers/", bookid].join(""), {
 					headers: {
@@ -519,7 +513,6 @@ const getState = scope => {
 			},
 
 			addToLibrary: addToInventoryEntry => {
-
 				fetch([urls[currentURL], "library/"].join(""), {
 					method: "POST", // or 'PUT'
 					body: JSON.stringify(addToInventoryEntry), // data can be `string` or {object}!

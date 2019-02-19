@@ -6,8 +6,6 @@ import { Home } from "./views/home.jsx";
 import { Account } from "./views/account.jsx";
 import { Wishlist } from "./views/wishlist.jsx";
 import { Single } from "./views/search.jsx";
-//import { Demo } from "./views/demo.jsx";
-//import { Single } from "./views/single.jsx";
 import { Library } from "./views/library.jsx";
 import Store from "./store/appContext.jsx";
 import { NavBar } from "./component/navbar.jsx";
