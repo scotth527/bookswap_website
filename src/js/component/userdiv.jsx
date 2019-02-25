@@ -8,7 +8,7 @@ function Userdiv(props) {
 	return (
 		<div
 			className={
-				"col-12 mb-3 d-flex justify-content-around border border-dark rounded " +
+				"col-12 mb-3 d-flex justify-content-around border border-dark rounded user" +
 				props.background
 			}
 			id={props.id}
@@ -53,7 +53,7 @@ Userdiv.propTypes = {
 	id: PropTypes.number,
 	getUserID: PropTypes.func,
 	selector: PropTypes.func,
-	background: PropTypes.string
+	background: PropTypes.func
 };
 
 Userdiv.defaultProps = {

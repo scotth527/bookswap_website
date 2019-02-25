@@ -8,7 +8,9 @@ export class Usermodal extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			user: null
+			user: null,
+			background1: "bg-secondary",
+			background2: ""
 		};
 	}
 
@@ -45,7 +47,6 @@ export class Usermodal extends React.Component {
 								{({ store, actions }) => {
 									return store[this.props.userKey].map(
 										(profile, index) => {
-											console.log(profile);
 											const user = profile["id"];
 											if (typeof user === "undefined") {
 												return (
@@ -66,11 +67,11 @@ export class Usermodal extends React.Component {
 															profile["user"]
 																.username
 														}
-														getUserID={id =>
+														getUserID={id => {
 															this.setState({
 																user: profile
-															})
-														}
+															});
+														}}
 													/>
 												);
 											}

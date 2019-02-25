@@ -181,9 +181,18 @@ const getState = scope => {
 			},
 
 			registerUser: user => {
-				let store = scope.state.store;
-				store.users.push(user);
-				scope.setState(store);
+				fetch([urls[currentURL], "register/"].join(""), {
+					method: "POST", // or 'PUT'
+					body: JSON.stringify(user), // data can be `string` or {object}!
+					headers: {
+						"Content-Type": "application/json"
+					}
+				})
+					.then(res => res.json())
+					.then(response => {
+						console.log("Success:", JSON.stringify(response));
+					})
+					.catch(error => console.error("Error:", error));
 			},
 
 			logout: () => {

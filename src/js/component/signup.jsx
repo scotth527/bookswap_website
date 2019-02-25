@@ -18,7 +18,6 @@ export class SignUp extends React.Component {
 			favorite_genre: "",
 			library: [],
 			wishlist: [],
-			password: "",
 			user: {
 				username: "",
 				email: "",
@@ -44,6 +43,9 @@ export class SignUp extends React.Component {
 	}
 
 	render() {
+		let password1 = "";
+		let password2 = "";
+
 		return (
 			<div
 				className="modal"
@@ -199,7 +201,7 @@ export class SignUp extends React.Component {
 														aria-describedby="password"
 														required
 														onChange={e =>
-															(this.user.password1 =
+															(password1 =
 																e.target.value)
 														}
 													/>
@@ -223,8 +225,10 @@ export class SignUp extends React.Component {
 																	aria-describedby="password1"
 																	required
 																	onChange={e =>
-																		(this.user.password2 =
-																			e.target.value)
+																		(password2 =
+																			e
+																				.target
+																				.value)
 																	}
 																/>
 															</div>
@@ -235,7 +239,7 @@ export class SignUp extends React.Component {
 													</div>
 													<input
 														className="form-control"
-														type="text"
+														type="date"
 														placeholder="Month/Day/Year e.g. 12/31/1984"
 														onChange={event =>
 															this.setState({
@@ -274,8 +278,6 @@ export class SignUp extends React.Component {
 										</option>
 									</select>
 
-									<p>{this.state.favorite_genre}</p>
-
 									<div className="mx-auto" />
 									<Context.Consumer>
 										{({ store, actions }) => {
@@ -283,11 +285,29 @@ export class SignUp extends React.Component {
 												<button
 													className="btn btn-primary"
 													type="button"
-													onClick={() =>
-														actions.registerUser(
-															this.state.user
-														)
-													}>
+													onClick={() => {
+														if (
+															password1 ===
+															password2
+														) {
+															let user = Object.assign(
+																{},
+																this.state.user
+															); //creating copy of object
+															user.password = password1; //updating value
+															this.setState({
+																user
+															});
+															actions.registerUser(
+																this.state
+															);
+															this.props.onClose();
+														} else {
+															alert(
+																"Password is not matching! Please reconfirm password."
+															);
+														}
+													}}>
 													Create Account
 												</button>
 											);
