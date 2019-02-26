@@ -301,6 +301,9 @@ export class SignUp extends React.Component {
 															actions.registerUser(
 																this.state
 															);
+															actions.loginUser(
+																this.state.user
+															);
 															this.props.onClose();
 														} else {
 															alert(

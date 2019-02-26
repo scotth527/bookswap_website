@@ -14,6 +14,13 @@ function Wishprev(props) {
 		uniqueinfo: PropTypes.number
 	};
 
+	Wishprev.defaultProps = {
+		pagetitle: "Placeholder",
+		pagedescription: "Placeholder",
+		link: "Placeholder",
+		uniqueinfo: 0
+	};
+
 	return (
 		<div
 			className="col-xs-12 col-md-9 col-lg-4 mb-2"

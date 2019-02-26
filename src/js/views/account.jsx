@@ -45,7 +45,19 @@ export class Account extends React.Component {
 				style={{
 					paddingBottom: "60px"
 				}}>
-				<Profilebanner />
+				<Context.Consumer>
+					{({ store, actions }) => {
+						return (
+							<Profilebanner
+								username={store.profile.user.username}
+								firstName={store.profile.first_name}
+								lastName={store.profile.last_name}
+								address={store.profile.address}
+								email={store.sessions.user.email}
+							/>
+						);
+					}}
+				</Context.Consumer>
 				<div className="row">
 					<Context.Consumer>
 						{({ store, actions }) => {

@@ -172,6 +172,7 @@ const getState = scope => {
 							store.token = "JWT " + data["token"];
 							store.sessions.loggedIn = true;
 							scope.setState({ store });
+							console.log(store);
 							scope.state.actions.getUserData(scope);
 						} else {
 							alert("Incorrect username/password");
