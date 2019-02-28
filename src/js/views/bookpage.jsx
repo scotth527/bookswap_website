@@ -57,8 +57,7 @@ export class BookPage extends React.Component {
 				className="container-fluid mt-5 d-flex flex-column wrapper"
 				style={{
 					flexGrow: "1",
-					position: "relative",
-					marginBottom: "147px"
+					position: "relative"
 				}}>
 				<div className="row">
 					<Context.Consumer>

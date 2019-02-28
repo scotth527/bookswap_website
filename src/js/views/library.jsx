@@ -27,7 +27,7 @@ export class Library extends React.Component {
 				style={{
 					wordWrap: "break-word",
 					marginTop: "50px",
-					flexGrow: "1",
+					minHeight: "75vh",
 					position: "relative"
 				}}>
 				<NewItem className="modal-dialog" />

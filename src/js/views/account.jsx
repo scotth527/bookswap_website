@@ -47,15 +47,28 @@ export class Account extends React.Component {
 				}}>
 				<Context.Consumer>
 					{({ store, actions }) => {
-						return (
-							<Profilebanner
-								username={store.profile.user.username}
-								firstName={store.profile.first_name}
-								lastName={store.profile.last_name}
-								address={store.profile.address}
-								email={store.sessions.user.email}
-							/>
-						);
+						console.log(store.profile);
+						if (typeof store.profile.user == undefined) {
+							return (
+								<Profilebanner
+									username="Undefined"
+									firstName="Undefined"
+									lastName="Undefined"
+									address="Undefined"
+									email="Undefined"
+								/>
+							);
+						} else {
+							return (
+								<Profilebanner
+									username={store.profile.user.username}
+									firstName={store.profile.first_name}
+									lastName={store.profile.last_name}
+									address={store.profile.address}
+									email={store.sessions.user.email}
+								/>
+							);
+						}
 					}}
 				</Context.Consumer>
 				<div className="row">

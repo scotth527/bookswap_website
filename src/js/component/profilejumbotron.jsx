@@ -45,7 +45,6 @@ function Profilebanner(props) {
 					</div>
 				</div>
 			</div>
-			);
 		</div>
 	);
 }

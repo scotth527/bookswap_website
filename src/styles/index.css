@@ -8,13 +8,27 @@ html, body {
     padding:0;
 }
 
-body {
+#app {
+    min-height: 100%;
     position: relative;
+    
 }
 
 .wrapper {
     min-height: 100%; 
     position: relative;
+}
+
+.container-fluid.wrapper {
+    position: relative;
+    min-height: 80vh;
+}
+
+footer {
+   position:absolute;
+   left:0;
+   bottom:0;
+   right:0;
 }
 
 

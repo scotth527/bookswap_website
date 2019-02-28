@@ -7,11 +7,11 @@ export class Footer extends Component {
 		return (
 			<footer
 				style={{
-					flex: "1",
+					// flex: "1",
 					background: "#CCD6DD",
-					position: "relative",
-					bottom: "0",
-					flexShrink: "0",
+					// position: "relative",
+					// bottom: "0",
+					// flexShrink: "0",
 					height: "40px"
 				}}
 				className="container-fluid mt-2 text-center border-top border-dark d-flex justify-content-center">
