@@ -4,7 +4,39 @@ import { withRouter } from "react-router-dom";
 import { Context } from "../store/appContext.jsx";
 
 export class SearchModal extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			search: "",
+			books: []
+		};
+	}
+
 	render() {
+		let bookSearch = search => {
+			fetch("https://www.googleapis.com/books/v1/volumes?q=" + search, {
+				headers: {
+					"Content-Type": "application/json"
+				}
+			})
+				.then(response => response.json())
+				.then(data => {
+					let state = this.state.books;
+					for (let i = 0; i < 10; i++) {
+						state.push(data.items[i]);
+					}
+					this.setState({ state });
+				})
+				.catch(error => console.log(error));
+		};
+
+		let keyPress = e => {
+			if (e.keyCode == 13) {
+				bookSearch(this.state.search);
+				// put the login here
+			}
+		};
+
 		return (
 			<div
 				className="modal"
@@ -39,6 +71,12 @@ export class SearchModal extends React.Component {
 								<input
 									className="form-control form-control-sm ml-3 col-10"
 									type="text"
+									onChange={e => {
+										this.setState({
+											search: e.target.value
+										});
+									}}
+									onKeyDown={keyPress}
 									placeholder="Search"
 									aria-label="Search"
 								/>

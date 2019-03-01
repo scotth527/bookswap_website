@@ -32,8 +32,7 @@ export class NavBar extends React.Component {
 								style={{
 									whiteSpace: "normal"
 								}}
-								className="btn btn-dark
-									mb-2 mr-2 ">
+								className="btn btn-dark mr-2 ">
 								{" "}
 								Home
 							</button>
