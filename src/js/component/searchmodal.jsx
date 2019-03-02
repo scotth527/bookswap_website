@@ -10,9 +10,6 @@ export class SearchModal extends React.Component {
 			search: "",
 			books: []
 		};
-	}
-
-	render() {
 		let bookSearch = search => {
 			fetch("https://www.googleapis.com/books/v1/volumes?q=" + search, {
 				headers: {
@@ -29,14 +26,15 @@ export class SearchModal extends React.Component {
 				})
 				.catch(error => console.log(error));
 		};
-
 		let keyPress = e => {
 			if (e.keyCode == 13) {
 				bookSearch(this.state.search);
 				// put the login here
 			}
 		};
+	}
 
+	render() {
 		return (
 			<div
 				className="modal"
@@ -76,7 +74,9 @@ export class SearchModal extends React.Component {
 											search: e.target.value
 										});
 									}}
-									onKeyDown={keyPress}
+									onKeyDown={() => {
+										this.keyPress;
+									}}
 									placeholder="Search"
 									aria-label="Search"
 								/>

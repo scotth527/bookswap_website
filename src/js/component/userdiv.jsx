@@ -1,7 +1,5 @@
 import React from "react";
 
-import { Link } from "react-router-dom";
-
 import PropTypes from "prop-types";
 
 function Userdiv(props) {
@@ -24,8 +22,6 @@ function Userdiv(props) {
 					props.getUserID(null);
 				}
 			}}
-			//onClick=
-			//{e => props.selector(e, props.id, props.getUserID)}
 		>
 			<div className="d-flex justify-content-between col-9">
 				<img
@@ -49,7 +45,6 @@ Userdiv.propTypes = {
 	Username: PropTypes.string,
 	Picurl: PropTypes.string,
 	City: PropTypes.string,
-	//index: PropTypes.number,
 	id: PropTypes.number,
 	getUserID: PropTypes.func,
 	selector: PropTypes.func,
