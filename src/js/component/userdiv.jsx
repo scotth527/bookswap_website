@@ -21,8 +21,7 @@ function Userdiv(props) {
 					);
 					props.getUserID(null);
 				}
-			}}
-		>
+			}}>
 			<div className="d-flex justify-content-between col-9">
 				<img
 					src={props.Picurl}
