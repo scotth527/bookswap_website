@@ -37,7 +37,14 @@ export class Trades extends React.Component {
 
 	render() {
 		return (
-			<div>
+			<div
+				className="container-fluid wrapper mb-5"
+				style={{
+					wordWrap: "break-word",
+					marginTop: "50px",
+					minHeight: "76vh",
+					position: "relative"
+				}}>
 				<Context.Consumer>
 					{({ store, actions }) => {
 						return (
