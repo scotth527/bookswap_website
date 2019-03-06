@@ -7,6 +7,7 @@ import "../../styles/index.css";
 import Wishprev from "../component/wishlistprev.jsx";
 import { Context } from "../store/appContext.jsx";
 import TradesPrev from "../component/tradesprev.jsx";
+import { baseUrl } from "../constant.jsx";
 
 export class Account extends React.Component {
 	render() {
@@ -20,21 +21,21 @@ export class Account extends React.Component {
 				name: "Your Shop",
 				description:
 					"Manage your books that you plan to trade away. Add books to your shop to start trading!",
-				link: "/library",
+				link: "library",
 				uniqueinfo: "# of Books"
 			},
 			{
 				name: "Wishlist",
 				description:
 					"Let others know what books you would like to read! Someone out there might have what you want!",
-				link: "/wishlist",
+				link: "wishlist",
 				uniqueinfo: "# of Books"
 			},
 			{
 				name: "Your Trades",
 				description:
 					"Keep track of incoming and outgoing orders and pending requests.",
-				link: "/trades",
+				link: "trades",
 				uniqueinfo: "# of Pending Orders"
 			}
 		];
@@ -79,19 +80,19 @@ export class Account extends React.Component {
 									<YourShop
 										pagetitle={options[0].name}
 										pagedescription={options[0].description}
-										link={options[0].link}
+										link={baseUrl + options[0].link}
 										uniqueinfo={store.library.length}
 									/>
 									<Wishprev
 										pagetitle={options[1].name}
 										pagedescription={options[1].description}
-										link={options[1].link}
+										link={baseUrl + options[1].link}
 										uniqueinfo={store.wishlist.length}
 									/>
 									<TradesPrev
 										pagetitle={options[2].name}
 										pagedescription={options[2].description}
-										link={options[2].link}
+										link={baseUrl + options[2].link}
 										uniqueinfo={
 											store.trades.filter(
 												item =>

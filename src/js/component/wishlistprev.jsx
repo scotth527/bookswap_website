@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Context } from "../store/appContext.jsx";
 import Preview from "../component/accountprevdiv.jsx";
+import { baseUrl } from "../constant.jsx";
 
 function Wishprev(props) {
 	Wishprev.propTypes = {

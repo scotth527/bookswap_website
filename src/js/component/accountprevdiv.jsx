@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Link } from "react-router-dom";
-
+import { baseUrl } from "../constant.jsx";
 import PropTypes from "prop-types";
 
 export class Preview extends React.Component {
@@ -13,7 +13,7 @@ export class Preview extends React.Component {
 		return (
 			<div className="col-11 rounded border d-flex justify-content-around border-dark mx-auto mb-2">
 				<h5 className="mt-3">{this.props.title}</h5>
-				<Link to={"/bookpage/" + this.props.link}>
+				<Link to={baseUrl + "bookpage/" + this.props.link}>
 					<button
 						type="button"
 						className="mt-3 mb-3 btn btn-primary btn-sm">
