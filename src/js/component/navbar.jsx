@@ -7,6 +7,7 @@ import { LogIn } from "../component/login.jsx";
 import { SignUp } from "../component/signup.jsx";
 import { Context } from "../store/appContext.jsx";
 //import DropDown from "../component/dropdown.jsx";
+import { baseUrl } from "../constant.jsx";
 
 export class NavBar extends React.Component {
 	constructor(props) {
@@ -21,12 +22,12 @@ export class NavBar extends React.Component {
 			<nav className="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between">
 				<ul className="nav">
 					<li className="nav-item">
-						<Link className="navbar-brand" to="/">
+						<Link className="navbar-brand" to={baseUrl}>
 							BookSwap ⇌
 						</Link>
 					</li>
 					<li className="nav-item">
-						<Link to="/">
+						<Link to={baseUrl}>
 							<button
 								type="button"
 								style={{
@@ -71,7 +72,7 @@ export class NavBar extends React.Component {
 									return (
 										<ul className="navbar-nav">
 											<li className="nav-item mr-1">
-												<Link to="/wishlist">
+												<Link to={baseUrl + "wishlist"}>
 													<button
 														type="button"
 														style={{
@@ -85,7 +86,7 @@ export class NavBar extends React.Component {
 												</Link>
 											</li>
 											<li className="nav-item mr-1">
-												<Link to="/library">
+												<Link to={baseUrl + "library"}>
 													<button
 														type="button"
 														style={{
@@ -99,7 +100,7 @@ export class NavBar extends React.Component {
 												</Link>
 											</li>
 											<li className="nav-item mr-1">
-												<Link to="/trades">
+												<Link to={baseUrl + "trades"}>
 													<button
 														type="button"
 														style={{
@@ -113,7 +114,7 @@ export class NavBar extends React.Component {
 												</Link>
 											</li>
 											<li className="nav-item mr-1">
-												<Link to="/account">
+												<Link to={baseUrl + "account"}>
 													<button
 														type="button"
 														style={{
@@ -127,7 +128,7 @@ export class NavBar extends React.Component {
 												</Link>
 											</li>
 											<li className="nav-item mr-1">
-												<Link to="/">
+												<Link to={baseUrl}>
 													<button
 														onClick={() =>
 															actions.logout()

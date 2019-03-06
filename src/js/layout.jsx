@@ -13,6 +13,8 @@ import { Footer } from "./component/footer.jsx";
 import { BookPage } from "./views/bookpage.jsx";
 import { Trades } from "./views/trades.jsx";
 
+const baseUrl = "/bookswap_website/";
+
 //create your first component
 export class Layout extends React.Component {
 	render() {
@@ -21,15 +23,35 @@ export class Layout extends React.Component {
 				<ScrollToTop>
 					<NavBar show="inline-block" />
 					<Switch>
-						<Route exact path="/" component={Home} />
-						<Route exact path="/account" component={Account} />
-						<Route exact path="/library" component={Library} />
-						<Route exact path="/wishlist" component={Wishlist} />
-						<Route exact path="/trades" component={Trades} />
-						<Route exact path="/search" component={Single} />
+						<Route exact path={baseUrl} component={Home} />
 						<Route
 							exact
-							path="/bookpage/:theid"
+							path={baseUrl + "account"}
+							component={Account}
+						/>
+						<Route
+							exact
+							path={baseUrl + "library"}
+							component={Library}
+						/>
+						<Route
+							exact
+							path={baseUrl + "wishlist"}
+							component={Wishlist}
+						/>
+						<Route
+							exact
+							path={baseUrl + "trades"}
+							component={Trades}
+						/>
+						<Route
+							exact
+							path={baseUrl + "search"}
+							component={Single}
+						/>
+						<Route
+							exact
+							path={baseUrl + "bookpage/:theid"}
 							component={BookPage}
 						/>
 						<Route render={() => <h1>Not found!</h1>} />

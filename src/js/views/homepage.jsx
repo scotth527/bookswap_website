@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDom from "react-dom";
 import { Link, withRouter } from "react-router-dom";
+import { baseUrl } from "../constant.jsx";
 
 export class HomePage extends React.Component {
 	render() {
@@ -65,7 +66,7 @@ export class HomePage extends React.Component {
 									</div>
 								</div>
 								<ol className="homepage mx-auto">
-									<Link to="/bookpage/1">
+									<Link to={baseUrl + "bookpage/1"}>
 										<button
 											type="button"
 											style={{
@@ -132,7 +133,7 @@ export class HomePage extends React.Component {
 								</div>
 
 								<ol className="homepage mx-auto">
-									<Link to="/bookpage/2">
+									<Link to={baseUrl + "bookpage/2"}>
 										<button
 											type="button"
 											style={{
@@ -200,7 +201,7 @@ export class HomePage extends React.Component {
 									</div>
 								</div>
 								<ol className="homepage mx-auto">
-									<Link to="/bookpage/3">
+									<Link to={baseUrl + "bookpage/3"}>
 										<button
 											type="button"
 											style={{
