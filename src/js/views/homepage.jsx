@@ -2,6 +2,7 @@ import React from "react";
 import ReactDom from "react-dom";
 import { Link, withRouter } from "react-router-dom";
 import { baseUrl } from "../constant.jsx";
+import Introduction from "../component/carousel.jsx";
 
 export class HomePage extends React.Component {
 	render() {
@@ -14,6 +15,10 @@ export class HomePage extends React.Component {
 						paddingTop: "15px",
 						paddingBottom: "15px"
 					}}>
+					<div className="mb-4 col-8 mx-auto d-flex justify-content-center">
+						<Introduction />
+					</div>
+
 					<div className="row">
 						<div className="col-md-4">
 							<div

@@ -10,7 +10,7 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'public'),
-    publicPath: '/bookswap_website/'
+    publicPath: '/'
   },
   module: {
     rules: [
