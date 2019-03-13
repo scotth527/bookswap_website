@@ -15,7 +15,7 @@ export class HomePage extends React.Component {
 						paddingTop: "15px",
 						paddingBottom: "15px"
 					}}>
-					<div className="mb-4 col-8 mx-auto d-flex justify-content-center">
+					<div className="mb-4 col-xs-12 col-9  mx-auto d-flex justify-content-center">
 						<Introduction />
 					</div>
 

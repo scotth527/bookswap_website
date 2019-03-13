@@ -21,6 +21,8 @@ export default class Example extends React.Component {
       isOpen: false
     };
   }
+  
+  
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen
@@ -64,3 +66,4 @@ export default class Example extends React.Component {
     );
   }
 }
+
