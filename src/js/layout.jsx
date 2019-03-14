@@ -1,14 +1,14 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ScrollToTop from "./component/functional/scrollToTop.jsx";
-
+import Example from "./component/navbar2.jsx";
 import { Home } from "./views/home.jsx";
 import { Account } from "./views/account.jsx";
 import { Wishlist } from "./views/wishlist.jsx";
 import { Single } from "./views/search.jsx";
 import { Library } from "./views/library.jsx";
 import Store from "./store/appContext.jsx";
-import { NavBar } from "./component/navbar.jsx";
+import { NavBar } from "./component/navbar2.jsx";
 import { Footer } from "./component/footer.jsx";
 import { BookPage } from "./views/bookpage.jsx";
 import { Trades } from "./views/trades.jsx";
