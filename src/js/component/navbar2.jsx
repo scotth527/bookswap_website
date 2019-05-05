@@ -5,16 +5,10 @@ import {
 	NavbarToggler,
 	NavbarBrand,
 	Nav,
-	NavItem,
-	NavLink,
-	UncontrolledDropdown,
-	DropdownToggle,
-	DropdownMenu,
-	DropdownItem
+	NavItem
 } from "reactstrap";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
-
 import { Link, withRouter } from "react-router-dom";
 import { LogIn } from "../component/login.jsx";
 import { SignUp } from "../component/signup.jsx";
