@@ -1,0 +1,5 @@
+@media only screen and (max-width: 580px) {
+  .col-lg-4 .col-sm .pt-2 .mb-3 {
+      width:100%;
+  }
+}

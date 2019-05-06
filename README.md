@@ -1,3 +1,15 @@
+# Front-end for Book Swap project
+
+A website that allows users to create wishlists, make an inventory for the books they own and trade books with other users. Built with react.js, javascript, html, css, bootstrap. Uses a django/python back end. Work in progress. 
+
+![Gif](./example3.gif)
+
+## Live App: [https://scotth527.github.io/bookswap_website/](https://scotth527.github.io/bookswap_website/)
+
+Built from the 4GeeksAcademy react-hello boilerplate here: [https://github.com/4GeeksAcademy/react-hello](https://github.com/4GeeksAcademy/react-hello)
+
+
+
 # WebApp boilerplate with React and Cloud 9
 
 Requirements: Make sure you have node version 8
