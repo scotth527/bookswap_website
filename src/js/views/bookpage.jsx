@@ -27,7 +27,7 @@ export class BookPage extends React.Component {
 	componentDidMount() {
 		fetch(
 			[
-				"https://bookexchange-backend-scotth527.c9users.io/api/books/",
+				"https://bookswap-backend-scotth527.c9users.io/api/books/",
 				this.props.match.params.theid
 			].join("")
 		)
@@ -94,8 +94,12 @@ export class BookPage extends React.Component {
 																this.state.book
 																	.language}
 														</p>
-														<p>ISBN</p>
-														<p className="text-wrap">
+														<p
+															className="text-wrap"
+															style={{
+																wordWrap:
+																	"break-word"
+															}}>
 															{"Description: " +
 																this.shorten(
 																	this.state

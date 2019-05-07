@@ -5,6 +5,7 @@ import { baseUrl } from "../constant.jsx";
 import Introduction from "../component/carousel.jsx";
 import { Alert } from "reactstrap";
 import Featured from "../component/featuredbooks.jsx";
+import "../../styles/home.css";
 
 export class HomePage extends React.Component {
 	render() {
@@ -21,15 +22,15 @@ export class HomePage extends React.Component {
 						<Introduction />
 					</div>
 					<Alert color="light">Featured books! Check them out!</Alert>
-					<div className="row mb-5">
+					<div className="row">
 						<Featured />
 					</div>
 
-					<Alert className="mt-5 mb-5" color="light">
+					<Alert className="mt-3 mb-3" color="light">
 						More books! Check them out!
 					</Alert>
 
-					<div className="container-fluid justify-content col-10 mx-auto rounded border border-dark text-center mt-5 mb-5">
+					<div className="container-fluid justify-content col-10 mx-auto rounded border border-dark text-center  mb-5">
 						<div className="row" style={{ margin: "5px" }}>
 							<div className="mx-auto col-10 d-flex" />
 							<div className="">

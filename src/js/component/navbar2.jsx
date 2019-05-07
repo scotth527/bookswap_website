@@ -41,7 +41,11 @@ export default class NavBar extends React.Component {
 					color="light"
 					light
 					expand="md">
-					<NavbarBrand href={baseUrl}>BookSwap ⇌</NavbarBrand>
+					<strong>
+						<Link style={{ color: "black" }} to={baseUrl}>
+							BookSwap ⇌
+						</Link>
+					</strong>
 					<NavbarToggler onClick={this.toggle} />
 
 					<Collapse isOpen={this.state.isOpen} navbar>

@@ -5,7 +5,7 @@ let key = "qnZN4IYfVP3fduRalfrFw";
 
 let urls = [
 	"https://backend-final-project-crivera09.c9users.io/api/",
-	"https://bookexchange-backend-scotth527.c9users.io/api/"
+	"https://bookswap-backend-scotth527.c9users.io/api/"
 ];
 let currentURL = 1;
 

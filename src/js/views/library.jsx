@@ -36,6 +36,7 @@ export class Library extends React.Component {
 						return store.library.map((item, index) => {
 							return (
 								<Item
+									thumbnails={item.book.thumbnail}
 									id={parseInt(item.book.api_id)}
 									key={index}
 									title={item.book.title}

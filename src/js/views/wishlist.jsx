@@ -32,7 +32,7 @@ export class Wishlist extends React.Component {
 					position: "relative"
 				}}>
 				<div className="row">
-					<div className="col-9 mx-auto">
+					<div className="col-12 mx-auto">
 						<h1 className="text-center">Wishlist</h1>
 						<Context.Consumer>
 							{({ store, actions }) => {
@@ -40,6 +40,10 @@ export class Wishlist extends React.Component {
 									return (
 										<Item
 											key={index}
+											thumbnails={
+												actions.searchBookByID(item)
+													.thumbnail
+											}
 											id={item}
 											buttonName="Find users who own this book"
 											deleteStuff={() => {

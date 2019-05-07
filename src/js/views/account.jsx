@@ -49,16 +49,8 @@ export class Account extends React.Component {
 				<Context.Consumer>
 					{({ store, actions }) => {
 						console.log(store.profile);
-						if (typeof store.profile.user == undefined) {
-							return (
-								<Profilebanner
-									username="Undefined"
-									firstName="Undefined"
-									lastName="Undefined"
-									address="Undefined"
-									email="Undefined"
-								/>
-							);
+						if (store.profile == {}) {
+							return <h1>Please login</h1>;
 						} else {
 							return (
 								<Profilebanner

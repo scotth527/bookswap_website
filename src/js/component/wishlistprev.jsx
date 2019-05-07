@@ -24,7 +24,7 @@ function Wishprev(props) {
 
 	return (
 		<div
-			className="col-xs-12 col-md-9 col-lg-4 mb-2"
+			className="col-lg-4 col-md-9 col-12 mb-2 "
 			style={{ width: "588px" }}>
 			<div className="card">
 				<div className="card-header text-left">
