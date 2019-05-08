@@ -61,33 +61,52 @@ export class Item extends React.Component {
 										style={{ maxHeight: "50px" }}
 										className="col-8 d-flex justify-content-between p-0">
 										<h5> {book.title || "Placeholder"}</h5>
-										<div>
-											<i
-												onClick={() =>
-													this.props.deleteStuff()
-												}
-												className="btn far fa-times-circle p-0"
-											/>
+
+										{!this.props.simple && (
+											<div
+												className="col-4 text-right"
+												alt="Rating">
+												<i
+													onClick={() =>
+														this.props.deleteStuff()
+													}
+													className="btn far fa-times-circle"
+												/>
+											</div>
+										)}
+									</div>
+									{!this.props.simple && (
+										<div className="row">
+											<div
+												className="col-12"
+												alt="Description">
+												<p>
+													{this.shorten(
+														book.description
+													) || "PLACEHOLDER"}
+												</p>
+											</div>
 										</div>
-									</div>
-									<div>
-										<p>
-											{this.shorten(book.description) ||
-												"PLACEHOLDER"}
-										</p>
-									</div>
-									<div className="row justify-content-end pr-2">
-										<button
-											onClick={() =>
-												this.props.addStuff()
-											}
-											className="btn btn-sm border border-secondary"
-											style={{
-												whiteSpace: "normal"
-											}}>
-											{this.props.buttonName}
-										</button>
-									</div>
+									)}
+									{!this.props.simple && (
+										<div className="row justify-content-end mt-5 pr-2">
+											<button
+												onClick={() =>
+													this.props.addStuff()
+												}
+												className="btn btn-sm"
+												style={{
+													whiteSpace: "normal"
+												}}>
+												{this.props.buttonName}
+											</button>
+										</div>
+									)}
+									{this.props.drop && (
+										<div className="col-12" alt="Author">
+											<p className="text-secondary" />
+										</div>
+									)}
 								</div>
 							</div>
 						);

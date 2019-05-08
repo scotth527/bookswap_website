@@ -67,7 +67,7 @@ export class Trade extends React.Component {
 										<Userdiv
 											id={this.props.sender.id}
 											//Picurl="https://picsum.photos/50/50/?random"
-											City={this.props.sender.address}
+											City={this.props.sender.city}
 											Username={
 												this.props.sender.user.username
 											}
@@ -91,9 +91,10 @@ export class Trade extends React.Component {
 										<Userdiv
 											id={this.props.receiver.id}
 											//Picurl="https://picsum.photos/50/50/?random"
-											City={this.props.receiver.address}
+											City={this.props.receiver.city}
 											Username={
-												this.props.receiver.username
+												this.props.receiver.user
+													.username
 											}
 										/>
 										<Item
@@ -119,6 +120,14 @@ export class Trade extends React.Component {
 														(item, index) => {
 															return (
 																<option
+																	onChange={() =>
+																		this.setState(
+																			{
+																				offeredBook:
+																					item.id
+																			}
+																		)
+																	}
 																	key={
 																		item
 																			.book

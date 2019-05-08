@@ -270,7 +270,7 @@ export class BookPage extends React.Component {
 									show={this.state.showTradeModal}
 									books={[this.state.book, store.library]}
 									sender={this.state.user}
-									receiver={store.sessions}
+									receiver={store.profile}
 									onReturn={() =>
 										this.setState({
 											showOwnersModal: true,
