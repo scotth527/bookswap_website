@@ -51,7 +51,7 @@ export class Item extends React.Component {
 										}}
 										className="mx-auto my-auto"
 										src={
-											this.props.thumbnails ||
+											book.thumbnail ||
 											"https://via.placeholder.com/75x75"
 										}
 									/>

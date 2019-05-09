@@ -12,6 +12,7 @@ export class Trade extends React.Component {
 		this.state = {
 			show: this.props.show,
 			offeredBook: -1,
+			desiredBook: -1,
 			trader: null
 		};
 	}
@@ -74,10 +75,42 @@ export class Trade extends React.Component {
 										/>
 										<Item
 											id={parseInt(
-												this.props.books[0].api_id
+												this.state.desiredBook
 											)}
 											simple={true}
 										/>
+										<select
+											onChange={e => {
+												this.setState({
+													desiredBook: e.target.value
+												});
+											}}
+											id="inputState"
+											className="form-control">
+											<option defaultValue>
+												Select book to offer
+											</option>
+											)
+											<Context.Consumer>
+												{({ store, actions }) => {
+													return this.props.sender.library.map(
+														(item, index) => {
+															return (
+																<option
+																	value={item}
+																	key={item}>
+																	{
+																		actions.searchBookByID(
+																			item
+																		).title
+																	}
+																</option>
+															);
+														}
+													);
+												}}
+											</Context.Consumer>
+										</select>
 									</div>
 									<div className="col-2 text-center my-auto">
 										<i
@@ -98,19 +131,21 @@ export class Trade extends React.Component {
 											}
 										/>
 										<Item
-											id={this.props.books[1][0].book.id}
+											id={parseInt(
+												this.state.offeredBook
+											)}
 											simple={true}
 											drop={true}
 										/>
 										<select
-											onChange={e =>
+											onChange={e => {
 												this.setState({
-													offeredBook: e.target.key
-												})
-											}
+													offeredBook: e.target.value
+												});
+											}}
 											id="inputState"
 											className="form-control">
-											<option selected>
+											<option defaultValue>
 												Select book to offer
 											</option>
 											)
@@ -120,13 +155,10 @@ export class Trade extends React.Component {
 														(item, index) => {
 															return (
 																<option
-																	onChange={() =>
-																		this.setState(
-																			{
-																				offeredBook:
-																					item.id
-																			}
-																		)
+																	value={
+																		item
+																			.book
+																			.api_id
 																	}
 																	key={
 																		item
