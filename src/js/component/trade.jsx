@@ -254,11 +254,11 @@ export class Trade extends React.Component {
 										<button
 											onClick={() => {
 												actions.addTradeRequest({
-													trader: this
+													trader: this.state
 														.desiredBookInvID,
+
 													requester: this.state
-														.offerInvID,
-													status: true
+														.offerInvID
 												});
 												actions.clearStore();
 												this.props.onConfirm();
