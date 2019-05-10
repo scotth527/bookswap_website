@@ -79,6 +79,33 @@ export class Library extends React.Component {
 						}
 					/>
 				)}
+				{this.state.showTradeModal && (
+					<Context.Consumer>
+						{({ store, actions }) => {
+							return (
+								<Trade
+									show={this.state.showTradeModal}
+									books={[this.state.book, store.library]}
+									sender={this.state.user}
+									receiver={store.sessions}
+									onReturn={() =>
+										this.setState({
+											showOwnersModal: true,
+											showTradeModal: false
+										})
+									}
+									onConfirm={() => {
+										this.setState({
+											user: null,
+											showOwnersModal: false,
+											showTradeModal: false
+										});
+									}}
+								/>
+							);
+						}}
+					</Context.Consumer>
+				)}
 			</div>
 		);
 	}

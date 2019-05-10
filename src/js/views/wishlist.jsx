@@ -71,25 +71,32 @@ export class Wishlist extends React.Component {
 					onClose={() => this.setState({ showModal: false })}
 				/>
 				{this.state.showTradeModal && (
-					<Trade
-						show={this.state.showTradeModal}
-						book={parseInt(this.state.bookid)}
-						sender={this.state.user}
-						receiver={3}
-						onReturn={() =>
-							this.setState({
-								showOwnersModal: true,
-								showTradeModal: false
-							})
-						}
-						onConfirm={() =>
-							this.setState({
-								key: "",
-								user: null,
-								showTradeModal: false
-							})
-						}
-					/>
+					<Context.Consumer>
+						{({ store, actions }) => {
+							return (
+								<Trade
+									show={this.state.showTradeModal}
+									books={[this.state.book, store.library]}
+									sender={this.state.user}
+									receiver={store.profile}
+									onReturn={() =>
+										this.setState({
+											showOwnersModal: true,
+											showTradeModal: false
+										})
+									}
+									onConfirm={() => {
+										this.setState({
+											key: "",
+											user: null,
+											showOwnersModal: false,
+											showTradeModal: false
+										});
+									}}
+								/>
+							);
+						}}
+					</Context.Consumer>
 				)}
 				{this.state.showOwnersModal && (
 					<Usermodal
@@ -126,7 +133,6 @@ export class Wishlist extends React.Component {
 									}
 									onConfirm={() => {
 										this.setState({
-											key: "",
 											user: null,
 											showOwnersModal: false,
 											showTradeModal: false

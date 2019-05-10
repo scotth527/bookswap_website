@@ -172,7 +172,6 @@ const getState = scope => {
 							store.token = "JWT " + data["token"];
 							store.sessions.loggedIn = true;
 							scope.setState({ store });
-							console.log(store);
 							scope.state.actions.getUserData(scope);
 						} else {
 							alert("Incorrect username/password");
@@ -267,7 +266,6 @@ const getState = scope => {
 				})
 					.then(response => response.json())
 					.then(data => {
-						//console.log(data);
 						let { store } = scope.state;
 						store.trades = data;
 
@@ -387,7 +385,6 @@ const getState = scope => {
 
 			deleteFromWishlist: wishlistIndex => {
 				let store = scope.state.store;
-				console.log(wishlistIndex);
 				store.wishlist.splice(wishlistIndex, 1);
 
 				//scope.setState({ store });

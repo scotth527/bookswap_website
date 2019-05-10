@@ -48,6 +48,7 @@ function TradesPrev(props) {
 									} else {
 										return (
 											<IndivTrade
+												key={item.id}
 												user={
 													item.requester.profile.user
 														.username
