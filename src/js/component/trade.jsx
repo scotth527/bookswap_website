@@ -9,32 +9,99 @@ import Userdiv from "./userdiv.jsx";
 export class Trade extends React.Component {
 	constructor(props) {
 		super(props);
+		this.fetchSender = this.fetchSender.bind(this);
+		this.fetchOffer = this.fetchOffer.bind(this);
 		this.state = {
 			show: this.props.show,
 			offeredBook: -1,
 			desiredBook: -1,
-			trader: null
+			desiredBookInvID: null,
+			offerInvID: null
 		};
 	}
 
-	componentDidMount() {
-		fetch(
-			[
-				"https://backend-final-project-crivera09.c9users.io/api/inv/",
-				this.props.books[0].id,
-				"/",
-				this.props.sender.id
-			].join("")
-		)
-			.then(response => response.json())
-			.then(data => {
-				let state = this.state;
-				state.trader = data.id;
-				this.setState(state);
-			})
-			.catch(error => console.log(error));
-	}
+	fetchSender = e => {
+		this.setState(
+			{
+				desiredBook: e.target.value
+			},
+			() => {
+				fetch(
+					[
+						"https://bookswap-backend-scotth527.c9users.io/api/inv/",
+						this.state.desiredBook,
+						"/",
+						this.props.sender.id
+					].join("")
+				)
+					.then(response => response.json())
+					.then(data => {
+						let state = this.state;
+						state.desiredBookInvID = data.id;
+						this.setState(state);
+					})
+					.catch(error => console.log(error));
+			}
+		);
+	};
 
+	fetchOffer = e => {
+		this.setState(
+			{
+				offeredBook: e.target.value
+			},
+			() => {
+				fetch(
+					[
+						"https://bookswap-backend-scotth527.c9users.io/api/inv/",
+						this.state.offeredBook,
+						"/",
+						this.props.receiver.id
+					].join("")
+				)
+					.then(response => response.json())
+					.then(data => {
+						let state = this.state;
+						state.offerInvID = data.id;
+						this.setState(state);
+					})
+					.catch(error => console.log(error));
+			}
+		);
+	};
+
+	componentDidUpdate() {
+		// fetch(
+		// 	[
+		// 		"https://bookswap-backend-scotth527.c9users.io/api/inv/",
+		// 		this.state.desiredBook,
+		// 		"/",
+		// 		this.props.sender.id
+		// 	].join("")
+		// )
+		// 	.then(response => response.json())
+		// 	.then(data => {
+		// 		let state = this.state;
+		// 		state.desiredBookInvID = data.id;
+		// 		this.setState(state);
+		// 	})
+		// 	.catch(error => console.log(error));
+		// fetch(
+		// 	[
+		// 		"https://bookswap-backend-scotth527.c9users.io/api/inv/",
+		// 		this.state.offeredBook,
+		// 		"/",
+		// 		this.props.receiver.id
+		// 	].join("")
+		// )
+		// 	.then(response => response.json())
+		// 	.then(data => {
+		// 		let state = this.state;
+		// 		state.offerInvID = data.id;
+		// 		this.setState(state);
+		// 	})
+		// 	.catch(error => console.log(error));
+	}
 	render() {
 		return (
 			<div
@@ -80,11 +147,7 @@ export class Trade extends React.Component {
 											simple={true}
 										/>
 										<select
-											onChange={e => {
-												this.setState({
-													desiredBook: e.target.value
-												});
-											}}
+											onChange={this.fetchSender}
 											id="inputState"
 											className="form-control">
 											<option defaultValue>
@@ -138,11 +201,7 @@ export class Trade extends React.Component {
 											drop={true}
 										/>
 										<select
-											onChange={e => {
-												this.setState({
-													offeredBook: e.target.value
-												});
-											}}
+											onChange={this.fetchOffer}
 											id="inputState"
 											className="form-control">
 											<option defaultValue>
@@ -195,9 +254,10 @@ export class Trade extends React.Component {
 										<button
 											onClick={() => {
 												actions.addTradeRequest({
-													trader: this.state.trader,
-													requester: this.props
-														.books[1][0].id,
+													trader: this
+														.desiredBookInvID,
+													requester: this.state
+														.offerInvID,
 													status: true
 												});
 												actions.clearStore();
