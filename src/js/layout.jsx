@@ -11,6 +11,7 @@ import NavBar from "./component/navbar2.jsx";
 import { Footer } from "./component/footer.jsx";
 import { BookPage } from "./views/bookpage.jsx";
 import { Trades } from "./views/trades.jsx";
+import { Browse } from "./views/browse.jsx";
 
 const baseUrl = "/bookswap_website/";
 
@@ -27,6 +28,11 @@ export class Layout extends React.Component {
 							exact
 							path={baseUrl + "account"}
 							component={Account}
+						/>
+						<Route
+							exact
+							path={baseUrl + "browse"}
+							component={Browse}
 						/>
 						<Route
 							exact

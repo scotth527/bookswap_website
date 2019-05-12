@@ -48,7 +48,6 @@ export class Account extends React.Component {
 				}}>
 				<Context.Consumer>
 					{({ store, actions }) => {
-						console.log(store.profile);
 						if (store.profile == {}) {
 							return <h1>Please login</h1>;
 						} else {

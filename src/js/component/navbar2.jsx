@@ -57,6 +57,17 @@ export default class NavBar extends React.Component {
 											className="ml-auto align-middle"
 											navbar>
 											<NavItem>
+												<Link to={baseUrl + "browse"}>
+													<button
+														type="button"
+														style={{
+															whiteSpace: "normal"
+														}}
+														className="btn btn-dark  mb-lg-0 mb-sm-2  mb-2 mr-2">
+														{" "}
+														Browse
+													</button>
+												</Link>
 												<Link to={baseUrl + "wishlist"}>
 													<button
 														type="button"
