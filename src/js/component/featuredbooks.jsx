@@ -1,4 +1,5 @@
 import React from "react";
+import MapContainer from "./MapContainer";
 import {
 	Card,
 	Button,
@@ -37,7 +38,12 @@ const featured = [
 	}
 ];
 
-const Featured = props => {
+const Featured = props => { 
+	const [location, setLocation] = useState({ latitude: 11.24117 , longitude: 78.83984 }); // Replace with the actual coordinates
+
+  const openLocationSharing = () => {
+    const mapUrl = `https://www.google.com/maps?q=${location.latitude},${location.longitude}`;
+    window.open(mapUrl, '_blank');
 	return (
 		<CardDeck className="mx-auto d-flex justify-content-between">
 			{featured.map((item, index) => {
@@ -56,8 +62,7 @@ const Featured = props => {
 							<CardTitle>{item.title}</CardTitle>
 							<CardSubtitle>Description:</CardSubtitle>
 							<CardText>{item.description}</CardText>
-							<Link to={"/bookswap_website/" + item.link}>
-								<Button>View more details</Button>
+							<Button onClick={openLocationSharing}>Location for Exchange</Button>
 							</Link>
 						</CardBody>
 					</Card>
