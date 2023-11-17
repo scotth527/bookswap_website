@@ -22,7 +22,7 @@ export class Footer extends Component {
 
 						fontSize: "10px"
 					}}>
-					© Book Swap 2018
+					© Book Swap 2023
 				</h2>
 			</footer>
 		);
